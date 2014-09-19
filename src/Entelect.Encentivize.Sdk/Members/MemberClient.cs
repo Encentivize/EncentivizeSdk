@@ -1,5 +1,11 @@
+using System;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using Entelect.Encentivize.Sdk.Exceptions;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members
@@ -113,6 +119,27 @@ namespace Entelect.Encentivize.Sdk.Members
             return response.Data; 
         }
 
+        public dynamic GetTimestoreForMember(long memberId)
+        {
+            var client = GetClient();
+            var request = new RestRequest("members/{memberId}/timestore", Method.GET);
+            request.RequestFormat = DataFormat.Json;
+            request.AddUrlSegment("memberId", string.Format("{0}", memberId));
+            var response = client.Execute<dynamic>(request);
+            return response.Content;
+        }
+
+        public void WriteTimestoreForMember(long memberId, dynamic timestore)
+        {
+            var baseUri = new Uri(Settings.BaseUrl);
+            var postUri = new Uri(baseUri, "members/{memberId}/timestore");
+            var response = Post(postUri.ToString(), Settings.Username, Settings.Password, timestore);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new CreationFailedException(response.Content);
+            }
+        }
+
         public void ResetPasswordPin(long memberId)
         {
             var client = GetClient();
@@ -121,6 +148,19 @@ namespace Entelect.Encentivize.Sdk.Members
             var response = client.Execute(request);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new DataRetrievalFailedException(response.Content); 
+        }
+
+        private HttpResponseMessage Post(string url, string username, string password, dynamic postData)
+        {
+            var uri = new Uri(url);
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(
+                Encoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password))));
+
+            var serializedData = JsonConvert.SerializeObject(postData);
+            var task = client.PostAsync(uri, new StringContent(serializedData, Encoding.UTF8, "application/json"));
+            var response = task.Result;
+            return response;
         }
     }
 }
