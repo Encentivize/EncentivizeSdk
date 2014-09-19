@@ -132,7 +132,7 @@ namespace Entelect.Encentivize.Sdk.Members
         public void WriteTimestoreForMember(long memberId, dynamic timestore)
         {
             var baseUri = new Uri(Settings.BaseUrl);
-            var postUri = new Uri(baseUri, "members/{memberId}/timestore");
+            var postUri = new Uri(baseUri, string.Format("members/{0}/timestore", memberId));
             var response = Post(postUri.ToString(), Settings.Username, Settings.Password, timestore);
             if (response.StatusCode != HttpStatusCode.OK)
             {

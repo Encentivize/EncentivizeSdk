@@ -95,7 +95,6 @@
     <Compile Include="Rewards\RewardClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Entelect.Encentivize.Sdk.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
