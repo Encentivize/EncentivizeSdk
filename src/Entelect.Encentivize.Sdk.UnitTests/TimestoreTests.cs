@@ -40,5 +40,19 @@ namespace Entelect.Encentivize.Sdk.UnitTests
 
             Assert.IsTrue(true);
         }
+
+        [Test]
+        public void GetFromTimestore()
+        {
+            const string username = "encentivizeexceptions@entelect.co.za";
+            const string password = "123456";
+            const string baseUrl = "http://localhost:57441/api/v1/";
+
+            var encentivizeSettings = new EncentivizeSettings(username, password, baseUrl);
+            var client = new MemberClient(encentivizeSettings);
+            var obj = client.GetTimestoreForMember(1);
+
+            Assert.IsNotNull(obj);
+        }
     }
 }

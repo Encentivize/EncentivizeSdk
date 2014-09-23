@@ -12,5 +12,6 @@ namespace Entelect.Encentivize.Sdk.Members
         void UpdateMember(MemberUpdate customer, long encentivizeMemberId);
         void AddMember(MemberInput customer);
         void WriteTimestoreForMember(long memberId, dynamic timestore);
+        dynamic GetTimestoreForMember(long memberId);
     }
 }
