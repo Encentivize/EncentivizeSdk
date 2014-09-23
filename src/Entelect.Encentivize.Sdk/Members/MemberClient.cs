@@ -125,8 +125,9 @@ namespace Entelect.Encentivize.Sdk.Members
             var request = new RestRequest("members/{memberId}/timestore", Method.GET);
             request.RequestFormat = DataFormat.Json;
             request.AddUrlSegment("memberId", string.Format("{0}", memberId));
-            var response = client.Execute<dynamic>(request);
-            return response.Content;
+            client.AddHandler("application/json", new DynamicJsonDeserializer());
+            var response = client.Execute<dynamic>(request).Data;
+            return response;
         }
 
         public void WriteTimestoreForMember(long memberId, dynamic timestore)

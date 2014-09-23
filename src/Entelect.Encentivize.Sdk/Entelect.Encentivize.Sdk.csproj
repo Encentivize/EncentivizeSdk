@@ -60,6 +60,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Achievements\AchievementInput.cs" />
+    <Compile Include="DynamicJsonDeserializer.cs" />
     <Compile Include="Points\MemberAdhocInput.cs" />
     <Compile Include="Grouping\MemberGroup.cs" />
     <Compile Include="Members\Member.cs" />
