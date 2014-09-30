@@ -80,7 +80,7 @@ namespace Entelect.Encentivize.Sdk.Members
 
             request.AddBody(member);
             var response = client.Execute(request);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
                 throw new UpdateFailedException(response.Content); 
         }
 
@@ -92,7 +92,7 @@ namespace Entelect.Encentivize.Sdk.Members
 
             request.AddBody(member);
             var response = client.Execute(request);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
                 throw new UpdateFailedException(response.Content);
         }
 
@@ -105,7 +105,7 @@ namespace Entelect.Encentivize.Sdk.Members
             request.AddBody(member);
             var response = client.Execute(request);
 
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
                 throw new CreationFailedException(response.Content); 
         }
 
@@ -147,7 +147,7 @@ namespace Entelect.Encentivize.Sdk.Members
             var request = new RestRequest(string.Format("members/{0}/passwordPinReset",memberId), Method.POST);
             request.RequestFormat = DataFormat.Json;
             var response = client.Execute(request);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
                 throw new DataRetrievalFailedException(response.Content); 
         }
 

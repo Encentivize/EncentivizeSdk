@@ -15,8 +15,8 @@ namespace Entelect.Encentivize.Sdk.Members
         public MemberType MemberType { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public string ProfilePictureUrl { get; set; }
-        public int CurrentPoints { get; set; }
-        public int LifetimePoints { get; set; }
+        public decimal CurrentPoints { get; set; }
+        public decimal LifetimePoints { get; set; }
         public bool CanSpendPoints { get; set; }
         public bool CanEarnPoints { get; set; }
     }
