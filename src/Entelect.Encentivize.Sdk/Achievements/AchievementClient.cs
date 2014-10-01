@@ -14,7 +14,7 @@ namespace Entelect.Encentivize.Sdk.Achievements
         public MemberAchievement AddAchievementForMember(long memberId, AchievementInput achievement)
         {
             var client = GetClient();
-            var request = new RestRequest("members/" + memberId + "/achievements", Method.POST);
+            var request = new RestRequest(string.Format("members/{0}/achievements", memberId), Method.POST);
             request.RequestFormat = DataFormat.Json;
             request.AddBody(achievement);
             var response = client.Execute<MemberAchievement>(request);
@@ -27,6 +27,17 @@ namespace Entelect.Encentivize.Sdk.Achievements
         public MemberAchievement AddAchievementForMember(Member member, AchievementInput achievement)
         {
             return AddAchievementForMember(member.MemberId, achievement);
+        }
+
+        public Achievement GetById(long achievementId)
+        {
+            var client = GetClient();
+            var request = new RestRequest("Achievements/" + achievementId, Method.GET);
+            request.RequestFormat = DataFormat.Json;
+            var response = client.Execute<Achievement>(request);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new CreationFailedException(response.Content);
+            return response.Data;
         }
     }
 }

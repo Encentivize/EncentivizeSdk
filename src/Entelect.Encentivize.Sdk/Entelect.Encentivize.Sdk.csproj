@@ -59,6 +59,7 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Achievements\Achievement.cs" />
     <Compile Include="Achievements\AchievementInput.cs" />
     <Compile Include="DynamicJsonDeserializer.cs" />
     <Compile Include="Points\MemberAdhocInput.cs" />

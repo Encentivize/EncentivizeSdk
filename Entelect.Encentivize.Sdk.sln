@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{56953BC1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entelect.Encentivize.Sdk.IntegrationTests", "test\Entelect.Encentivize.Sdk.IntegrationTests\Entelect.Encentivize.Sdk.IntegrationTests.csproj", "{FD8BF93F-07B3-49CD-A3AB-69767A177A4E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D348974E-A1EC-4C29-8B1E-65FCF10010B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{58982BD3-924D-4FB7-AC10-1436B44AC210} = {D348974E-A1EC-4C29-8B1E-65FCF10010B9}
 		{FD8BF93F-07B3-49CD-A3AB-69767A177A4E} = {56953BC1-0B89-4DB0-BD1D-A9B28359997C}
 	EndGlobalSection
 EndGlobal
