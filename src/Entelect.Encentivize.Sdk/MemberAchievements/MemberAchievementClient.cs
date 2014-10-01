@@ -4,19 +4,19 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Achievements
 {
-    public class AchievementClient: EncentivizeClientBase, IAchievementClient
+    public class MemberAchievementClient: EncentivizeClientBase, IMemberAchievementClient
     {
-        public AchievementClient(EncentivizeSettings settings) 
+        public MemberAchievementClient(EncentivizeSettings settings) 
             : base(settings)
         {
         }
 
-        public MemberAchievement AddAchievementForMember(long memberId, AchievementInput achievement)
+        public MemberAchievement AddAchievementForMember(long memberId, MemberAchievementInput memberAchievement)
         {
             var client = GetClient();
             var request = new RestRequest(string.Format("members/{0}/achievements", memberId), Method.POST);
             request.RequestFormat = DataFormat.Json;
-            request.AddBody(achievement);
+            request.AddBody(memberAchievement);
             var response = client.Execute<MemberAchievement>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -24,9 +24,9 @@ namespace Entelect.Encentivize.Sdk.Achievements
             return response.Data;
         }
 
-        public MemberAchievement AddAchievementForMember(Member member, AchievementInput achievement)
+        public MemberAchievement AddAchievementForMember(Member member, MemberAchievementInput memberAchievement)
         {
-            return AddAchievementForMember(member.MemberId, achievement);
+            return AddAchievementForMember(member.MemberId, memberAchievement);
         }
 
         public Achievement GetById(long achievementId)

@@ -7,7 +7,7 @@ namespace Entelect.Encentivize.Sdk.UnitTests
         [Test]
         public void GetAchievementById()
         {
-            var achievement = AchievementClient.GetById(1);
+            var achievement = MemberAchievementClient.GetById(1);
             Assert.NotNull(achievement);
         }
     }

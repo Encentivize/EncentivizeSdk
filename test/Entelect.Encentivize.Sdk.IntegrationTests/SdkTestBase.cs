@@ -20,7 +20,7 @@ namespace Entelect.Encentivize.Sdk.UnitTests
 
         public MemberClient MemberClient { get { return new MemberClient(EncentivizeSettings); } }
 
-        public AchievementClient AchievementClient { get { return new AchievementClient(EncentivizeSettings); } }
+        public MemberAchievementClient MemberAchievementClient { get { return new MemberAchievementClient(EncentivizeSettings); } }
 
         public GroupingClient GroupingClient { get { return new GroupingClient(EncentivizeSettings); } }
 

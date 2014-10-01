@@ -2,7 +2,7 @@ using System;
 
 namespace Entelect.Encentivize.Sdk.Achievements
 {
-    public class AchievementInput
+    public class MemberAchievementInput
     {
         public long AchievementId { get; set; }
         public decimal? OverriddenPoints { get; set; }
