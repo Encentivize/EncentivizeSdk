@@ -7,8 +7,8 @@
     <ProjectGuid>{FD8BF93F-07B3-49CD-A3AB-69767A177A4E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entelect.Encentivize.Sdk.UnitTests</RootNamespace>
-    <AssemblyName>Entelect.Encentivize.Sdk.UnitTests</AssemblyName>
+    <RootNamespace>Entelect.Encentivize.Sdk.IntegrationTests</RootNamespace>
+    <AssemblyName>Entelect.Encentivize.Sdk.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -48,13 +48,14 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SdkTestBase.cs" />
     <Compile Include="TimestoreTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entelect.Encentivize.Sdk\Entelect.Encentivize.Sdk.csproj">
+    <ProjectReference Include="..\..\src\Entelect.Encentivize.Sdk\Entelect.Encentivize.Sdk.csproj">
       <Project>{58982bd3-924d-4fb7-ac10-1436b44ac210}</Project>
       <Name>Entelect.Encentivize.Sdk</Name>
     </ProjectReference>

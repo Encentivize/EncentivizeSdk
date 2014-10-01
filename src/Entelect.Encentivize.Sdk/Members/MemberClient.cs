@@ -137,7 +137,7 @@ namespace Entelect.Encentivize.Sdk.Members
             var response = Post(postUri.ToString(), Settings.Username, Settings.Password, timestore);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new CreationFailedException(response.Content);
+                throw new CreationFailedException(response.ToString());
             }
         }
 
