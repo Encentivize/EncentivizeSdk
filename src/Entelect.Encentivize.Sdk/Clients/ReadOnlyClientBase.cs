@@ -4,7 +4,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Clients
 {
-    public class ReadOnlyClientBase<TOutput> : ClientBase
+    public class ReadOnlyClientBase<TOutput> : ClientBase, IReadOnlyClientBase<TOutput> 
         where TOutput : class, new()
     {
         protected readonly string EntityRoute;

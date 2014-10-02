@@ -4,8 +4,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Clients
 {
-    public class CrudClientBase<TInput, TOutput> : ReadOnlyClientBase<TOutput>
-        where TInput : BaseInput
+    public class CrudClientBase<TInput, TOutput> : ReadOnlyClientBase<TOutput>, ICrudClientBase<TInput, TOutput> where TInput : BaseInput
         where TOutput : class, new()
     {
         public CrudClientBase(EncentivizeSettings settings, string entityRoute)

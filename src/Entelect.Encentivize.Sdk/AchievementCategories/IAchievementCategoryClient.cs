@@ -1,6 +1,8 @@
-﻿namespace Entelect.Encentivize.Sdk.AchievementCategories
+﻿using Entelect.Encentivize.Sdk.Clients;
+
+namespace Entelect.Encentivize.Sdk.AchievementCategories
 {
-    public interface IAchievementCategoryClient
+    public interface IAchievementCategoryClient : ICrudClientBase<AchievementCategoryInput, AchievementCategoryOutput>
     {
     }
 }

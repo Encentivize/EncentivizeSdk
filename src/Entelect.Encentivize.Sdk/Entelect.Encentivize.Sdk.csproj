@@ -70,6 +70,8 @@
     <Compile Include="BaseInput.cs" />
     <Compile Include="Achievements\Achievement.cs" />
     <Compile Include="Clients\CrudClientBase.cs" />
+    <Compile Include="Clients\ICrudClientBase.cs" />
+    <Compile Include="Clients\IReadOnlyClientBase.cs" />
     <Compile Include="Clients\ReadOnlyClientBase.cs" />
     <Compile Include="Exceptions\DeleteFailedException.cs" />
     <Compile Include="MemberAchievements\MemberAchievementInput.cs" />

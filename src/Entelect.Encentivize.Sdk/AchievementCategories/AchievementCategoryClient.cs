@@ -8,6 +8,5 @@ namespace Entelect.Encentivize.Sdk.AchievementCategories
             : base(settings, "AchievementCategories")
         {
         }
-
     }
 }
