@@ -35,6 +35,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Entelect">
+      <HintPath>..\..\packages\Entelect.0.0.60\lib\net45\Entelect.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -43,6 +46,7 @@
       <HintPath>..\..\packages\RestSharp.104.2.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -59,6 +63,9 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AchievementCategories\AchievementCategoryInput.cs" />
+    <Compile Include="AchievementCategories\AchievementCategoryOutput.cs" />
+    <Compile Include="BaseInput.cs" />
     <Compile Include="Achievements\Achievement.cs" />
     <Compile Include="MemberAchievements\MemberAchievementInput.cs" />
     <Compile Include="DynamicJsonDeserializer.cs" />
@@ -95,13 +102,12 @@
     <Compile Include="Rewards\RedeemRewardInput.cs" />
     <Compile Include="Rewards\Reward.cs" />
     <Compile Include="Rewards\RewardClient.cs" />
+    <Compile Include="ValidationFailedError.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AchievementCategories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
