@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Entelect.Encentivize.Sdk.Clients;
 using Entelect.Encentivize.Sdk.Exceptions;
 using Entelect.Encentivize.Sdk.Members;
 using RestSharp;

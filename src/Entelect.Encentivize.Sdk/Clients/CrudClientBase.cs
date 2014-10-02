@@ -2,7 +2,7 @@
 using Entelect.Encentivize.Sdk.Exceptions;
 using RestSharp;
 
-namespace Entelect.Encentivize.Sdk
+namespace Entelect.Encentivize.Sdk.Clients
 {
     public class CrudClientBase<TInput, TOutput> : ReadOnlyClientBase<TOutput>
         where TInput : BaseInput

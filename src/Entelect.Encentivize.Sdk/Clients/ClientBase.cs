@@ -1,6 +1,6 @@
 using RestSharp;
 
-namespace Entelect.Encentivize.Sdk
+namespace Entelect.Encentivize.Sdk.Clients
 {
     public abstract class ClientBase
     {

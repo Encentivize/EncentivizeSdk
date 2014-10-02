@@ -1,4 +1,6 @@
-﻿namespace Entelect.Encentivize.Sdk.AchievementCategories
+﻿using Entelect.Encentivize.Sdk.Clients;
+
+namespace Entelect.Encentivize.Sdk.AchievementCategories
 {
     public class AchievementCategoryClient : CrudClientBase<AchievementCategoryInput,AchievementCategoryOutput>, IAchievementCategoryClient
     {
