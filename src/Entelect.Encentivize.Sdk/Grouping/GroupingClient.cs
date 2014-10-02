@@ -7,7 +7,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Grouping
 {
-    public class GroupingClient : EncentivizeClientBase, IGroupingClient
+    public class GroupingClient : ClientBase, IGroupingClient
     {
         public GroupingClient(EncentivizeSettings settings) 
             : base(settings)

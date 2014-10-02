@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Rewards
 {
-    public class RewardClient : EncentivizeClientBase, IRewardClient
+    public class RewardClient : ClientBase, IRewardClient
     {
         public RewardClient(EncentivizeSettings settings) 
             : base(settings)

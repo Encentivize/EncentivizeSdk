@@ -4,7 +4,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Achievements
 {
-    public class MemberAchievementClient: EncentivizeClientBase, IMemberAchievementClient
+    public class MemberAchievementClient: ClientBase, IMemberAchievementClient
     {
         public MemberAchievementClient(EncentivizeSettings settings) 
             : base(settings)

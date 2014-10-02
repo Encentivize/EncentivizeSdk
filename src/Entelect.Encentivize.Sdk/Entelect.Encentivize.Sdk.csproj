@@ -63,10 +63,15 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AchievementCategories\AchievementCategoryClient.cs" />
     <Compile Include="AchievementCategories\AchievementCategoryInput.cs" />
     <Compile Include="AchievementCategories\AchievementCategoryOutput.cs" />
+    <Compile Include="AchievementCategories\IAchievementCategoryClient.cs" />
     <Compile Include="BaseInput.cs" />
     <Compile Include="Achievements\Achievement.cs" />
+    <Compile Include="Clients\CrudClientBase.cs" />
+    <Compile Include="Clients\ReadOnlyClientBase.cs" />
+    <Compile Include="Exceptions\DeleteFailedException.cs" />
     <Compile Include="MemberAchievements\MemberAchievementInput.cs" />
     <Compile Include="DynamicJsonDeserializer.cs" />
     <Compile Include="Points\MemberAdhocInput.cs" />
@@ -89,7 +94,7 @@
     <Compile Include="Points\IPointsClient.cs" />
     <Compile Include="Rewards\IRewardClient.cs" />
     <Compile Include="Members\MemberClient.cs" />
-    <Compile Include="EncentivizeClientBase.cs" />
+    <Compile Include="Clients\ClientBase.cs" />
     <Compile Include="EncentivizeSettings.cs" />
     <Compile Include="Exceptions\CreationFailedException.cs" />
     <Compile Include="Exceptions\DataRetrievalFailedException.cs" />

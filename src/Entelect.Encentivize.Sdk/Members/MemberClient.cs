@@ -10,7 +10,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members
 {
-    public class MemberClient : EncentivizeClientBase, IMemberClient
+    public class MemberClient : ClientBase, IMemberClient
     {
         public MemberClient(EncentivizeSettings settings)
             :base(settings)

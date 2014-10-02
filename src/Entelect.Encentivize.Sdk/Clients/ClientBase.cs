@@ -2,9 +2,9 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk
 {
-    public abstract class EncentivizeClientBase
+    public abstract class ClientBase
     {
-        protected EncentivizeClientBase(EncentivizeSettings settings)
+        protected ClientBase(EncentivizeSettings settings)
         {
             Settings = settings;
         }
