@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Entelect.Encentivize.Sdk.Clients;
 using Entelect.Encentivize.Sdk.Exceptions;
+using Entelect.Encentivize.Sdk.Members.Members;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -18,40 +19,40 @@ namespace Entelect.Encentivize.Sdk.Members
         {
         }
 
-        public Member GetMemberByExternalReference(string externalReference)
+        public MemberOutput GetMemberByExternalReference(string externalReference)
         {
             var client = GetClient(); 
             var request = new RestRequest("members", Method.GET);
             request.AddParameter("externalReferenceCode", externalReference);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<Member>>(request);
+            var response = client.Execute<PagedResult<MemberOutput>>(request);
             return response.Data.Data.FirstOrDefault();
         }
 
-        public Member GetMemberByMobileNumber(string mobileNumber)
+        public MemberOutput GetMemberByMobileNumber(string mobileNumber)
         {
             var client = GetClient();
             var request = new RestRequest("members", Method.GET);
             request.AddParameter("mobileNumber", mobileNumber);
             request.RequestFormat = DataFormat.Json;
 
-            var response = client.Execute<PagedResult<Member>>(request);
+            var response = client.Execute<PagedResult<MemberOutput>>(request);
  
             return response.Data.Data.FirstOrDefault();
         }
 
-        public Member GetMemberByEmailAddress(string emailAddress)
+        public MemberOutput GetMemberByEmailAddress(string emailAddress)
         {
             var client = GetClient();
             var request = new RestRequest("members", Method.GET);
             request.AddParameter("emailAddress", emailAddress);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<Member>>(request);
+            var response = client.Execute<PagedResult<MemberOutput>>(request);
 
             return response.Data != null ? response.Data.Data.FirstOrDefault() : null;
         }
 
-        public PagedResult<Member> GetMembers(int? pageSize, int? pageNumber)
+        public PagedResult<MemberOutput> GetMembers(int? pageSize, int? pageNumber)
         {
             var client = GetClient();
             var request = new RestRequest("members", Method.GET);
@@ -67,8 +68,8 @@ namespace Entelect.Encentivize.Sdk.Members
             {
                 request.AddParameter("$PageNo", pageNumber);
             }
-            
-            var response = client.Execute<PagedResult<Member>>(request);
+
+            var response = client.Execute<PagedResult<MemberOutput>>(request);
 
             return response.Data;
         }
@@ -110,13 +111,13 @@ namespace Entelect.Encentivize.Sdk.Members
                 throw new CreationFailedException(response.Content); 
         }
 
-        public Member GetMe()
+        public MemberOutput GetMe()
         {
             var client = GetClient();
             var request = new RestRequest("members/me", Method.GET);
             request.RequestFormat = DataFormat.Json;
 
-            var response = client.Execute<Member>(request);
+            var response = client.Execute<MemberOutput>(request);
             return response.Data; 
         }
 

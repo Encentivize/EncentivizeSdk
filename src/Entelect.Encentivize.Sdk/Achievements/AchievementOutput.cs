@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.Achievements
 {
-    public class Achievement
+    public class AchievementOutput
     {
         public long AchievementId { get; set; }
         public long AchievementCategoryId { get; set; }

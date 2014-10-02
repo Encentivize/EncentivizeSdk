@@ -25,20 +25,16 @@ namespace Entelect.Encentivize.Sdk.Achievements
             return response.Data;
         }
 
-        public MemberAchievement AddAchievementForMember(Member member, MemberAchievementInput memberAchievement)
-        {
-            return AddAchievementForMember(member.MemberId, memberAchievement);
-        }
 
-        public Achievement GetById(long achievementId)
-        {
-            var client = GetClient();
-            var request = new RestRequest("Achievements/" + achievementId, Method.GET);
-            request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<Achievement>(request);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content);
-            return response.Data;
-        }
+        //public Achievement GetById(long achievementId)
+        //{
+        //    var client = GetClient();
+        //    var request = new RestRequest("Achievements/" + achievementId, Method.GET);
+        //    request.RequestFormat = DataFormat.Json;
+        //    var response = client.Execute<Achievement>(request);
+        //    if (response.StatusCode != System.Net.HttpStatusCode.OK)
+        //        throw new CreationFailedException(response.Content);
+        //    return response.Data;
+        //}
     }
 }

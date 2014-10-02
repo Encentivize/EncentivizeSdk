@@ -4,6 +4,7 @@ using System.Linq;
 using Entelect.Encentivize.Sdk.Clients;
 using Entelect.Encentivize.Sdk.Exceptions;
 using Entelect.Encentivize.Sdk.Members;
+using Entelect.Encentivize.Sdk.Members.Members;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Grouping
@@ -67,13 +68,13 @@ namespace Entelect.Encentivize.Sdk.Grouping
             var response = client.Execute<PagedResult<MemberGroup>>(request);
         }
 
-        public List<Member> GetMembersInGroup(int groupId)
+        public List<MemberOutput> GetMembersInGroup(int groupId)
         {
             var client = GetClient();
             var request = new RestRequest("groups", Method.GET);
             request.AddParameter("externalReferenceCode", groupId);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<Member>>(request);
+            var response = client.Execute<PagedResult<MemberOutput>>(request);
             return response.Data.Data;
         }
 

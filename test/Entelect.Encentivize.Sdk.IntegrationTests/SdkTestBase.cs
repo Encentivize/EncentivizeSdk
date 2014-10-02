@@ -1,3 +1,4 @@
+using Entelect.Encentivize.Sdk.AchievementCategories;
 using Entelect.Encentivize.Sdk.Achievements;
 using Entelect.Encentivize.Sdk.Grouping;
 using Entelect.Encentivize.Sdk.Members;
@@ -17,6 +18,8 @@ namespace Entelect.Encentivize.Sdk.UnitTests
         }
 
         public EncentivizeSettings EncentivizeSettings { get; set; }
+
+        public AchievementCategoryClient AchievementCategoryClient { get { return new AchievementCategoryClient(EncentivizeSettings); } }
 
         public MemberClient MemberClient { get { return new MemberClient(EncentivizeSettings); } }
 
