@@ -1,5 +1,5 @@
-using Entelect.Encentivize.Sdk.AchievementCategories;
 using Entelect.Encentivize.Sdk.Achievements;
+using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.Grouping;
 using Entelect.Encentivize.Sdk.Members;
 using Entelect.Encentivize.Sdk.Points;

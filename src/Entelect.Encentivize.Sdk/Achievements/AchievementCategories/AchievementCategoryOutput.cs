@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entelect.Encentivize.Sdk.AchievementCategories
+namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
     public class AchievementCategoryOutput
     {

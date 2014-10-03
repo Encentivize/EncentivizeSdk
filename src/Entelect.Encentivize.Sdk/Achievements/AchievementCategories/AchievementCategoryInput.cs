@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Entelect.Encentivize.Sdk.AchievementCategories
+namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
     public class AchievementCategoryInput : BaseInput
     {

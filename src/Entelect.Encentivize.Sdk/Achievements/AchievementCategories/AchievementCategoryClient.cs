@@ -1,6 +1,6 @@
 ﻿using Entelect.Encentivize.Sdk.Clients;
 
-namespace Entelect.Encentivize.Sdk.AchievementCategories
+namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
     public class AchievementCategoryClient : CrudClientBase<AchievementCategoryInput,AchievementCategoryOutput>, IAchievementCategoryClient
     {
