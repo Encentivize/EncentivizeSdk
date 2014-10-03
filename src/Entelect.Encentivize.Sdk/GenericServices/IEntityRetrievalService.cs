@@ -1,4 +1,5 @@
 ﻿using System;
+using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
@@ -9,6 +10,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         TOutput GetById(long id);
         TOutput GetById(Guid id);
         TOutput GetById(string id);
-        PagedResult<TOutput> FindBySearchCriteria(object searchCriteria);
+        PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria);
     }
 }

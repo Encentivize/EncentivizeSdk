@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
-    public class AchievementCategorySearchCriteria
+    public class AchievementCategorySearchCriteria: BaseSearchCriteria
     {
         public string Name { get; set; }
         public string Description { get; set; }

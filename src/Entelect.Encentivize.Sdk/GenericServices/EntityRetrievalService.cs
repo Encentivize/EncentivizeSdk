@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.Exceptions;
 using RestSharp;
 
@@ -12,7 +13,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         public EntityRetrievalService(IRestClient restClient, string entityRoute)
             :base(restClient,entityRoute)
         {
-            QueryStringBuilder = new QueryStringBuilder();
+            QueryStringBuilder = new QueryStringBuilder(propertiesToExclude: new[] { "PageNumber", "PageSize" });
         }
 
         protected QueryStringBuilder QueryStringBuilder { get; set; }
@@ -43,10 +44,17 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
 
-        public virtual PagedResult<TOutput> FindBySearchCriteria(object searchCriteria)
+        public virtual PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
         {
-
             var queryString = QueryStringBuilder.ToQueryString(searchCriteria);
+            if (!string.IsNullOrWhiteSpace(queryString))
+            {
+                queryString = string.Format("{0}&{1}", queryString, GetPagingQueryString(searchCriteria));
+            }
+            else
+            {
+                queryString = GetPagingQueryString(searchCriteria);
+            }
             var request = new RestRequest(string.Format("{0}?{1}", EntityRoute, queryString), Method.GET)
             {
                 RequestFormat = DataFormat.Json
@@ -59,5 +67,9 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
 
+        private string GetPagingQueryString(BaseSearchCriteria searchCriteria)
+        {
+            return string.Format("$page={0}&$pageSize={1}", searchCriteria.PageNumber, searchCriteria.PageSize);
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using Entelect.Extensions;
 
 namespace Entelect.Encentivize.Sdk
 {
@@ -11,22 +13,28 @@ namespace Entelect.Encentivize.Sdk
     public class QueryStringBuilder
     {
         private readonly string _separator;
+        private readonly List<string> _propertiesToExclude;
 
-        public QueryStringBuilder(string separator = ",")
+        public QueryStringBuilder(string separator = ",", IEnumerable<string> propertiesToExclude = null)
         {
             _separator = separator;
+            _propertiesToExclude = propertiesToExclude != null ? propertiesToExclude.ToList() : new List<string>();
         }
 
-        public string ToQueryString(object objectToSerialise)
+        public string ToQueryString(object objectToSerialise, IEnumerable<string> propertiesToExclude = null)
         {
             if (objectToSerialise == null)
             {
                 throw new ArgumentNullException("objectToSerialise");
             }
+            if (propertiesToExclude != null)
+            {
+                _propertiesToExclude.AddRange(propertiesToExclude);
+            }
 
             // Get all properties on the object
             var properties = objectToSerialise.GetType().GetProperties()
-                .Where(x => x.CanRead)
+                .Where(x => x.CanRead && !_propertiesToExclude.Contains(x.Name,StringComparison.OrdinalIgnoreCase))
                 .Where(x => x.GetValue(objectToSerialise, null) != null)
                 .ToDictionary(x => x.Name, x => x.GetValue(objectToSerialise, null));
 

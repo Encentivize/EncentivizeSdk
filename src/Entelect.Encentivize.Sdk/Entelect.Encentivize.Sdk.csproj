@@ -35,8 +35,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Entelect">
-      <HintPath>..\..\packages\Entelect.0.0.60\lib\net45\Entelect.dll</HintPath>
+    <Reference Include="Entelect, Version=0.0.63.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Entelect.0.0.63\lib\net45\Entelect.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,6 +68,7 @@
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryInput.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryOutput.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategorySearchCriteria.cs" />
+    <Compile Include="Achievements\AchievementCategories\BaseSearchCriteria.cs" />
     <Compile Include="Achievements\AchievementCategories\IAchievementCategoryClient.cs" />
     <Compile Include="Achievements\AchievementInput.cs" />
     <Compile Include="Achievements\AchievementOutput.cs" />

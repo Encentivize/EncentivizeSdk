@@ -25,7 +25,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void FindAll()
         {
-            var pagedAchievements = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria());
+            var pagedAchievements = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria {PageSize = 1, PageNumber = 2});
             Assert.NotNull(pagedAchievements);
             Assert.Greater(pagedAchievements.Data.Count, 0);
         }
