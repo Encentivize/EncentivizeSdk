@@ -1,5 +1,6 @@
 using Entelect.Encentivize.Sdk.Achievements;
 using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
+using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.Grouping;
 using Entelect.Encentivize.Sdk.Members;
 using Entelect.Encentivize.Sdk.Points;
@@ -21,11 +22,14 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             const string baseUrl = "http://localhost:57441/api/v1/";
 #endif
             EncentivizeSettings = new EncentivizeSettings(username, password, baseUrl);
+            EncentivizeRestClient = new EncentivizeRestClient(EncentivizeSettings);
         }
+
+        public EncentivizeRestClient EncentivizeRestClient { get; set; }
 
         public EncentivizeSettings EncentivizeSettings { get; set; }
 
-        public AchievementCategoryClient AchievementCategoryClient { get { return new AchievementCategoryClient(EncentivizeSettings); } }
+        public AchievementCategoryClient AchievementCategoryClient { get { return new AchievementCategoryClient(EncentivizeRestClient); } }
 
         public MemberClient MemberClient { get { return new MemberClient(EncentivizeSettings); } }
 

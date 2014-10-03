@@ -1,6 +1,5 @@
 ﻿using System;
-using Entelect.Encentivize.Sdk.Exceptions;
-using RestSharp;
+using Entelect.Encentivize.Sdk.GenericServices;
 
 namespace Entelect.Encentivize.Sdk.Clients
 {
@@ -8,41 +7,42 @@ namespace Entelect.Encentivize.Sdk.Clients
         where TInput : BaseInput
         where TOutput : class, new()
     {
-        public CrudClientBase(EncentivizeSettings settings, string entityRoute)
-            : base(settings, entityRoute)
+        private readonly IEntityUpdateService<TInput, TOutput> _entityUpdateService;
+        private readonly IEntityCreationService<TInput, TOutput> _entityCreationService;
+        private readonly IEntityDeletionService _entityDeletionService;
+
+        public CrudClientBase(
+            IEntityUpdateService<TInput, TOutput> entityUpdateService,
+            IEntityRetrievalService<TOutput> entityRetrievalService,
+            IEntityCreationService<TInput, TOutput> entityCreationService,
+            IEntityDeletionService entityDeletionService)
+            : base(entityRetrievalService)
         {
+            _entityUpdateService = entityUpdateService;
+            _entityCreationService = entityCreationService;
+            _entityDeletionService = entityDeletionService;
         }
 
         #region Update
 
         public virtual TOutput Update(int id, TInput input)
         {
-            return Update(id.ToString(), input);
+            return _entityUpdateService.Update(id, input);
         }
 
         public virtual TOutput Update(long id, TInput input)
         {
-            return Update(id.ToString(), input);
+            return _entityUpdateService.Update(id, input);
         }
 
         public virtual TOutput Update(Guid id, TInput input)
         {
-            return Update(id.ToString(), input);
+            return _entityUpdateService.Update(id, input);
         }
 
         public virtual TOutput Update(string id, TInput input)
         {
-            input.Validate();
-            var client = GetClient();
-            var request = new RestRequest(string.Format("{0}/{1}", EntityRoute, id), Method.PUT);
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(input);
-            var response = client.Execute<TOutput>(request);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                throw new UpdateFailedException(response);
-            }
-            return response.Data;
+            return _entityUpdateService.Update(id, input);
         }
 
         #endregion
@@ -51,17 +51,7 @@ namespace Entelect.Encentivize.Sdk.Clients
 
         public TOutput Create(TInput input)
         {
-            input.Validate();
-            var client = GetClient();
-            var request = new RestRequest(string.Format("{0}", EntityRoute), Method.POST);
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(input);
-            var response = client.Execute<TOutput>(request);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                throw new CreationFailedException(response);
-            }
-            return response.Data;
+            return _entityCreationService.Create(input);
         }
 
         #endregion
@@ -70,28 +60,22 @@ namespace Entelect.Encentivize.Sdk.Clients
 
         public virtual void Delete(int id)
         {
-            Delete(id.ToString());
+            _entityDeletionService.Delete(id);
         }
 
         public virtual void Delete(long id)
         {
-            Delete(id.ToString());
+            _entityDeletionService.Delete(id);
         }
 
         public virtual void Delete(Guid id)
         {
-            Delete(id.ToString());
+            _entityDeletionService.Delete(id);
         }
 
         public virtual void Delete(string id)
         {
-            var client = GetClient();
-            var request = new RestRequest(string.Format("{0}/{1}", EntityRoute, id), Method.DELETE);
-            request.RequestFormat = DataFormat.Json;
-            var response = client.Execute(request);
-
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new DeleteFailedException(response);
+            _entityDeletionService.Delete(id);
         }
 
         #endregion
