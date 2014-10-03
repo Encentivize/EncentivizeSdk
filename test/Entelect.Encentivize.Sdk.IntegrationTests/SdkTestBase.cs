@@ -5,7 +5,7 @@ using Entelect.Encentivize.Sdk.Members;
 using Entelect.Encentivize.Sdk.Points;
 using Entelect.Encentivize.Sdk.Rewards;
 
-namespace Entelect.Encentivize.Sdk.UnitTests
+namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
     public class SdkTestBase
     {

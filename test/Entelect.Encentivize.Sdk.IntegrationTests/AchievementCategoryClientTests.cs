@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Entelect.Encentivize.Sdk.UnitTests
+namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
     public class AchievementCategoryClientTests: SdkTestBase
     {
