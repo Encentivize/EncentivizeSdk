@@ -66,6 +66,7 @@
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryClient.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryInput.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryOutput.cs" />
+    <Compile Include="Achievements\AchievementCategories\AchievementCategorySearchCriteria.cs" />
     <Compile Include="Achievements\AchievementCategories\IAchievementCategoryClient.cs" />
     <Compile Include="Achievements\AchievementInput.cs" />
     <Compile Include="Achievements\AchievementOutput.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Grouping\IGroupingClient.cs" />
     <Compile Include="Points\IPointsClient.cs" />
     <Compile Include="Program\ProgramOutput.cs" />
+    <Compile Include="QueryStringBuilder.cs" />
     <Compile Include="Rewards\IRewardClient.cs" />
     <Compile Include="Members\Members\MemberClient.cs" />
     <Compile Include="Clients\ClientBase.cs" />

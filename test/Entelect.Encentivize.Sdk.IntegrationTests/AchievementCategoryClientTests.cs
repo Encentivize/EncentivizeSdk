@@ -23,6 +23,15 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        public void FindAll()
+        {
+            var pagedAchievements = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria());
+            Assert.NotNull(pagedAchievements);
+            Assert.Greater(pagedAchievements.Data.Count, 0);
+        }
+
+
+        [Test]
         public void Create()
         {
             var guid = Guid.NewGuid().ToString();

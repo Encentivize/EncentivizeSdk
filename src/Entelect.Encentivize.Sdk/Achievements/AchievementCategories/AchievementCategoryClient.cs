@@ -1,5 +1,4 @@
-﻿using System;
-using Entelect.Encentivize.Sdk.GenericServices;
+﻿using Entelect.Encentivize.Sdk.GenericServices;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
@@ -22,6 +21,11 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
         public AchievementCategoryOutput GetById(long achievementCategoryId)
         {
             return _entityRetrievalService.GetById(achievementCategoryId);
+        }
+
+        public PagedResult<AchievementCategoryOutput> Search(AchievementCategorySearchCriteria achievementCategorySearchCriteria)
+        {
+            return _entityRetrievalService.FindBySearchCriteria(achievementCategorySearchCriteria);
         }
 
         public AchievementCategoryOutput Create(AchievementCategoryInput achievementCategoryInput)

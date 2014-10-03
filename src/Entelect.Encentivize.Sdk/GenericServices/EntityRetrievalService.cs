@@ -12,7 +12,10 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         public EntityRetrievalService(IRestClient restClient, string entityRoute)
             :base(restClient,entityRoute)
         {
+            QueryStringBuilder = new QueryStringBuilder();
         }
+
+        protected QueryStringBuilder QueryStringBuilder { get; set; }
 
         public virtual TOutput GetById(int id)
         {
@@ -39,5 +42,22 @@ namespace Entelect.Encentivize.Sdk.GenericServices
                 throw new DataRetrievalFailedException(response);
             return response.Data;
         }
+
+        public virtual PagedResult<TOutput> FindBySearchCriteria(object searchCriteria)
+        {
+
+            var queryString = QueryStringBuilder.ToQueryString(searchCriteria);
+            var request = new RestRequest(string.Format("{0}?{1}", EntityRoute, queryString), Method.GET)
+            {
+                RequestFormat = DataFormat.Json
+            };
+            var response = RestClient.Execute<PagedResult<TOutput>>(request);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new DataRetrievalFailedException(response);
+            }
+            return response.Data;
+        }
+
     }
 }

@@ -54,7 +54,9 @@
     <Compile Include="AchievementCategoryClientTests.cs" />
     <Compile Include="AchievementClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryStringBuilderTests.cs" />
     <Compile Include="SdkTestBase.cs" />
+    <Compile Include="TestSerialisationObject.cs" />
     <Compile Include="TimestoreTests.cs" />
   </ItemGroup>
   <ItemGroup>
