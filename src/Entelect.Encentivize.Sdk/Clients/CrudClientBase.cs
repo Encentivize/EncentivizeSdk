@@ -32,6 +32,7 @@ namespace Entelect.Encentivize.Sdk.Clients
 
         public virtual TOutput Update(string id, TInput input)
         {
+            input.Validate();
             var client = GetClient();
             var request = new RestRequest(string.Format("{0}/{1}", EntityRoute, id), Method.PUT);
             request.RequestFormat = DataFormat.Json;
