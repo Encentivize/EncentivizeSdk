@@ -1,8 +1,10 @@
-﻿using Entelect.Encentivize.Sdk.Clients;
-
-namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
+﻿namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
-    public interface IAchievementCategoryClient : ICrudClientBase<AchievementCategoryInput, AchievementCategoryOutput>
+    public interface IAchievementCategoryClient
     {
+        AchievementCategoryOutput GetById(long achievementCategoryId);
+        AchievementCategoryOutput Create(AchievementCategoryInput achievementCategoryInput);
+        AchievementCategoryOutput Update(long achievementCategoryId, AchievementCategoryInput achievementCategoryInput);
+        void Delete(long achievementCategoryId);
     }
 }
