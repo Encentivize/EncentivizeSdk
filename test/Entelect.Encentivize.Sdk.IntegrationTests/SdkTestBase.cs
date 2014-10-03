@@ -11,9 +11,15 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
     {
         public SdkTestBase()
         {
+#if !DEBUG
             const string username = "alex66@doe66.co.zaQA";
             const string password = "tX3AyNWpwu8xG8tJ5EqujtNP";
             const string baseUrl = "https://qa.encentivize.co.za/api/v1/";
+#else
+            const string username = "encentivizeExceptions@entelect.co.za";
+            const string password = "123456";
+            const string baseUrl = "http://localhost:57441/api/v1/";
+#endif
             EncentivizeSettings = new EncentivizeSettings(username, password, baseUrl);
         }
 

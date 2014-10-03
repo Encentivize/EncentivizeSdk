@@ -6,7 +6,7 @@ namespace Entelect.Encentivize.Sdk
 {
     public abstract class BaseInput
     {
-        public void Validate()
+        public virtual void Validate()
         {
             var results = new List<ValidationResult>();
             Validator.TryValidateObject(this, new ValidationContext(this, null, null), results, true);

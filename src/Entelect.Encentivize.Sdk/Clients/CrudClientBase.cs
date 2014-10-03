@@ -4,7 +4,8 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Clients
 {
-    public class CrudClientBase<TInput, TOutput> : ReadOnlyClientBase<TOutput>, ICrudClientBase<TInput, TOutput> where TInput : BaseInput
+    public class CrudClientBase<TInput, TOutput> : ReadOnlyClientBase<TOutput>, ICrudClientBase<TInput, TOutput> 
+        where TInput : BaseInput
         where TOutput : class, new()
     {
         public CrudClientBase(EncentivizeSettings settings, string entityRoute)
@@ -33,11 +34,13 @@ namespace Entelect.Encentivize.Sdk.Clients
         {
             var client = GetClient();
             var request = new RestRequest(string.Format("{0}/{1}", EntityRoute, id), Method.PUT);
-            request.AddBody(input);
             request.RequestFormat = DataFormat.Json;
+            request.AddBody(input);
             var response = client.Execute<TOutput>(request);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
                 throw new UpdateFailedException(response);
+            }
             return response.Data;
         }
 
@@ -47,14 +50,16 @@ namespace Entelect.Encentivize.Sdk.Clients
 
         public TOutput Create(TInput input)
         {
+            input.Validate();
             var client = GetClient();
             var request = new RestRequest(string.Format("{0}", EntityRoute), Method.POST);
-            request.AddBody(input);
             request.RequestFormat = DataFormat.Json;
+            request.AddBody(input);
             var response = client.Execute<TOutput>(request);
-
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
                 throw new CreationFailedException(response);
+            }
             return response.Data;
         }
 
