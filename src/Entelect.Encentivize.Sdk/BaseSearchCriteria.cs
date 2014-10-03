@@ -1,4 +1,4 @@
-﻿namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
+﻿namespace Entelect.Encentivize.Sdk
 {
     public class BaseSearchCriteria
     {
