@@ -17,5 +17,10 @@ namespace Entelect.Encentivize.Sdk.Clients
             client.Authenticator = new HttpBasicAuthenticator(Settings.Username, Settings.Password);
             return client;
         }
+
+        protected string GetErrorMessage(IRestResponse response)
+        {
+            return string.Format("Error response returned ({0} :{1}), Content: {2}", (int)response.StatusCode, response.StatusCode, response.Content);
+        }
     }
 }

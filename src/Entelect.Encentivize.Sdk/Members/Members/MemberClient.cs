@@ -83,7 +83,7 @@ namespace Entelect.Encentivize.Sdk.Members
             request.AddBody(member);
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
-                throw new UpdateFailedException(response.Content); 
+                throw new UpdateFailedException(response); 
         }
 
         public void UpdateMember(MemberUpdate member, long encentivizeMemberId)
@@ -95,7 +95,7 @@ namespace Entelect.Encentivize.Sdk.Members
             request.AddBody(member);
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
-                throw new UpdateFailedException(response.Content);
+                throw new UpdateFailedException(response);
         }
 
         public void AddMember(MemberInput member)
@@ -108,7 +108,7 @@ namespace Entelect.Encentivize.Sdk.Members
             var response = client.Execute(request);
 
             if (response.StatusCode != HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content); 
+                throw new CreationFailedException(response); 
         }
 
         public MemberOutput GetMe()
@@ -150,7 +150,7 @@ namespace Entelect.Encentivize.Sdk.Members
             request.RequestFormat = DataFormat.Json;
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
-                throw new DataRetrievalFailedException(response.Content); 
+                throw new DataRetrievalFailedException(response); 
         }
 
         private HttpResponseMessage Post(string url, string username, string password, dynamic postData)

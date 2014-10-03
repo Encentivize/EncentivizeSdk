@@ -37,7 +37,7 @@ namespace Entelect.Encentivize.Sdk.Clients
             request.RequestFormat = DataFormat.Json;
             var response = client.Execute<TOutput>(request);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new UpdateFailedException(response.Content);
+                throw new UpdateFailedException(response);
             return response.Data;
         }
 
@@ -54,7 +54,7 @@ namespace Entelect.Encentivize.Sdk.Clients
             var response = client.Execute<TOutput>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content);
+                throw new CreationFailedException(response);
             return response.Data;
         }
 
@@ -82,10 +82,10 @@ namespace Entelect.Encentivize.Sdk.Clients
             var client = GetClient();
             var request = new RestRequest(string.Format("{0}/{1}", EntityRoute, id), Method.DELETE);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<TOutput>(request);
+            var response = client.Execute(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new DeleteFailedException(response.Content);
+                throw new DeleteFailedException(response);
         }
 
         #endregion

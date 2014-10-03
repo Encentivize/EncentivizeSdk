@@ -21,7 +21,7 @@ namespace Entelect.Encentivize.Sdk.Achievements
             var response = client.Execute<MemberAchievement>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content);
+                throw new CreationFailedException(response);
             return response.Data;
         }
 

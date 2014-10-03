@@ -40,7 +40,7 @@ namespace Entelect.Encentivize.Sdk.Clients
             var response = client.Execute<TOutput>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new DataRetrievalFailedException(response.Content);
+                throw new DataRetrievalFailedException(response);
             return response.Data;
         }
 

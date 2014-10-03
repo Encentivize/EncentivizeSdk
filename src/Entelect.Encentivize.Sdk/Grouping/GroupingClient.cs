@@ -34,7 +34,7 @@ namespace Entelect.Encentivize.Sdk.Grouping
             request.AddBody(memberGroup);
             var response = client.Execute<MemberGroupDetails>(request);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content);
+                throw new CreationFailedException(response);
             return response.Data;
 
         }
@@ -48,7 +48,7 @@ namespace Entelect.Encentivize.Sdk.Grouping
             request.AddBody(memberGroup);
             var response = client.Execute(request);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new UpdateFailedException(response.Content);
+                throw new UpdateFailedException(response);
         }
 
         public MemberGroup GetMemberGroup(int groupId)
@@ -88,7 +88,7 @@ namespace Entelect.Encentivize.Sdk.Grouping
             var response = client.Execute(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content);
+                throw new CreationFailedException(response);
         }
 
         public void RemoveMemberFromGroup(int groupId, int memberId)

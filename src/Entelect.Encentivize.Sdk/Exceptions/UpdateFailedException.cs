@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Exceptions
 {
     public class UpdateFailedException : EncentivizeApiException
     {
-         public UpdateFailedException(string message)
-            : base(message)
+        public UpdateFailedException(IRestResponse response, string additionalInformation = null)
+            : base(response, additionalInformation)
         {
         }
 
-        public UpdateFailedException(string message, Exception inner)
-            : base(message, inner)
+        public UpdateFailedException(IRestResponse response, Exception inner, string additionalInformation = null)
+            : base(response, inner, additionalInformation)
         {
         }
 

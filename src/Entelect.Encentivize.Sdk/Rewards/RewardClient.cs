@@ -19,7 +19,7 @@ namespace Entelect.Encentivize.Sdk.Rewards
             var response = client.Execute<PagedResult<Reward>>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new DataRetrievalFailedException(response.Content);
+                throw new DataRetrievalFailedException(response);
             return response.Data;
         }
 
@@ -37,7 +37,7 @@ namespace Entelect.Encentivize.Sdk.Rewards
             request.AddBody(rewardInput);
             var response = client.Execute(request);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content);
+                throw new CreationFailedException(response);
 
         }
     }

@@ -20,7 +20,7 @@ namespace Entelect.Encentivize.Sdk.Points
             var response = client.Execute(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response.Content);
+                throw new CreationFailedException(response);
 
         }
     }
