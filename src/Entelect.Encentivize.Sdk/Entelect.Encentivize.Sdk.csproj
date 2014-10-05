@@ -96,6 +96,8 @@
     <Compile Include="MemberGrouping\GroupCreationTypes\IGroupCreationTypesClient.cs" />
     <Compile Include="MemberGrouping\GroupMembers\GroupMembersClient.cs" />
     <Compile Include="MemberGrouping\GroupMembers\IGroupMembersClient.cs" />
+    <Compile Include="MemberGrouping\GroupRoles\GroupRolesClient.cs" />
+    <Compile Include="MemberGrouping\GroupRoles\IGroupRolesClient.cs" />
     <Compile Include="MemberGrouping\Groups\GroupingClient.cs">
       <SubType>Code</SubType>
     </Compile>
