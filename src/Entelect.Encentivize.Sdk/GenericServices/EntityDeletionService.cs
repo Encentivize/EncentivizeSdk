@@ -20,7 +20,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            Delete(id.ToString(CultureInfo.InvariantCulture));
+            DeleteById(id.ToString(CultureInfo.InvariantCulture));
         }
 
         public virtual void Delete(long id)
@@ -29,7 +29,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            Delete(id.ToString(CultureInfo.InvariantCulture));
+            DeleteById(id.ToString(CultureInfo.InvariantCulture));
         }
 
         public virtual void Delete(Guid id)
@@ -38,16 +38,24 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            Delete(id.ToString());
+            DeleteById(id.ToString());
         }
 
-        public virtual void Delete(string id)
+        public void Delete(string customPath)
         {
-            var request = new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id), Method.DELETE)
-            {
-                RequestFormat = DataFormat.Json
-            };
-            var response = RestClient.Execute(request);
+            DoDelete(new RestRequest(customPath));
+        }
+
+        protected virtual void DeleteById(string id)
+        {
+            DoDelete(new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
+        }
+
+        protected virtual void DoDelete(RestRequest restRequest)
+        {
+            restRequest.Method = Method.DELETE;
+            restRequest.RequestFormat = DataFormat.Json;
+            var response = RestClient.Execute(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new DeleteFailedException(response);

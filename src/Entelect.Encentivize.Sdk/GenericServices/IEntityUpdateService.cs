@@ -7,6 +7,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         TOutput Update(int id, TInput input);
         TOutput Update(long id, TInput input);
         TOutput Update(Guid id, TInput input);
-        TOutput Update(string id, TInput input);
+        TOutput Update(string customPath, TInput input);
     }
 }

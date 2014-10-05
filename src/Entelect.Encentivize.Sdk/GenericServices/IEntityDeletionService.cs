@@ -7,6 +7,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         void Delete(int id);
         void Delete(long id);
         void Delete(Guid id);
-        void Delete(string id);
+        void Delete(string customPath);
     }
 }

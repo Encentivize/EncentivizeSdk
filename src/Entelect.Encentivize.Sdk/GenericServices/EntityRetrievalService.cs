@@ -45,15 +45,9 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return GetById(id.ToString());
         }
 
-        public virtual TOutput GetById(string id)
+        public virtual TOutput Get(string customPath)
         {
-            var request = new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id), Method.GET);
-            request.RequestFormat = DataFormat.Json;
-            var response = RestClient.Execute<TOutput>(request);
-
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new DataRetrievalFailedException(response);
-            return response.Data;
+            return DoGet(new RestRequest(customPath));
         }
 
         public virtual PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
@@ -67,11 +61,11 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 queryString = GetPagingQueryString(searchCriteria);
             }
-            var request = new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString), Method.GET)
-            {
-                RequestFormat = DataFormat.Json
-            };
-            var response = RestClient.Execute<PagedResult<TOutput>>(request);
+            var restRequest = new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString), Method.GET)
+                          {
+                              RequestFormat = DataFormat.Json
+                          };
+            var response = RestClient.Execute<PagedResult<TOutput>>(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new DataRetrievalFailedException(response);
@@ -79,7 +73,23 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
 
-        private string GetPagingQueryString(BaseSearchCriteria searchCriteria)
+        protected virtual TOutput GetById(string id)
+        {
+            return DoGet(new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
+        }
+
+        protected virtual TOutput DoGet(RestRequest restRequest)
+        {
+            restRequest.Method = Method.GET;
+            restRequest.RequestFormat = DataFormat.Json;
+            var response = RestClient.Execute<TOutput>(restRequest);
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new DataRetrievalFailedException(response);
+            return response.Data;
+        }
+
+        protected virtual string GetPagingQueryString(BaseSearchCriteria searchCriteria)
         {
             return string.Format("$page={0}&$pageSize={1}", searchCriteria.PageNumber, searchCriteria.PageSize);
         }

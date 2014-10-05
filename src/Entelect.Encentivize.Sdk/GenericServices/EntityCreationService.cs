@@ -14,13 +14,21 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         public TOutput Create(TInput input)
         {
+            return DoCreate(new RestRequest(string.Format("{0}", EntitySettings.EntityRoute)), input);
+        }
+
+        public TOutput Create(string customPath, TInput input)
+        {
+            return DoCreate(new RestRequest(customPath), input);
+        }
+
+        protected virtual TOutput DoCreate(RestRequest restRequest, TInput input)
+        {
+            restRequest.Method = Method.POST;
+            restRequest.RequestFormat = DataFormat.Json;
             input.Validate();
-            var request = new RestRequest(string.Format("{0}", EntitySettings.EntityRoute), Method.POST)
-            {
-                RequestFormat = DataFormat.Json
-            };
-            request.AddBody(input);
-            var response = RestClient.Execute<TOutput>(request);
+            restRequest.AddBody(input);
+            var response = RestClient.Execute<TOutput>(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new CreationFailedException(response);

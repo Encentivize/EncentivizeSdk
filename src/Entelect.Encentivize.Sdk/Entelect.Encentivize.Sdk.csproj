@@ -94,6 +94,7 @@
     <Compile Include="MemberGrouping\Abilities\IAbilitiesClient.cs" />
     <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypesClient.cs" />
     <Compile Include="MemberGrouping\GroupCreationTypes\IGroupCreationTypesClient.cs" />
+    <Compile Include="MemberGrouping\GroupMembers\GroupMembersClient.cs" />
     <Compile Include="MemberGrouping\Groups\GroupingClient.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -105,8 +106,8 @@
     <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypeOutput.cs" />
     <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypeSearchCriteria.cs" />
     <Compile Include="MemberGrouping\GroupMembers\GroupMemberSearchCriteria.cs" />
-    <Compile Include="MemberGrouping\GroupMembers\MemberGroupInput.cs" />
-    <Compile Include="MemberGrouping\GroupMembers\MemberGroupOutput.cs" />
+    <Compile Include="MemberGrouping\GroupMembers\GroupMemberInput.cs" />
+    <Compile Include="MemberGrouping\GroupMembers\GroupMemberOutput.cs" />
     <Compile Include="MemberGrouping\GroupRoles\GroupRoleInput.cs" />
     <Compile Include="MemberGrouping\GroupRoles\GroupRoleOutput.cs" />
     <Compile Include="MemberGrouping\GroupRoles\GroupRoleSearchCriteria.cs" />

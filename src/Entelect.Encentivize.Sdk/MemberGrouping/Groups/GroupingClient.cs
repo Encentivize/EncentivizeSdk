@@ -67,28 +67,6 @@ namespace Entelect.Encentivize.Sdk.Grouping
             request.RequestFormat = DataFormat.Json;
             client.Execute<PagedResult<GroupOutput>>(request);
         }
-
-        public List<MemberOutput> GetMembersInGroup(int groupId)
-        {
-            var client = GetClient();
-            var request = new RestRequest("groups", Method.GET);
-            request.AddParameter("externalReferenceCode", groupId);
-            request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<MemberOutput>>(request);
-            return response.Data.Data;
-        }
-
-        public void AddMemberToGroup(MemberGroupInput memberGroupInput, int groupId)
-        {
-            var client = GetClient();
-            var request = new RestRequest("Groups/" + groupId + "/Members", Method.POST);
-            request.RequestFormat = DataFormat.Json;
-
-            request.AddBody(memberGroupInput);
-            var response = client.Execute(request);
-
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response);
-        }
+        
     }
 }

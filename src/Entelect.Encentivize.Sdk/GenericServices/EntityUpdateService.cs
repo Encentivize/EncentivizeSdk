@@ -22,7 +22,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return Update(id.ToString(CultureInfo.InvariantCulture), input);
+            return DoUpdate(id.ToString(CultureInfo.InvariantCulture), input);
         }
 
         public virtual TOutput Update(long id, TInput input)
@@ -31,7 +31,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return Update(id.ToString(CultureInfo.InvariantCulture), input);
+            return DoUpdate(id.ToString(CultureInfo.InvariantCulture), input);
         }
 
         public virtual TOutput Update(Guid id, TInput input)
@@ -40,18 +40,26 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return Update(id.ToString(), input);
+            return DoUpdate(id.ToString(), input);
         }
 
-        public virtual TOutput Update(string id, TInput input)
+        public TOutput Update(string customPath, TInput input)
         {
+            return Update(input, new RestRequest(customPath));
+        }
+
+        protected virtual TOutput DoUpdate(string id, TInput input)
+        {
+            return Update(input, new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
+        }
+
+        protected virtual TOutput Update(TInput input, RestRequest restRequest)
+        {
+            restRequest.Method = Method.PUT;
+            restRequest.RequestFormat = DataFormat.Json;
             input.Validate();
-            var request = new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id), Method.PUT)
-            {
-                RequestFormat = DataFormat.Json
-            };
-            request.AddBody(input);
-            var response = RestClient.Execute<TOutput>(request);
+            restRequest.AddBody(input);
+            var response = RestClient.Execute<TOutput>(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new UpdateFailedException(response);
