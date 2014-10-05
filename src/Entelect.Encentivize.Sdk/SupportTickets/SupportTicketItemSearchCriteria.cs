@@ -29,7 +29,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
         public DateTime? LastUpdatedFrom { get; set; }
 
         public DateTime? LastUpdatedTo { get; set; }
--
+
         public long? LastUpdatedById { get; set; }
 
         public long? SupportAgentId { get; set; }
