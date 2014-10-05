@@ -1,5 +1,4 @@
-﻿using Entelect.Encentivize.Sdk.Achievements.GroupTypes;
-using Entelect.Encentivize.Sdk.GenericServices;
+﻿using Entelect.Encentivize.Sdk.GenericServices;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupTypes

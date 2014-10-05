@@ -1,6 +1,4 @@
-﻿using Entelect.Encentivize.Sdk.MemberGrouping.GroupTypes;
-
-namespace Entelect.Encentivize.Sdk.Achievements.GroupTypes
+﻿namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupTypes
 {
     public interface IGroupTypeClient
     {
