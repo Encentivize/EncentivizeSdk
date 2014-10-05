@@ -15,10 +15,18 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        [ExpectedException(typeof(IdNotSetException))]
+        public void GetByIdThatIsNegative()
+        {
+            var achievement = AchievementCategoryClient.Get(-1);
+            Assert.NotNull(achievement);
+        }
+
+        [Test]
         [ExpectedException(typeof(DataRetrievalFailedException))]
         public void GetByIdThatDoesntExist()
         {
-            var achievement = AchievementCategoryClient.Get(-1);
+            var achievement = AchievementCategoryClient.Get(int.MaxValue);
             Assert.NotNull(achievement);
         }
 
