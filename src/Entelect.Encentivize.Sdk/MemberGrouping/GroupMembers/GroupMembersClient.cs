@@ -3,9 +3,9 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
 {
-    public class GroupMembersClient
+    public class GroupMembersClient : IGroupMembersClient
     {
-        private IRestClient _restClient;
+        private readonly IRestClient _restClient;
         private IEntityUpdateService<GroupMemberInput, GroupMemberOutput> _entityUpdateService;
         private IEntityRetrievalService<GroupMemberOutput> _entityRetrievalService;
         private IEntityCreationService<GroupMemberInput, GroupMemberOutput> _entityCreationService;
