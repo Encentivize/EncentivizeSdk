@@ -1,14 +1,15 @@
 ﻿using System;
 
-namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
+namespace Entelect.Encentivize.Sdk.Members.Rewards
 {
-    public class AchievementCategorySearchCriteria : BaseSearchCriteria
+    public class RewardTransactionSearchCriteria : BaseSearchCriteria
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public long? MemberId { get; set; }
+        public long? RewardId { get; set; }
         public DateTime? CreatedDateUtcFrom { get; set; }
         public DateTime? CreatedDateUtcTo { get; set; }
         public DateTime? LastUpdatedDateUtcFrom { get; set; }
         public DateTime? LastUpdatedDateUtcTo { get; set; }
+        public int? RewardsTransactionStatusId { get; set; }
     }
 }
