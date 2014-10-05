@@ -9,13 +9,13 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
         private readonly IEntityRetrievalService<AchievementCategoryOutput> _entityRetrievalService;
         private readonly IEntityCreationService<AchievementCategoryInput, AchievementCategoryOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
-
+        private const string EntityString = "AchievementCategories";
         public AchievementCategoryClient(IRestClient restClient)
         {
-            _entityUpdateService = new EntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, "AchievementCategories");
-            _entityRetrievalService = new EntityRetrievalService<AchievementCategoryOutput>(restClient, "AchievementCategories");
-            _entityCreationService = new EntityCreationService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, "AchievementCategories");
-            _entityDeletionService = new EntityDeletionService(restClient, "AchievementCategories");
+            _entityUpdateService = new EntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, EntityString);
+            _entityRetrievalService = new EntityRetrievalService<AchievementCategoryOutput>(restClient, EntityString);
+            _entityCreationService = new EntityCreationService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, EntityString);
+            _entityDeletionService = new EntityDeletionService(restClient, EntityString);
         }
 
         public AchievementCategoryOutput Get(long achievementCategoryId)
