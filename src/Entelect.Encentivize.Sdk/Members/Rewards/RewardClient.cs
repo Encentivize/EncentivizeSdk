@@ -1,5 +1,6 @@
 ﻿using Entelect.Encentivize.Sdk.Clients;
 using Entelect.Encentivize.Sdk.Exceptions;
+using Entelect.Encentivize.Sdk.Members.Rewards;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Rewards
@@ -11,12 +12,12 @@ namespace Entelect.Encentivize.Sdk.Rewards
         {
         }
 
-        public PagedResult<Reward> GetAvailableRewardsForMember(long memberId)
+        public PagedResult<RewardStructureOutput> GetAvailableRewardsForMember(long memberId)
         {
             var client = GetClient();
             var request = new RestRequest("members/" + memberId + "/availableRewards", Method.GET);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<Reward>>(request);
+            var response = client.Execute<PagedResult<RewardStructureOutput>>(request);
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new DataRetrievalFailedException(response);

@@ -1,8 +1,7 @@
-using Entelect.Encentivize.Sdk.Achievements;
 using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.GenericServices;
-using Entelect.Encentivize.Sdk.Grouping;
 using Entelect.Encentivize.Sdk.Members;
+using Entelect.Encentivize.Sdk.Members.Achievements;
 using Entelect.Encentivize.Sdk.Points;
 using Entelect.Encentivize.Sdk.Rewards;
 
@@ -35,7 +34,6 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         public MemberAchievementClient MemberAchievementClient { get { return new MemberAchievementClient(EncentivizeSettings); } }
 
-        public GroupingClient GroupingClient { get { return new GroupingClient(EncentivizeSettings); } }
 
         public PointsClient PointsClient { get { return new PointsClient(EncentivizeSettings); } }
 

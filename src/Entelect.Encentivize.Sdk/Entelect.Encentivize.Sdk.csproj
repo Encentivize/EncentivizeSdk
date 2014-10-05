@@ -85,8 +85,13 @@
     <Compile Include="GenericServices\IEntityDeletionService.cs" />
     <Compile Include="GenericServices\IEntityRetrievalService.cs" />
     <Compile Include="GenericServices\IEntityUpdateService.cs" />
-    <Compile Include="MemberAchievements\MemberAchievementInput.cs" />
     <Compile Include="DynamicJsonDeserializer.cs" />
+    <Compile Include="MemberGrouping\Groups\GroupingClient.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MemberGrouping\Groups\IGroupingClient.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MemberGrouping\Abilities\AbilityInput.cs" />
     <Compile Include="MemberGrouping\Abilities\AbilityOutput.cs" />
     <Compile Include="MemberGrouping\Abilities\AbilitySearchCriteria.cs" />
@@ -143,18 +148,15 @@
     <Compile Include="PointsTransactions\RewardTransactionOutput.cs" />
     <Compile Include="PointsTransactions\ToPointsTransferTransactionOutput.cs" />
     <Compile Include="PointsTransactions\TransferPointsInput.cs" />
-    <Compile Include="Points\MemberAdhocInput.cs" />
     <Compile Include="Members\MemberUpdate.cs" />
     <Compile Include="PagedResult.cs" />
-    <Compile Include="MemberAchievements\MemberAchievementClient.cs" />
-    <Compile Include="Grouping\GroupingClient.cs" />
-    <Compile Include="MemberAchievements\IMemberAchievementClient.cs" />
-    <Compile Include="Grouping\IGroupingClient.cs" />
-    <Compile Include="Points\IPointsClient.cs" />
+    <Compile Include="Members\Achievements\MemberAchievementClient.cs" />
+    <Compile Include="Members\Achievements\IMemberAchievementClient.cs" />
+    <Compile Include="PointsTransactions\IPointsClient.cs" />
     <Compile Include="PointsTransactions\PointsTransactionSearchCriteria.cs" />
     <Compile Include="Program\ProgramOutput.cs" />
     <Compile Include="QueryStringBuilder.cs" />
-    <Compile Include="Rewards\IRewardClient.cs" />
+    <Compile Include="Members\Rewards\IRewardClient.cs" />
     <Compile Include="Members\Members\MemberClient.cs" />
     <Compile Include="Clients\ClientBase.cs" />
     <Compile Include="EncentivizeSettings.cs" />
@@ -163,12 +165,9 @@
     <Compile Include="Exceptions\EncentivizeApiException.cs" />
     <Compile Include="Exceptions\UpdateFailedException.cs" />
     <Compile Include="Members\Members\IMemberClient.cs" />
-    <Compile Include="MemberAchievements\MemberAchievement.cs" />
-    <Compile Include="Points\PointsClient.cs" />
+    <Compile Include="PointsTransactions\PointsClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rewards\RedeemRewardInput.cs" />
-    <Compile Include="Rewards\Reward.cs" />
-    <Compile Include="Rewards\RewardClient.cs" />
+    <Compile Include="Members\Rewards\RewardClient.cs" />
     <Compile Include="SupportTickets\Categories\SupportTicketCategoryOutput.cs" />
     <Compile Include="SupportTickets\Categories\SupportTicketCategorySearchCriteria.cs" />
     <Compile Include="SupportTickets\CommentOutput.cs" />

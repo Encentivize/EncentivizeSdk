@@ -1,5 +1,6 @@
 ﻿using Entelect.Encentivize.Sdk.Clients;
 using Entelect.Encentivize.Sdk.Exceptions;
+using Entelect.Encentivize.Sdk.PointsTransactions;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Points
@@ -10,7 +11,7 @@ namespace Entelect.Encentivize.Sdk.Points
         {
         }
 
-        public void AddAdhocPoints(long memberId, MemberAdhocInput adhocInput)
+        public void AddAdhocPoints(long memberId, AdHocPointsInput adhocInput)
         {
             var client = GetClient();
             var request = new RestRequest(string.Format("members/{0}/AdHocPoints", memberId), Method.POST);

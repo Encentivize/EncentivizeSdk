@@ -1,4 +1,5 @@
 ﻿using System;
+using Entelect.Encentivize.Sdk.Members.Members;
 
 namespace Entelect.Encentivize.Sdk.Members.Achievements
 {
@@ -13,7 +14,7 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
         public DateTime CreatedDateUtc { get; set; }
         public DateTime DateAchievementEarnedUtc { get; set; }
         public long StructureId { get; set; }
-        public global::Entelect.Encentivize.Sdk.Members.Members.MemberType MemberType { get; set; }
+        public MemberType MemberType { get; set; }
         public string AchievementReferenceNumber { get; set; }
         public long TimesAwarded { get; set; }
     }
