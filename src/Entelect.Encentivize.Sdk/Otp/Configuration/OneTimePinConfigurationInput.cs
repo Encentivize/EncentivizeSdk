@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Otp.Configuration
 {
-    public class OneTimePinConfigurationInput
+    public class OneTimePinConfigurationInput : BaseInput
     {
         [Required]
         public int OneTimePinTypeId { get; set; }

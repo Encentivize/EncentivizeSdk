@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public class MemberInput
+    public class MemberInput : BaseInput
     {
         [Required]
         [StringLength(100)]

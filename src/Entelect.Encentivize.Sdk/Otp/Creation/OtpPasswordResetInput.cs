@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Otp.Creation
 {
-    public class OtpPasswordResetInput
+    public class OtpPasswordResetInput : BaseInput
     {
         [Required(ErrorMessage = "OtpCode is required.")]
         public int OtpCode { get; set; }

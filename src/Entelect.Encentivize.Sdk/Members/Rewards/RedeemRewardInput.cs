@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.Members.Rewards
 {
-    public class RedeemRewardInput
+    public class RedeemRewardInput : BaseInput
     {
         public long RewardId { get; set; }
         public int Quantity { get; set; }

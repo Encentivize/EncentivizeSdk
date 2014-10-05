@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.SupportTickets
 {
-    public class SupportTicketInput
+    public class SupportTicketInput : BaseInput
     {
         [Required(ErrorMessage = "Support ticket type is required")]
         public long SupportTicketTypeId { get; set; }

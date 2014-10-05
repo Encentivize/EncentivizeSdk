@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public class CompletePasswordResetInput
+    public class CompletePasswordResetInput : BaseInput
     {
         public String Guid { get; set; }
 

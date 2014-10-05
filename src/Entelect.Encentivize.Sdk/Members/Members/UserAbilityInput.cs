@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public class UserAbilityInput
+    public class UserAbilityInput : BaseInput
     {
         [Required(ErrorMessage = "UserId is required.")]
         public long UserId { get; set; }

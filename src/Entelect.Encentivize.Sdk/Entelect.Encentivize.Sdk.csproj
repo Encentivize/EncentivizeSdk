@@ -92,10 +92,8 @@
     <Compile Include="MemberGrouping\Groups\IGroupingClient.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MemberGrouping\Abilities\AbilityInput.cs" />
     <Compile Include="MemberGrouping\Abilities\AbilityOutput.cs" />
     <Compile Include="MemberGrouping\Abilities\AbilitySearchCriteria.cs" />
-    <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypeInput.cs" />
     <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypeOutput.cs" />
     <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypeSearchCriteria.cs" />
     <Compile Include="MemberGrouping\GroupMembers\GroupMemberSearchCriteria.cs" />
@@ -132,7 +130,6 @@
     <Compile Include="Otp\Configuration\OneTimePinConfigurationSearchCriteria.cs" />
     <Compile Include="Otp\Creation\CreateOtpRequest.cs" />
     <Compile Include="Otp\Creation\OtpPasswordResetInput.cs" />
-    <Compile Include="Otp\Type\OneTimePinTypeInput.cs" />
     <Compile Include="Otp\Type\OneTimePinTypeOutput.cs" />
     <Compile Include="Otp\Type\OneTimePinTypeSearchCriteria.cs" />
     <Compile Include="PointsTransactions\AchievementTransactionOutput.cs" />
@@ -141,7 +138,6 @@
     <Compile Include="PointsTransactions\FromPointsTransferTransactionOutput.cs" />
     <Compile Include="PointsTransactions\LostPointsTransactionOutput.cs" />
     <Compile Include="PointsTransactions\PayoutTransactionOutput.cs" />
-    <Compile Include="PointsTransactions\PointsTransactionInput.cs" />
     <Compile Include="PointsTransactions\PointsTransactionOutput.cs" />
     <Compile Include="PointsTransactions\PointsTransferOutput.cs" />
     <Compile Include="PointsTransactions\RefundTransactionOutput.cs" />
