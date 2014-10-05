@@ -70,6 +70,7 @@
     <Compile Include="Achievements\AchievementCategories\AchievementCategorySearchCriteria.cs" />
     <Compile Include="Achievements\AchievementClient.cs" />
     <Compile Include="Achievements\AchievementSearchCriteria.cs" />
+    <Compile Include="Achievements\IAchievementClient.cs" />
     <Compile Include="BaseSearchCriteria.cs" />
     <Compile Include="Achievements\AchievementCategories\IAchievementCategoryClient.cs" />
     <Compile Include="Achievements\AchievementInput.cs" />
