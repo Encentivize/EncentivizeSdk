@@ -18,7 +18,7 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
             _entityDeletionService = new EntityDeletionService(restClient, "AchievementCategories");
         }
 
-        public AchievementCategoryOutput GetById(long achievementCategoryId)
+        public AchievementCategoryOutput Get(long achievementCategoryId)
         {
             return _entityRetrievalService.GetById(achievementCategoryId);
         }

@@ -10,7 +10,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var achievement = AchievementCategoryClient.GetById(2);
+            var achievement = AchievementCategoryClient.Get(2);
             Assert.NotNull(achievement);
         }
 
@@ -18,7 +18,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [ExpectedException(typeof(DataRetrievalFailedException))]
         public void GetByIdThatDoesntExist()
         {
-            var achievement = AchievementCategoryClient.GetById(-1);
+            var achievement = AchievementCategoryClient.Get(-1);
             Assert.NotNull(achievement);
         }
 
