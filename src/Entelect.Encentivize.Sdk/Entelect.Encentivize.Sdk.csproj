@@ -144,12 +144,6 @@
     <Compile Include="PointsTransactions\ToPointsTransferTransactionOutput.cs" />
     <Compile Include="PointsTransactions\TransferPointsInput.cs" />
     <Compile Include="Points\MemberAdhocInput.cs" />
-    <Compile Include="Grouping\MemberGroup.cs" />
-    <Compile Include="Grouping\MemberGroupAbilities.cs" />
-    <Compile Include="Grouping\MemberGroupDetails.cs" />
-    <Compile Include="Grouping\MemberGroupInput.cs" />
-    <Compile Include="Grouping\MemberGroupRoles.cs" />
-    <Compile Include="Grouping\MemberGroupType.cs" />
     <Compile Include="Members\MemberUpdate.cs" />
     <Compile Include="PagedResult.cs" />
     <Compile Include="MemberAchievements\MemberAchievementClient.cs" />

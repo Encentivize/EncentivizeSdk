@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Entelect.Encentivize.Sdk.Clients;
 using Entelect.Encentivize.Sdk.Exceptions;
-using Entelect.Encentivize.Sdk.Members;
+using Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers;
+using Entelect.Encentivize.Sdk.MemberGrouping.Groups;
 using Entelect.Encentivize.Sdk.Members.Members;
 using RestSharp;
 
@@ -16,30 +16,30 @@ namespace Entelect.Encentivize.Sdk.Grouping
         {
         }
 
-        public List<MemberGroup> GetGroups()
+        public List<GroupOutput> GetGroups()
         {
             var client = GetClient();
             var request = new RestRequest("groups", Method.GET);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<MemberGroup>>(request);
+            var response = client.Execute<PagedResult<GroupOutput>>(request);
             return response.Data.Data;
         }
 
-        public MemberGroupDetails AddGroup(MemberGroup memberGroup)
+        public GroupOutput AddGroup(GroupOutput memberGroup)
         {
             var client = GetClient();
             var request = new RestRequest("Groups", Method.POST);
             request.RequestFormat = DataFormat.Json;
 
             request.AddBody(memberGroup);
-            var response = client.Execute<MemberGroupDetails>(request);
+            var response = client.Execute<GroupOutput>(request);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new CreationFailedException(response);
             return response.Data;
 
         }
 
-        public void UpdateGroup(MemberGroup memberGroup, int groupId)
+        public void UpdateGroup(GroupOutput memberGroup, int groupId)
         {
             var client = GetClient();
             var request = new RestRequest("Groups/" + groupId, Method.PUT);
@@ -51,12 +51,12 @@ namespace Entelect.Encentivize.Sdk.Grouping
                 throw new UpdateFailedException(response);
         }
 
-        public MemberGroup GetMemberGroup(int groupId)
+        public GroupOutput GetMemberGroup(int groupId)
         {
             var client = GetClient();
             var request = new RestRequest(string.Format("groups/{0}", groupId), Method.GET);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<MemberGroup>>(request);
+            var response = client.Execute<PagedResult<GroupOutput>>(request);
             return response.Data.Data.FirstOrDefault();
         }
 
@@ -65,7 +65,7 @@ namespace Entelect.Encentivize.Sdk.Grouping
             var client = GetClient();
             var request = new RestRequest("groups", Method.DELETE);
             request.RequestFormat = DataFormat.Json;
-            var response = client.Execute<PagedResult<MemberGroup>>(request);
+            client.Execute<PagedResult<GroupOutput>>(request);
         }
 
         public List<MemberOutput> GetMembersInGroup(int groupId)
@@ -89,16 +89,6 @@ namespace Entelect.Encentivize.Sdk.Grouping
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new CreationFailedException(response);
-        }
-
-        public void RemoveMemberFromGroup(int groupId, int memberId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateMemberRole(int groupId, int MemberId, MemberGroupRoles role)
-        {
-            throw new NotImplementedException();
         }
     }
 }
