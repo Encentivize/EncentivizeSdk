@@ -90,8 +90,10 @@
     <Compile Include="GenericServices\IEntityRetrievalService.cs" />
     <Compile Include="GenericServices\IEntityUpdateService.cs" />
     <Compile Include="DynamicJsonDeserializer.cs" />
-    <Compile Include="MemberGrouping\Abilities\AbilityClient.cs" />
-    <Compile Include="MemberGrouping\Abilities\IAbilityClient.cs" />
+    <Compile Include="MemberGrouping\Abilities\AbilitiesClient.cs" />
+    <Compile Include="MemberGrouping\Abilities\IAbilitiesClient.cs" />
+    <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypesClient.cs" />
+    <Compile Include="MemberGrouping\GroupCreationTypes\IGroupCreationTypesClient.cs" />
     <Compile Include="MemberGrouping\Groups\GroupingClient.cs">
       <SubType>Code</SubType>
     </Compile>

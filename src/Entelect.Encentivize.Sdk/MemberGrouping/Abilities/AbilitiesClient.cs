@@ -3,23 +3,23 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.Abilities
 {
-    public class AbilityClient : IAbilityClient
+    public class AbilitiesClient : IAbilitiesClient
     {
         private readonly IEntityRetrievalService<AbilityOutput> _entityRetrievalService;
-        public AbilityClient(IRestClient restClient)
+        public AbilitiesClient(IRestClient restClient)
         {
             var entitySettings = new EntitySettings("Ability", "Abilities", "Abilities");
             _entityRetrievalService = new EntityRetrievalService<AbilityOutput>(restClient, entitySettings);
         }
 
-        public AbilityOutput Get(long achievementCategoryId)
+        public AbilityOutput Get(long abilityId)
         {
-            return _entityRetrievalService.GetById(achievementCategoryId);
+            return _entityRetrievalService.GetById(abilityId);
         }
 
-        public PagedResult<AbilityOutput> Search(AbilitySearchCriteria achievementCategorySearchCriteria)
+        public PagedResult<AbilityOutput> Search(AbilitySearchCriteria abilitySearchCriteria)
         {
-            return _entityRetrievalService.FindBySearchCriteria(achievementCategorySearchCriteria);
+            return _entityRetrievalService.FindBySearchCriteria(abilitySearchCriteria);
         }
 
     }
