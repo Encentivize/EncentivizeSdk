@@ -3,7 +3,7 @@ using Entelect.Encentivize.Sdk.Members.Members;
 
 namespace Entelect.Encentivize.Sdk.Members.Achievements
 {
-    public class AwardedAchievementOutput
+    public class MemberAchievementOutput
     {
         public long MemberAchievementId { get; set; }
         public long AchievementId { get; set; }

@@ -10,5 +10,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         TOutput GetById(Guid id);
         TOutput Get(string customPath);
         PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria);
+        PagedResult<TOutput> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria);
     }
 }

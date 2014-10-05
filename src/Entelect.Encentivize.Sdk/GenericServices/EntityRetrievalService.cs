@@ -52,25 +52,15 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         public virtual PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
         {
-            var queryString = QueryStringBuilder.ToQueryString(searchCriteria);
-            if (!string.IsNullOrWhiteSpace(queryString))
-            {
-                queryString = string.Format("{0}&{1}", queryString, GetPagingQueryString(searchCriteria));
-            }
-            else
-            {
-                queryString = GetPagingQueryString(searchCriteria);
-            }
-            var restRequest = new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString), Method.GET)
-                          {
-                              RequestFormat = DataFormat.Json
-                          };
-            var response = RestClient.Execute<PagedResult<TOutput>>(restRequest);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                throw new DataRetrievalFailedException(response);
-            }
-            return response.Data;
+            var queryString = GetQueryString(searchCriteria);
+            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString)));
+        }
+
+
+        public PagedResult<TOutput> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
+        {
+            var queryString = GetQueryString(searchCriteria);
+            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", customPath, queryString)));
         }
 
         protected virtual TOutput GetById(string id)
@@ -87,6 +77,32 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new DataRetrievalFailedException(response);
             return response.Data;
+        }
+
+        public virtual PagedResult<TOutput> DoFindBySearchCriteria(RestRequest restRequest)
+        {
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.Method = Method.GET;
+            var response = RestClient.Execute<PagedResult<TOutput>>(restRequest);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new DataRetrievalFailedException(response);
+            }
+            return response.Data;
+        }
+
+        protected virtual string GetQueryString(BaseSearchCriteria searchCriteria)
+        {
+            var queryString = QueryStringBuilder.ToQueryString(searchCriteria);
+            if (!string.IsNullOrWhiteSpace(queryString))
+            {
+                queryString = string.Format("{0}&{1}", queryString, GetPagingQueryString(searchCriteria));
+            }
+            else
+            {
+                queryString = GetPagingQueryString(searchCriteria);
+            }
+            return queryString;
         }
 
         protected virtual string GetPagingQueryString(BaseSearchCriteria searchCriteria)

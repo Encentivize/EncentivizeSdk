@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entelect.Encentivize.Sdk.Members.Achievements
 {
-    public class AwardedAchievementInput : BaseInput
+    public class MemberAchievementInput : BaseInput
     {
         [Required]
         [Range(1, long.MaxValue)]

@@ -119,9 +119,10 @@
     <Compile Include="MemberGrouping\GroupTypes\GroupTypeSearchCriteria.cs" />
     <Compile Include="MemberGrouping\GroupTypes\IGroupTypeClient.cs" />
     <Compile Include="Members\Achievements\AchievementStatus.cs" />
+    <Compile Include="Members\Achievements\MemberAchievementsClient.cs" />
     <Compile Include="Members\Achievements\MemberAchievementSearchCriteria.cs" />
-    <Compile Include="Members\Achievements\AwardedAchievementInput.cs" />
-    <Compile Include="Members\Achievements\AwardedAchievementOutput.cs" />
+    <Compile Include="Members\Achievements\MemberAchievementInput.cs" />
+    <Compile Include="Members\Achievements\MemberAchievementOutput.cs" />
     <Compile Include="Members\Members\CompletePasswordResetInput.cs" />
     <Compile Include="Members\Members\MemberInput.cs" />
     <Compile Include="Members\Members\MemberOutput.cs" />
@@ -156,8 +157,6 @@
     <Compile Include="PointsTransactions\TransferPointsInput.cs" />
     <Compile Include="Members\MemberUpdate.cs" />
     <Compile Include="PagedResult.cs" />
-    <Compile Include="Members\Achievements\MemberAchievementClient.cs" />
-    <Compile Include="Members\Achievements\IMemberAchievementClient.cs" />
     <Compile Include="PointsTransactions\IPointsClient.cs" />
     <Compile Include="PointsTransactions\PointsTransactionSearchCriteria.cs" />
     <Compile Include="Program\ProgramOutput.cs" />
