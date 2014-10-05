@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.Exceptions;
 using RestSharp;
 
@@ -9,9 +8,10 @@ namespace Entelect.Encentivize.Sdk.GenericServices
     public class EntityRetrievalService<TOutput> : EntityService, IEntityRetrievalService<TOutput> 
         where TOutput : class, new()
     {
+        const string IdNotSetVerb = "retrieve";
 
-        public EntityRetrievalService(IRestClient restClient, string entityRoute)
-            :base(restClient,entityRoute)
+        public EntityRetrievalService(IRestClient restClient, EntitySettings entitySettings)
+            :base(restClient, entitySettings)
         {
             QueryStringBuilder = new QueryStringBuilder(propertiesToExclude: new[] { "PageNumber", "PageSize" });
         }
@@ -20,22 +20,34 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         public virtual TOutput GetById(int id)
         {
+            if (id <= 0)
+            {
+                throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
+            }
             return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
         public virtual TOutput GetById(long id)
         {
+            if (id <= 0)
+            {
+                throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
+            }
             return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
         public virtual TOutput GetById(Guid id)
         {
+            if (id == null)
+            {
+                throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
+            }
             return GetById(id.ToString());
         }
 
         public virtual TOutput GetById(string id)
         {
-            var request = new RestRequest(string.Format("{0}/{1}", EntityRoute, id), Method.GET);
+            var request = new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id), Method.GET);
             request.RequestFormat = DataFormat.Json;
             var response = RestClient.Execute<TOutput>(request);
 
@@ -55,7 +67,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             {
                 queryString = GetPagingQueryString(searchCriteria);
             }
-            var request = new RestRequest(string.Format("{0}?{1}", EntityRoute, queryString), Method.GET)
+            var request = new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString), Method.GET)
             {
                 RequestFormat = DataFormat.Json
             };

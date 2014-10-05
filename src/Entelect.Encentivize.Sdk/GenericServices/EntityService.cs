@@ -5,12 +5,12 @@ namespace Entelect.Encentivize.Sdk.GenericServices
     public class EntityService
     {
         protected readonly IRestClient RestClient;
-        protected readonly string EntityRoute;
+        protected readonly EntitySettings EntitySettings;
 
-        public EntityService(IRestClient restClient, string entityRoute)
+        public EntityService(IRestClient restClient, EntitySettings entitySettings)
         {
             RestClient = restClient;
-            EntityRoute = entityRoute;
-        } 
+            EntitySettings = entitySettings;
+        }
     }
 }

@@ -74,12 +74,14 @@
     <Compile Include="Achievements\AchievementInput.cs" />
     <Compile Include="Achievements\AchievementOutput.cs" />
     <Compile Include="BaseInput.cs" />
+    <Compile Include="Exceptions\IdNotSetException.cs" />
     <Compile Include="GenericServices\EncentivizeRestClient.cs" />
     <Compile Include="GenericServices\EntityCreationService.cs" />
     <Compile Include="GenericServices\EntityDeletionService.cs" />
     <Compile Include="GenericServices\EntityRetrievalService.cs" />
     <Compile Include="Exceptions\DeleteFailedException.cs" />
     <Compile Include="GenericServices\EntityService.cs" />
+    <Compile Include="GenericServices\EntitySettings.cs" />
     <Compile Include="GenericServices\EntityUpdateService.cs" />
     <Compile Include="GenericServices\IEntityCreationService.cs" />
     <Compile Include="GenericServices\IEntityDeletionService.cs" />

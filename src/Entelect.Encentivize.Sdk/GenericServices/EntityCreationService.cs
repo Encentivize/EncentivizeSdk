@@ -7,15 +7,15 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         where TInput : BaseInput
         where TOutput : class, new()
     {
-        public EntityCreationService(IRestClient restClient, string entityRoute) 
-            : base(restClient, entityRoute)
+        public EntityCreationService(IRestClient restClient, EntitySettings entitySettings) 
+            : base(restClient, entitySettings)
         {
         }
 
         public TOutput Create(TInput input)
         {
             input.Validate();
-            var request = new RestRequest(string.Format("{0}", EntityRoute), Method.POST)
+            var request = new RestRequest(string.Format("{0}", EntitySettings.EntityRoute), Method.POST)
             {
                 RequestFormat = DataFormat.Json
             };
