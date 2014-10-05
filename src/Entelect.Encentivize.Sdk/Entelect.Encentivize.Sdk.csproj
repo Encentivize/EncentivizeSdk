@@ -115,7 +115,9 @@
     <Compile Include="MemberGrouping\Groups\IGroupsClient.cs" />
     <Compile Include="MemberGrouping\GroupTypes\GroupTypeInput.cs" />
     <Compile Include="MemberGrouping\GroupTypes\GroupTypeOutput.cs" />
+    <Compile Include="MemberGrouping\GroupTypes\GroupTypesClient.cs" />
     <Compile Include="MemberGrouping\GroupTypes\GroupTypeSearchCriteria.cs" />
+    <Compile Include="MemberGrouping\GroupTypes\IGroupTypeClient.cs" />
     <Compile Include="Members\Achievements\AchievementStatus.cs" />
     <Compile Include="Members\Achievements\MemberAchievementSearchCriteria.cs" />
     <Compile Include="Members\Achievements\AwardedAchievementInput.cs" />
