@@ -2,8 +2,8 @@ using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.Members;
 using Entelect.Encentivize.Sdk.Members.Achievements;
+using Entelect.Encentivize.Sdk.Members.Rewards;
 using Entelect.Encentivize.Sdk.Points;
-using Entelect.Encentivize.Sdk.Rewards;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
@@ -36,6 +36,5 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         public PointsClient PointsClient { get { return new PointsClient(EncentivizeSettings); } }
 
-        public RewardClient RewardClient { get { return new RewardClient(EncentivizeSettings); } }
     }
 }

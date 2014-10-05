@@ -79,7 +79,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
 
-        public virtual PagedResult<TOutput> DoFindBySearchCriteria(RestRequest restRequest)
+        protected virtual PagedResult<TOutput> DoFindBySearchCriteria(RestRequest restRequest)
         {
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.Method = Method.GET;

@@ -1,4 +1,4 @@
-﻿namespace Entelect.Encentivize.Sdk.Members
+﻿namespace Entelect.Encentivize.Sdk.Members.Members
 {
     public class MemberUpdate
     {
