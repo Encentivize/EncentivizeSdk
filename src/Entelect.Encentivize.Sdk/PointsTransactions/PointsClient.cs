@@ -20,5 +20,11 @@ namespace Entelect.Encentivize.Sdk.Points
             var entityCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransactionOutput>(_restClient, new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints"));
             return entityCreationService.Create(string.Format("members/{0}/AdHocPoints", memberId), adhocInput);
         }
+
+        public virtual TransferPointsOutput TransferPoints(long fromMemberId, TransferPointsInput transferPointsInput)
+        {
+            var entityCreationService = new EntityCreationService<TransferPointsInput, TransferPointsOutput>(_restClient, new EntitySettings("Transfer Points", "Transfer Points", "members/{fromMemberId:long}/TransferPoints"));
+            return entityCreationService.Create(string.Format("members/{0}/TransferPoints", fromMemberId), transferPointsInput);
+        }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
-    public class PointsTransferOutput
+    public class TransferPointsOutput
     {
         public long PointsTransferId { get; set; }
         public string Comment { get; set; }

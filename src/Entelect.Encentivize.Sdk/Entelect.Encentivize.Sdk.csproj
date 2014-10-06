@@ -155,7 +155,7 @@
     <Compile Include="PointsTransactions\LostPointsTransactionOutput.cs" />
     <Compile Include="PointsTransactions\PayoutTransactionOutput.cs" />
     <Compile Include="PointsTransactions\PointsTransactionOutput.cs" />
-    <Compile Include="PointsTransactions\PointsTransferOutput.cs" />
+    <Compile Include="PointsTransactions\TransferPointsOutput.cs" />
     <Compile Include="PointsTransactions\RefundTransactionOutput.cs" />
     <Compile Include="PointsTransactions\RewardTransactionOutput.cs" />
     <Compile Include="PointsTransactions\ToPointsTransferTransactionOutput.cs" />
