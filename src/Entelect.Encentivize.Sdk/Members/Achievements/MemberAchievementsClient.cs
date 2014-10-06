@@ -31,7 +31,7 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
             return _entityCreationService.Create(GetMemberPath(memberId), memberAchievementInput);
         }
 
-        public void Delete(long memberId, long memberAchievementId)
+        public void RetractAchievement(long memberId, long memberAchievementId)
         {
             _entityDeletionService.Delete(string.Format("{0}{1}", GetMemberPath(memberId), memberAchievementId));
         }

@@ -1,11 +1,8 @@
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using Entelect.Encentivize.Sdk.Exceptions;
 using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.Members.Members;
-using Newtonsoft.Json;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members
