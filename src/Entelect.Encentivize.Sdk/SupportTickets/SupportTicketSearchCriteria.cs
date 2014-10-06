@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.SupportTickets
 {
-    public class SupportTicketItemSearchCriteria : BaseSearchCriteria
+    public class SupportTicketSearchCriteria : BaseSearchCriteria
     {
         public long? SupportTicketId { get; set; }
 

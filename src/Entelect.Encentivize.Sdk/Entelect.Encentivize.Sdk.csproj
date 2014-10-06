@@ -185,8 +185,9 @@
     <Compile Include="SupportTickets\CommentOutput.cs" />
     <Compile Include="SupportTickets\EditSupportTicketInput.cs" />
     <Compile Include="SupportTickets\SupportTicketInput.cs" />
-    <Compile Include="SupportTickets\SupportTicketItemSearchCriteria.cs" />
+    <Compile Include="SupportTickets\SupportTicketSearchCriteria.cs" />
     <Compile Include="SupportTickets\SupportTicketOutput.cs" />
+    <Compile Include="SupportTickets\SupportTicketsClient.cs" />
     <Compile Include="SupportTickets\Types\ISupportTicketTypesClient.cs" />
     <Compile Include="SupportTickets\Types\SupportTicketTypeOutput.cs" />
     <Compile Include="SupportTickets\Types\SupportTicketTypesClient.cs" />
