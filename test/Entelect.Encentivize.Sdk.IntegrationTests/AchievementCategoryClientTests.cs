@@ -66,8 +66,8 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
                 Name = guid
             };
             var updated = AchievementCategoryClient.Update(GetSomeEntity().AchievementCategoryId, input);
-            Assert.AreEqual(updated.Name, guid);
-            Assert.AreEqual(updated.Description, guid);
+            Assert.AreEqual(guid, updated.Name);
+            Assert.AreEqual(guid, updated.Description);
         }
 
         [Test]
