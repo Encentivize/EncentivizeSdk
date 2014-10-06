@@ -56,7 +56,7 @@
     <Compile Include="AchievementClientTests.cs" />
     <Compile Include="GroupClientTests.cs" />
     <Compile Include="GroupCreationTypesClientTests.cs" />
-    <Compile Include="GroupMembersClientTestss.cs" />
+    <Compile Include="GroupMembersClientTests.cs" />
     <Compile Include="GroupRolesClientTests.cs" />
     <Compile Include="GroupTypesClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
