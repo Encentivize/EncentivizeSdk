@@ -52,7 +52,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         public GroupRolesClient GroupRolesClient { get { return new GroupRolesClient(_encentivizeRestClient); } }
 
-        public GroupsClient GroupRolesGroupsClientClient { get { return new GroupsClient(_encentivizeRestClient); } }
+        public GroupsClient GroupsClient { get { return new GroupsClient(_encentivizeRestClient); } }
 
         public GroupTypesClient GroupTypesClient { get { return new GroupTypesClient(_encentivizeRestClient); } }
 
