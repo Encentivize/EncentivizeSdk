@@ -2,8 +2,6 @@ using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.Members;
 using Entelect.Encentivize.Sdk.Members.Achievements;
-using Entelect.Encentivize.Sdk.Members.Rewards;
-using Entelect.Encentivize.Sdk.Points;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {

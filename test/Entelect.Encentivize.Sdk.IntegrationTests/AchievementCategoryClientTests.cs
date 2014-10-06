@@ -38,7 +38,6 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             Assert.Greater(pagedAchievements.Data.Count, 0);
         }
 
-
         [Test]
         public void Create()
         {
