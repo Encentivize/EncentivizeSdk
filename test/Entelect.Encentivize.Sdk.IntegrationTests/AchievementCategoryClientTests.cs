@@ -42,15 +42,13 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void Create()
         {
-            var guid = Guid.NewGuid().ToString();
-            var input = new AchievementCategoryInput
-            {
-                Name = guid,
-                Description = guid
-            };
-            var createdAchievement = AchievementCategoryClient.Create(input);
+            var guidString = Guid.NewGuid().ToString();
+            var createdAchievement = CreateSomeCategory(guidString);
             Assert.NotNull(createdAchievement);
+            Assert.AreEqual(guidString, createdAchievement.Name);
+            Assert.AreEqual(guidString, createdAchievement.Description);
         }
+        
 
         [Test]
         [ExpectedException(typeof(NullReferenceException))]
@@ -59,23 +57,53 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             AchievementCategoryClient.Create(null);
         }
 
-
         [Test]
         public void Update()
         {
-            var pagedAchievements = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria { PageSize = 1, PageNumber = 1 });
-            Assert.NotNull(pagedAchievements);
-            var firstAchievementCategory = pagedAchievements.Data.First();
-            Assert.NotNull(firstAchievementCategory);
             var guid = Guid.NewGuid().ToString();
             var input = new AchievementCategoryInput
             {
                 Description = guid,
                 Name = guid
             };
-            var updated = AchievementCategoryClient.Update(firstAchievementCategory.AchievementCategoryId, input);
+            var updated = AchievementCategoryClient.Update(GetSomeAchievementCategory().AchievementCategoryId, input);
             Assert.AreEqual(updated.Name, guid);
             Assert.AreEqual(updated.Description, guid);
+        }
+
+        [Test]
+        public void Delete()
+        {
+            var guid = Guid.NewGuid().ToString();
+            var input = new AchievementCategoryInput
+            {
+                Description = guid,
+                Name = guid
+            };
+            var updated = AchievementCategoryClient.Update(GetSomeAchievementCategory().AchievementCategoryId, input);
+            Assert.AreEqual(updated.Name, guid);
+            Assert.AreEqual(updated.Description, guid);
+        }
+
+        private AchievementCategoryOutput GetSomeAchievementCategory()
+        {
+            var pagedAchievements = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria { PageSize = 1, PageNumber = 1 });
+            var firstAchievementCategory = pagedAchievements.Data.FirstOrDefault();
+            if (firstAchievementCategory == null)
+            {
+                firstAchievementCategory = CreateSomeCategory(Guid.NewGuid().ToString());
+            }
+            return firstAchievementCategory;
+        }
+
+        private AchievementCategoryOutput CreateSomeCategory(string guid)
+        {
+            var input = new AchievementCategoryInput
+            {
+                Name = guid,
+                Description = guid
+            };
+            return AchievementCategoryClient.Create(input);
         }
     }
 }
