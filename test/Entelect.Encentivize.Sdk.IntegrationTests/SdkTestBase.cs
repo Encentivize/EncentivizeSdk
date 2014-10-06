@@ -34,7 +34,6 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         public MemberAchievementsClient MemberAchievementClient { get { return new MemberAchievementsClient(EncentivizeRestClient); } }
 
-        public PointsClient PointsClient { get { return new PointsClient(EncentivizeSettings); } }
 
     }
 }

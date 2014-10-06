@@ -21,12 +21,5 @@
             EntityNamePlural = entityNamePlural;
             EntityRoute = entityRoute;
         }
-
-        public EntitySettings(string sameForAll)
-        {
-            EntityNameSingular = sameForAll;
-            EntityNamePlural = sameForAll;
-            EntityRoute = sameForAll;
-        }
     }
 }

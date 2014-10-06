@@ -1,28 +1,24 @@
 ﻿using Entelect.Encentivize.Sdk.Clients;
 using Entelect.Encentivize.Sdk.Exceptions;
+using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.PointsTransactions;
 using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Points
 {
-    public class PointsClient : ClientBase, IPointsClient
+    public class PointsClient : IPointsClient
     {
-        public PointsClient(EncentivizeSettings settings) : base(settings)
+        private readonly IRestClient _restClient;
+
+        public PointsClient(IRestClient restClient) 
         {
+            _restClient = restClient;
         }
 
-        public void AddAdhocPoints(long memberId, AdHocPointsInput adhocInput)
+        public virtual AdHocTransactionOutput AddAdhocPoints(long memberId, AdHocPointsInput adhocInput)
         {
-            var client = GetClient();
-            var request = new RestRequest(string.Format("members/{0}/AdHocPoints", memberId), Method.POST);
-            request.RequestFormat = DataFormat.Json;
-
-            request.AddBody(adhocInput);
-            var response = client.Execute(request);
-
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                throw new CreationFailedException(response);
-
+            var entityCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransactionOutput>(_restClient, new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints"));
+            return entityCreationService.Create(string.Format("members/{0}/AdHocPoints", memberId), adhocInput);
         }
     }
 }
