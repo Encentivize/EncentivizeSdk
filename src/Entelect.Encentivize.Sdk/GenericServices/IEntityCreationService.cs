@@ -4,5 +4,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
     {
         TOutput Create(TInput input);
         TOutput Create(string customPath, TInput input);
+        void CreateExpectNullResponse(TInput input);
+        void CreateExpectNullResponse(string customPath, TInput input);
     }
 }
