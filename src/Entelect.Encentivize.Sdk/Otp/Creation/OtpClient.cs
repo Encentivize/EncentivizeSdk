@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Otp.Creation
 {
-    public class OtpClient
+    public class OtpClient : IOtpClient
     {
         private readonly IRestClient _restClient;
 

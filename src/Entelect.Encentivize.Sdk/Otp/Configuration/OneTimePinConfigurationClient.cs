@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Otp.Configuration
 {
-    public class OneTimePinConfigurationClient
+    public class OneTimePinConfigurationClient : IOneTimePinConfigurationClient
     {
         private readonly IEntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput> _entityUpdateService;
         private readonly IEntityRetrievalService<OneTimePinConfigurationOutput> _entityRetrievalService;

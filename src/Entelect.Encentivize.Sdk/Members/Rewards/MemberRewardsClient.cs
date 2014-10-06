@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members.Rewards
 {
-    public class MemberRewardsClient
+    public class MemberRewardsClient : IMemberRewardsClient
     {
         private readonly IRestClient _restClient;
         private readonly IEntityUpdateService<RedeemRewardInput, RewardTransactionOutput> _entityUpdateService;
