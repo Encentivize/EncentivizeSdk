@@ -56,9 +56,12 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             }
             else
             {
-                //roleId = GroupRol
+                roleId = new GroupRolesClientTests().GetSomeEntity().GroupRoleId;
             }
-            throw new NotImplementedException();
+            var output = GroupMembersClient.UpdateMemberRole(SomeGroup().GroupId, new GroupMemberInput {GroupRoleId = roleId, MemberId = firstMemberInGroup.MemberOutput.MemberId});
+            Assert.NotNull(output);
+            Assert.AreEqual(roleId,output.GroupRoleId);
+            Assert.AreEqual(firstMemberInGroup.MemberOutput.MemberId, output.MemberOutput.MemberId);
         }
 
         public GroupOutput SomeGroup()
