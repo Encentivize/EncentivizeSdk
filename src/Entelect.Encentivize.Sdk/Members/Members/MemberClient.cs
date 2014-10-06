@@ -35,9 +35,7 @@ namespace Entelect.Encentivize.Sdk.Members
             var request = new RestRequest("members", Method.GET);
             request.AddParameter("mobileNumber", mobileNumber);
             request.RequestFormat = DataFormat.Json;
-
             var response = client.Execute<PagedResult<MemberOutput>>(request);
- 
             return response.Data.Data.FirstOrDefault();
         }
 
@@ -48,7 +46,6 @@ namespace Entelect.Encentivize.Sdk.Members
             request.AddParameter("emailAddress", emailAddress);
             request.RequestFormat = DataFormat.Json;
             var response = client.Execute<PagedResult<MemberOutput>>(request);
-
             return response.Data != null ? response.Data.Data.FirstOrDefault() : null;
         }
 
@@ -56,21 +53,16 @@ namespace Entelect.Encentivize.Sdk.Members
         {
             var client = GetClient();
             var request = new RestRequest("members", Method.GET);
-
             request.RequestFormat = DataFormat.Json;
-
             if (pageSize != null)
             {
                 request.AddParameter("$PageSize", pageSize);
             }
-
             if (pageNumber != null)
             {
                 request.AddParameter("$PageNo", pageNumber);
             }
-
             var response = client.Execute<PagedResult<MemberOutput>>(request);
-
             return response.Data;
         }
 
@@ -79,11 +71,12 @@ namespace Entelect.Encentivize.Sdk.Members
             var client = GetClient(); 
             var request = new RestRequest("members/" + encentivizeMemberId, Method.PUT);
             request.RequestFormat = DataFormat.Json;
-
             request.AddBody(member);
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
-                throw new UpdateFailedException(response); 
+            {
+                throw new UpdateFailedException(response);
+            }
         }
 
         public void UpdateMember(MemberUpdate member, long encentivizeMemberId)
@@ -91,11 +84,12 @@ namespace Entelect.Encentivize.Sdk.Members
             var client = GetClient();
             var request = new RestRequest("members/" + encentivizeMemberId, Method.PUT);
             request.RequestFormat = DataFormat.Json;
-
             request.AddBody(member);
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
+            { 
                 throw new UpdateFailedException(response);
+            }
         }
 
         public void AddMember(MemberInput member)
@@ -103,12 +97,12 @@ namespace Entelect.Encentivize.Sdk.Members
             var client = GetClient(); 
             var request = new RestRequest("members", Method.POST);
             request.RequestFormat = DataFormat.Json;
-
             request.AddBody(member);
             var response = client.Execute(request);
-
             if (response.StatusCode != HttpStatusCode.OK)
+            {
                 throw new CreationFailedException(response); 
+            }
         }
 
         public MemberOutput GetMe()
@@ -116,7 +110,6 @@ namespace Entelect.Encentivize.Sdk.Members
             var client = GetClient();
             var request = new RestRequest("members/me", Method.GET);
             request.RequestFormat = DataFormat.Json;
-
             var response = client.Execute<MemberOutput>(request);
             return response.Data; 
         }
@@ -150,7 +143,9 @@ namespace Entelect.Encentivize.Sdk.Members
             request.RequestFormat = DataFormat.Json;
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
+            {
                 throw new DataRetrievalFailedException(response); 
+            }
         }
 
         private HttpResponseMessage Post(string url, string username, string password, dynamic postData)
@@ -159,7 +154,6 @@ namespace Entelect.Encentivize.Sdk.Members
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(
                 Encoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password))));
-
             var serializedData = JsonConvert.SerializeObject(postData);
             var task = client.PostAsync(uri, new StringContent(serializedData, Encoding.UTF8, "application/json"));
             var response = task.Result;
