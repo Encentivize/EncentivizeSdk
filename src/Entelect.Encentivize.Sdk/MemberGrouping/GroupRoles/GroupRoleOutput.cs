@@ -9,6 +9,6 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
         public long GroupTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<AbilityOutput> Abilities { get; set; }
+        public List<AbilityOutput> Abilities { get; set; }
     }
 }
