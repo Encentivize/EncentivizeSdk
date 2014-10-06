@@ -178,6 +178,8 @@
     <Compile Include="PointsTransactions\PointsClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rewards\RewardSearchCriteria.cs" />
+    <Compile Include="SupportTickets\Categories\ISupportTicketCategorysClient.cs" />
+    <Compile Include="SupportTickets\Categories\SupportTicketCategorysClient.cs" />
     <Compile Include="SupportTickets\Categories\SupportTicketCategoryOutput.cs" />
     <Compile Include="SupportTickets\Categories\SupportTicketCategorySearchCriteria.cs" />
     <Compile Include="SupportTickets\CommentOutput.cs" />
@@ -185,7 +187,9 @@
     <Compile Include="SupportTickets\SupportTicketInput.cs" />
     <Compile Include="SupportTickets\SupportTicketItemSearchCriteria.cs" />
     <Compile Include="SupportTickets\SupportTicketOutput.cs" />
+    <Compile Include="SupportTickets\Types\ISupportTicketTypesClient.cs" />
     <Compile Include="SupportTickets\Types\SupportTicketTypeOutput.cs" />
+    <Compile Include="SupportTickets\Types\SupportTicketTypesClient.cs" />
     <Compile Include="SupportTickets\Types\SupportTicketTypeSearchCriteria.cs" />
     <Compile Include="ValidationFailedError.cs" />
   </ItemGroup>

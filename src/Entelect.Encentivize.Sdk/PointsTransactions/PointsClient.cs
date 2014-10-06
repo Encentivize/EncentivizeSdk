@@ -35,7 +35,19 @@ namespace Entelect.Encentivize.Sdk.Points
             return Map(result);
         }
 
-        private PagedResult<PointsTransactionOutput> Map(PagedResult<object> result)
+        public virtual AdHocTransactionOutput AddAdhocPoints(long memberId, AdHocPointsInput adhocInput)
+        {
+            var entityCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransactionOutput>(_restClient, new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints"));
+            return entityCreationService.Create(string.Format("members/{0}/AdHocPoints", memberId), adhocInput);
+        }
+
+        public virtual TransferPointsOutput TransferPoints(long fromMemberId, TransferPointsInput transferPointsInput)
+        {
+            var entityCreationService = new EntityCreationService<TransferPointsInput, TransferPointsOutput>(_restClient, new EntitySettings("Transfer Points", "Transfer Points", "members/{fromMemberId:long}/TransferPoints"));
+            return entityCreationService.Create(string.Format("members/{0}/TransferPoints", fromMemberId), transferPointsInput);
+        }
+
+        protected virtual PagedResult<PointsTransactionOutput> Map(PagedResult<object> result)
         {
             /* todo rk, this whole method is shit and might not work, test and find a better way*/
             var mappedResult = new PagedResult<PointsTransactionOutput>();
@@ -83,18 +95,6 @@ namespace Entelect.Encentivize.Sdk.Points
                 }
             }
             return mappedResult;
-        }
-
-        public virtual AdHocTransactionOutput AddAdhocPoints(long memberId, AdHocPointsInput adhocInput)
-        {
-            var entityCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransactionOutput>(_restClient, new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints"));
-            return entityCreationService.Create(string.Format("members/{0}/AdHocPoints", memberId), adhocInput);
-        }
-
-        public virtual TransferPointsOutput TransferPoints(long fromMemberId, TransferPointsInput transferPointsInput)
-        {
-            var entityCreationService = new EntityCreationService<TransferPointsInput, TransferPointsOutput>(_restClient, new EntitySettings("Transfer Points", "Transfer Points", "members/{fromMemberId:long}/TransferPoints"));
-            return entityCreationService.Create(string.Format("members/{0}/TransferPoints", fromMemberId), transferPointsInput);
         }
     }
 }
