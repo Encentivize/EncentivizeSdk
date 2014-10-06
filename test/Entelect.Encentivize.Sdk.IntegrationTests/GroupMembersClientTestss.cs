@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
-    public class GroupMembersClientTests : SdkTestBase
+    public class GroupMembersClientTestss : SdkTestBase
     {
         const int MemberId = 16;
 
