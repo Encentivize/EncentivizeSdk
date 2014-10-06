@@ -51,6 +51,7 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AbilitiesClientTests.cs" />
     <Compile Include="AchievementCategoryClientTests.cs" />
     <Compile Include="AchievementClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
