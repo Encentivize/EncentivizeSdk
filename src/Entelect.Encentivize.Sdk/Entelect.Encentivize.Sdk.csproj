@@ -177,7 +177,6 @@
     <Compile Include="Exceptions\DataRetrievalFailedException.cs" />
     <Compile Include="Exceptions\EncentivizeApiException.cs" />
     <Compile Include="Exceptions\UpdateFailedException.cs" />
-    <Compile Include="Members\Members\IMemberClient.cs" />
     <Compile Include="PointsTransactions\PointsClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rewards\RewardSearchCriteria.cs" />

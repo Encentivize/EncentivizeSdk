@@ -7,57 +7,32 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members
 {
-    public class MemberClient : IMemberClient
+    public class MemberClient
     {
         private readonly IRestClient _restClient;
+        private EntityRetrievalService<MemberOutput> _entityRetrievalService;
 
         public MemberClient(IRestClient restClient)
         {
             _restClient = restClient;
+            _entityRetrievalService = new EntityRetrievalService<MemberOutput>(_restClient, new EntitySettings("Member", "Members", "members"));
         }
 
-        public MemberOutput GetMemberByExternalReference(string externalReference)
+        public MemberOutput GetMe()
         {
-            var request = new RestRequest("members", Method.GET);
-            request.AddParameter("externalReferenceCode", externalReference);
-            request.RequestFormat = DataFormat.Json;
-            var response = _restClient.Execute<PagedResult<MemberOutput>>(request);
-            return response.Data.Data.FirstOrDefault();
+            return _entityRetrievalService.Get("members/me");
         }
 
-        public MemberOutput GetMemberByMobileNumber(string mobileNumber)
+        public PagedResult<MemberOutput> Search(MemberSearchCriteria memberSearchCriteria)
         {
-            var request = new RestRequest("members", Method.GET);
-            request.AddParameter("mobileNumber", mobileNumber);
-            request.RequestFormat = DataFormat.Json;
-            var response = _restClient.Execute<PagedResult<MemberOutput>>(request);
-            return response.Data.Data.FirstOrDefault();
+            return _entityRetrievalService.FindBySearchCriteria(memberSearchCriteria);
         }
 
-        public MemberOutput GetMemberByEmailAddress(string emailAddress)
+        public MemberOutput Get(long memberId)
         {
-            var request = new RestRequest("members", Method.GET);
-            request.AddParameter("emailAddress", emailAddress);
-            request.RequestFormat = DataFormat.Json;
-            var response = _restClient.Execute<PagedResult<MemberOutput>>(request);
-            return response.Data != null ? response.Data.Data.FirstOrDefault() : null;
+            return _entityRetrievalService.GetById(memberId);
         }
 
-        public PagedResult<MemberOutput> GetMembers(int? pageSize, int? pageNumber)
-        {
-            var request = new RestRequest("members", Method.GET);
-            request.RequestFormat = DataFormat.Json;
-            if (pageSize != null)
-            {
-                request.AddParameter("$PageSize", pageSize);
-            }
-            if (pageNumber != null)
-            {
-                request.AddParameter("$PageNo", pageNumber);
-            }
-            var response = _restClient.Execute<PagedResult<MemberOutput>>(request);
-            return response.Data;
-        }
 
         public void UpdateMember(MemberInput member, long encentivizeMemberId)
         {
@@ -93,14 +68,6 @@ namespace Entelect.Encentivize.Sdk.Members
             {
                 throw new CreationFailedException(response); 
             }
-        }
-
-        public MemberOutput GetMe()
-        {
-            var request = new RestRequest("members/me", Method.GET);
-            request.RequestFormat = DataFormat.Json;
-            var response = _restClient.Execute<MemberOutput>(request);
-            return response.Data; 
         }
 
         public dynamic GetTimestoreForMember(long memberId)
