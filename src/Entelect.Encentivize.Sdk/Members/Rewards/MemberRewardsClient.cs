@@ -1,5 +1,4 @@
-﻿using Entelect.Encentivize.Sdk.Exceptions;
-using Entelect.Encentivize.Sdk.GenericServices;
+﻿using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.PointsTransactions;
 using Entelect.Encentivize.Sdk.Rewards;
 using RestSharp;

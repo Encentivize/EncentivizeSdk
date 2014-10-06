@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.Exceptions;
 using NUnit.Framework;
@@ -56,6 +57,25 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public void CreateWithNoBody()
         {
             AchievementCategoryClient.Create(null);
+        }
+
+
+        [Test]
+        public void Update()
+        {
+            var pagedAchievements = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria { PageSize = 1, PageNumber = 1 });
+            Assert.NotNull(pagedAchievements);
+            var firstAchievementCategory = pagedAchievements.Data.First();
+            Assert.NotNull(firstAchievementCategory);
+            var guid = Guid.NewGuid().ToString();
+            var input = new AchievementCategoryInput
+            {
+                Description = guid,
+                Name = guid
+            };
+            var updated = AchievementCategoryClient.Update(firstAchievementCategory.AchievementCategoryId, input);
+            Assert.AreEqual(updated.Name, guid);
+            Assert.AreEqual(updated.Description, guid);
         }
     }
 }
