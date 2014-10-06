@@ -144,7 +144,9 @@
     <Compile Include="Otp\Creation\CreateOtpRequest.cs" />
     <Compile Include="Otp\Creation\OtpClient.cs" />
     <Compile Include="Otp\Creation\OtpPasswordResetInput.cs" />
+    <Compile Include="Otp\Type\IOneTimePinTypesClient.cs" />
     <Compile Include="Otp\Type\OneTimePinTypeOutput.cs" />
+    <Compile Include="Otp\Type\OneTimePinTypesClient.cs" />
     <Compile Include="Otp\Type\OneTimePinTypeSearchCriteria.cs" />
     <Compile Include="PointsTransactions\AchievementTransactionOutput.cs" />
     <Compile Include="PointsTransactions\AdHocPointsInput.cs" />
