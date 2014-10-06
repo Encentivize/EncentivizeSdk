@@ -1,14 +1,14 @@
-﻿using Entelect.Encentivize.Sdk.MemberGrouping.Abilities;
+﻿using Entelect.Encentivize.Sdk.MemberGrouping.GroupCreationTypes;
 using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
-    public class AbilitiesClientTests : SdkTestBase
+    public class GroupCreationTypesClientTests : SdkTestBase
     {
         [Test]
         public void Search()
         {
-            var searchResult = AbilitiesClient.Search(new AbilitySearchCriteria());
+            var searchResult = GroupCreationTypesClient.Search(new GroupCreationTypeSearchCriteria());
             Assert.NotNull(searchResult);
             Assert.Greater(searchResult.Data.Count, 0);
         }
@@ -16,7 +16,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var item = AbilitiesClient.Get(1);
+            var item = GroupCreationTypesClient.Get(1);
             Assert.NotNull(item);
         }
     }
