@@ -164,6 +164,7 @@
     <Compile Include="PagedResult.cs" />
     <Compile Include="PointsTransactions\IPointsClient.cs" />
     <Compile Include="PointsTransactions\PointsTransactionSearchCriteria.cs" />
+    <Compile Include="Program\ProgramClient.cs" />
     <Compile Include="Program\ProgramOutput.cs" />
     <Compile Include="QueryStringBuilder.cs" />
     <Compile Include="Members\Members\MemberClient.cs" />
