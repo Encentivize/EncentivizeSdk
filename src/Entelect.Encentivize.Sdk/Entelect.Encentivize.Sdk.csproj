@@ -172,7 +172,6 @@
     <Compile Include="Program\ProgramOutput.cs" />
     <Compile Include="QueryStringBuilder.cs" />
     <Compile Include="Members\Members\MemberClient.cs" />
-    <Compile Include="Clients\ClientBase.cs" />
     <Compile Include="EncentivizeSettings.cs" />
     <Compile Include="Exceptions\CreationFailedException.cs" />
     <Compile Include="Exceptions\DataRetrievalFailedException.cs" />
