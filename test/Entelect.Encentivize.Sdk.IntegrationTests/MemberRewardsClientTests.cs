@@ -46,12 +46,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             });
             Assert.NotNull(transaction);
         }
-
-        private void EnsureOtpDisabledForRewards()
-        {
-            OneTimePinConfigurationClient.Delete(2);
-        }
-
+        
         [Test]
         public void GetTransaction()
         {
@@ -59,6 +54,18 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             var sameTransaction = MemberRewardsClient.Get(rewardTransaction.MemberId, rewardTransaction.PointsTransactionsId);
             Assert.NotNull(sameTransaction);
             Assert.AreEqual(rewardTransaction.PointsTransactionsId, sameTransaction.PointsTransactionsId);
+        }
+
+        [Test]
+        public void RefundReward()
+        {
+            var rewardTransaction = MemberRewardsClient.Search(new RewardTransactionSearchCriteria()).Data.First();
+            MemberRewardsClient.RefundReward(rewardTransaction.MemberId, rewardTransaction.PointsTransactionsId);
+        }
+
+        private void EnsureOtpDisabledForRewards()
+        {
+            OneTimePinConfigurationClient.Delete(2);
         }
     }
 }
