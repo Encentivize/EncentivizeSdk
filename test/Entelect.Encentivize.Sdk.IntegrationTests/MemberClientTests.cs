@@ -92,7 +92,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void ResetPasswordPin()
         {
-            MemberClient.ResetPasswordPin(1);
+            MemberClient.ResetPasswordPin(2);
         }
     }
 }

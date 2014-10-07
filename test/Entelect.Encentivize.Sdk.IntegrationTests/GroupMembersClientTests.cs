@@ -48,7 +48,11 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public void UpdateMemberRole()
         {
             var groupMembers = GroupMembersClient.GetMembersInGroup(SomeGroup().GroupId);
-            var firstMemberInGroup = groupMembers.Data.First();
+            var firstMemberInGroup = groupMembers.Data.FirstOrDefault();
+            if (firstMemberInGroup == null)
+            {
+                firstMemberInGroup = GroupMembersClient.AddMemberToGroup(new GroupMemberInput { MemberId = MemberId }, SomeGroup().GroupId);
+            }
             long? roleId;
             if (firstMemberInGroup.GroupRoleId.HasValue)
             {
