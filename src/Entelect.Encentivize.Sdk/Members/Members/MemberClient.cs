@@ -58,9 +58,7 @@ namespace Entelect.Encentivize.Sdk.Members
         public dynamic GetTimestoreForMember(long memberId)
         {
             var entityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, _timeStoreEntitySettings);
-            _restClient.AddHandler("application/json", new DynamicJsonDeserializer());
-            var data = entityRetrievalService.Get(TimeStoreUrl(memberId));
-            _restClient.RemoveHandler("application/json");
+            var data = entityRetrievalService.Get(TimeStoreUrl(memberId), true);
             return data;
         }
 
