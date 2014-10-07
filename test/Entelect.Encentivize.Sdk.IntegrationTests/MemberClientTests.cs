@@ -62,5 +62,21 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             var output = MemberClient.CreateMember(memeberInput);
             Assert.NotNull(output);
         }
+
+        [Test]
+        public void GetTimestoreForMember()
+        {
+            var data = MemberClient.GetTimestoreForMember(1);
+        }
+
+        [Test]
+        public void SaveTimestoreForMember()
+        {
+            dynamic dataToSave = new {SomeThing = "Word", ABool = true};
+            var data = MemberClient.WriteTimestoreForMember(1, dataToSave);
+            var retrievedData = MemberClient.GetTimestoreForMember(1);
+            Assert.AreEqual("Word", retrievedData.SomeThing);
+            Assert.AreEqual(true, retrievedData.ABool);
+        }
     }
 }
