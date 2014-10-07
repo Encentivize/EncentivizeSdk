@@ -6,6 +6,7 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
     public class MemberAchievementOutput
     {
         public long MemberAchievementId { get; set; }
+        public long MemberId { get; set; }
         public long AchievementId { get; set; }
         public AchievementStatus AchievementStatus { get; set; }
         public decimal PointsAwarded { get; set; }

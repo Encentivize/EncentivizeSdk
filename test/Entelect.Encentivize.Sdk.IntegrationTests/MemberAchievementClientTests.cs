@@ -11,17 +11,17 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void Search()
         {
-            var pagedAchievementCategory = MemberAchievementsClient.Search(new MemberAchievementSearchCriteria());
-            Assert.NotNull(pagedAchievementCategory);
-            Assert.Greater(pagedAchievementCategory.Data.Count, 0);
+            var pagedResult = MemberAchievementsClient.Search(new MemberAchievementSearchCriteria());
+            Assert.NotNull(pagedResult);
+            Assert.Greater(pagedResult.Data.Count, 0);
         }
 
         [Test]
         public void MemberAchievementHistory()
         {
-            var pagedAchievementCategory = MemberAchievementsClient.SearchMembersAchievements(1, new MemberAchievementSearchCriteria());
-            Assert.NotNull(pagedAchievementCategory);
-            Assert.Greater(pagedAchievementCategory.Data.Count, 0);
+            var pagedResult = MemberAchievementsClient.SearchMembersAchievements(1, new MemberAchievementSearchCriteria());
+            Assert.NotNull(pagedResult);
+            Assert.Greater(pagedResult.Data.Count, 0);
         }
 
         [Test]
