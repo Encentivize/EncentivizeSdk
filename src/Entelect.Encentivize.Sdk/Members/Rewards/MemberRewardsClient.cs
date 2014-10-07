@@ -65,7 +65,5 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
         {
             return _entityUpdateService.Update(string.Format("members/{0}/rewards/{1}/additionalInformation", memberId, rewardTransactionId), additionalInformation);
         }
-
-        
     }
 }

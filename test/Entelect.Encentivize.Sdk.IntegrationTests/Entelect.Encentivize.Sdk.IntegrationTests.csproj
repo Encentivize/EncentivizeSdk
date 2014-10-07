@@ -61,6 +61,7 @@
     <Compile Include="GroupTypesClientTests.cs" />
     <Compile Include="MemberAchievementClientTests.cs" />
     <Compile Include="MemberClientTests.cs" />
+    <Compile Include="MemberRewardsClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryStringBuilderTests.cs" />
     <Compile Include="SdkTestBase.cs" />
