@@ -88,5 +88,11 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             Assert.AreEqual(guidString, retrievedData.email.ToString());
             
         }
+
+        [Test]
+        public void ResetPasswordPin()
+        {
+            MemberClient.ResetPasswordPin(1);
+        }
     }
 }

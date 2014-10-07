@@ -1,12 +1,11 @@
 using System.Net;
 using Entelect.Encentivize.Sdk.Exceptions;
 using Entelect.Encentivize.Sdk.GenericServices;
-using Entelect.Encentivize.Sdk.Members.Members;
 using RestSharp;
 
-namespace Entelect.Encentivize.Sdk.Members
+namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public class MemberClient
+    public class MemberClient : IMemberClient
     {
         private readonly IEncentivizeRestClient _restClient;
         private readonly EntityRetrievalService<MemberOutput> _entityRetrievalService;
@@ -77,11 +76,11 @@ namespace Entelect.Encentivize.Sdk.Members
             }
         }
 
-
         private string TimeStoreUrl(long memberId)
         {
             return string.Format("members/{0}/timestore", memberId);
         }
+
         public void ResetPasswordPin(long memberId)
         {
             var request = new RestRequest(string.Format("members/{0}/passwordPinReset", memberId), Method.POST);
