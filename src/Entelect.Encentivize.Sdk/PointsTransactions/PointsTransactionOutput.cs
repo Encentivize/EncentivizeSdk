@@ -10,7 +10,7 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
         public string PointsTransactionType { get; set; }
         public string Comment { get; set; }
         public decimal PointsValue { get; set; }
-        public long? MemberId { get; set; }
+        public long MemberId { get; set; }
         public long CreatedById { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public long? LastUpdatedById { get; set; }
