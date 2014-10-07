@@ -63,6 +63,25 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             MemberRewardsClient.RefundReward(rewardTransaction.MemberId, rewardTransaction.PointsTransactionsId);
         }
 
+        [Test]
+        public void GetRewardAdditionalInformation()
+        {
+            var rewardTransaction = MemberRewardsClient.Search(new RewardTransactionSearchCriteria()).Data.First();
+            var additionalInfo = MemberRewardsClient.GetRewardAdditionalInformation(rewardTransaction.MemberId, rewardTransaction.PointsTransactionsId);
+        }
+
+        [Test]
+        public void AddRewardAdditionalInformation()
+        {
+            var rewardTransaction = MemberRewardsClient.Search(new RewardTransactionSearchCriteria()).Data.First();
+            var data = new
+            {
+                Something = "test"
+            };
+            var additionalInfo = MemberRewardsClient.UpdateRewardAdditionalInformation(rewardTransaction.MemberId, rewardTransaction.PointsTransactionsId, data);
+            Assert.AreEqual("test", additionalInfo.Something.ToString());
+        }
+
         private void EnsureOtpDisabledForRewards()
         {
             OneTimePinConfigurationClient.Delete(2);

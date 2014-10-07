@@ -12,6 +12,6 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
         RewardTransactionOutput Get(long memberId, long rewardTransactionId);
         void RefundReward(long memberId, long rewardTransactionId);
         dynamic GetRewardAdditionalInformation(long memberId, long rewardTransactionId);
-        RewardTransactionOutput UpdateRewardAdditionalInformation(long memberId, long rewardTransactionId, dynamic additionalInformation);
+        dynamic UpdateRewardAdditionalInformation(long memberId, long rewardTransactionId, dynamic additionalInformation);
     }
 }

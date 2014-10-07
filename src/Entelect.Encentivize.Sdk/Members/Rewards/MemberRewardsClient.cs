@@ -1,4 +1,6 @@
-﻿using Entelect.Encentivize.Sdk.GenericServices;
+﻿using System.Net;
+using Entelect.Encentivize.Sdk.Exceptions;
+using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.PointsTransactions;
 using Entelect.Encentivize.Sdk.Rewards;
 using RestSharp;
@@ -61,9 +63,25 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
                 .Get(string.Format("members/{0}/rewards/{1}/additionalInformation", memberId, rewardTransactionId));
         }
 
-        public virtual RewardTransactionOutput UpdateRewardAdditionalInformation(long memberId, long rewardTransactionId, dynamic additionalInformation)
+        public virtual dynamic UpdateRewardAdditionalInformation(long memberId, long rewardTransactionId, dynamic additionalInformation)
         {
-            return _entityUpdateService.Update(string.Format("members/{0}/rewards/{1}/additionalInformation", memberId, rewardTransactionId), additionalInformation);
+            var request = new RestRequest(AdditionalInfoUrl(memberId, rewardTransactionId))
+            {
+                Method = Method.PUT,
+                RequestFormat = DataFormat.Json
+            };
+            request.AddBody(additionalInformation);
+            var response = _restClient.Execute<dynamic>(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new CreationFailedException(response);
+            }
+            return response.Data;
+        }
+
+        private string AdditionalInfoUrl(long memberId, long rewardTransactionId)
+        {
+            return string.Format("members/{0}/rewards/{1}/additionalInformation", memberId, rewardTransactionId);
         }
     }
 }
