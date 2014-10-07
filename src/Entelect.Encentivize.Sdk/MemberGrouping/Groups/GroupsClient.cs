@@ -9,7 +9,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
         private readonly IEntityRetrievalService<GroupOutput> _entityRetrievalService;
         private readonly IEntityCreationService<GroupInput, GroupOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
-        public GroupsClient(IRestClient restClient)
+        public GroupsClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Group", "Groups", "Groups");
             _entityUpdateService = new EntityUpdateService<GroupInput, GroupOutput>(restClient, entitySettings);

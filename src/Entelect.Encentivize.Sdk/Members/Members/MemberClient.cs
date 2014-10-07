@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Net;
 using Entelect.Encentivize.Sdk.Exceptions;
 using Entelect.Encentivize.Sdk.GenericServices;
@@ -9,13 +8,13 @@ namespace Entelect.Encentivize.Sdk.Members
 {
     public class MemberClient
     {
-        private readonly IRestClient _restClient;
+        private readonly IEncentivizeRestClient _restClient;
         private readonly EntityRetrievalService<MemberOutput> _entityRetrievalService;
         private readonly EntityUpdateService<MemberInput, MemberOutput> _entityUpdateService;
-        private EntityCreationService<MemberInput, MemberOutput> _entityCreationService;
-        private EntitySettings _timeStoreEntitySettings;
+        private readonly EntityCreationService<MemberInput, MemberOutput> _entityCreationService;
+        private readonly EntitySettings _timeStoreEntitySettings;
 
-        public MemberClient(IRestClient restClient)
+        public MemberClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
             var memberSettings = new EntitySettings("Member", "Members", "members");
@@ -59,23 +58,27 @@ namespace Entelect.Encentivize.Sdk.Members
         public dynamic GetTimestoreForMember(long memberId)
         {
             var entityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, _timeStoreEntitySettings);
+            _restClient.AddHandler("application/json", new DynamicJsonDeserializer());
             var data = entityRetrievalService.Get(TimeStoreUrl(memberId));
+            _restClient.RemoveHandler("application/json");
             return data;
-            //var request = new RestRequest("members/{memberId}/timestore", Method.GET);
-            //request.RequestFormat = DataFormat.Json;
-            //request.AddUrlSegment("memberId", string.Format("{0}", memberId));
-            ///*todo rk hack temporary fix for this method, change after refactoring*/
-            //var restClient = (RestClient) _restClient;
-            //restClient.AddHandler("application/json", new DynamicJsonDeserializer());
-            //var response = restClient.Execute<dynamic>(request).Data;
-            //return response;
         }
 
         public void WriteTimestoreForMember(long memberId, dynamic timestoreData)
         {
-            var entityCreationService = new EntityCreationService<BaseInput, dynamic>(_restClient, _timeStoreEntitySettings);
-            entityCreationService.CreateExpectNullResponse(TimeStoreUrl(memberId), timestoreData);
+            var request = new RestRequest(TimeStoreUrl(memberId))
+            {
+                Method = Method.POST, 
+                RequestFormat = DataFormat.Json
+            };
+            request.AddBody(timestoreData);
+            var response = _restClient.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new CreationFailedException(response);
+            }
         }
+
 
         private string TimeStoreUrl(long memberId)
         {
@@ -83,12 +86,12 @@ namespace Entelect.Encentivize.Sdk.Members
         }
         public void ResetPasswordPin(long memberId)
         {
-            var request = new RestRequest(string.Format("members/{0}/passwordPinReset",memberId), Method.POST);
+            var request = new RestRequest(string.Format("members/{0}/passwordPinReset", memberId), Method.POST);
             request.RequestFormat = DataFormat.Json;
             var response = _restClient.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new DataRetrievalFailedException(response); 
+                throw new DataRetrievalFailedException(response);
             }
         }
 

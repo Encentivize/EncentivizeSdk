@@ -7,7 +7,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 {
     public class EntityDeletionService: EntityService, IEntityDeletionService
     {
-        public EntityDeletionService(IRestClient restClient, EntitySettings entitySettings) 
+        public EntityDeletionService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
             : base(restClient, entitySettings)
         {
         }

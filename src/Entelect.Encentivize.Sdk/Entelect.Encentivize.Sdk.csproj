@@ -85,6 +85,7 @@
     <Compile Include="GenericServices\EntityService.cs" />
     <Compile Include="GenericServices\EntitySettings.cs" />
     <Compile Include="GenericServices\EntityUpdateService.cs" />
+    <Compile Include="GenericServices\IEncentivizeRestClient.cs" />
     <Compile Include="GenericServices\IEntityCreationService.cs" />
     <Compile Include="GenericServices\IEntityDeletionService.cs" />
     <Compile Include="GenericServices\IEntityRetrievalService.cs" />

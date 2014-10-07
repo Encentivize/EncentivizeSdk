@@ -1,13 +1,11 @@
-﻿using RestSharp;
-
-namespace Entelect.Encentivize.Sdk.GenericServices
+﻿namespace Entelect.Encentivize.Sdk.GenericServices
 {
     public class EntityService
     {
-        protected readonly IRestClient RestClient;
+        protected readonly IEncentivizeRestClient RestClient;
         protected readonly EntitySettings EntitySettings;
 
-        public EntityService(IRestClient restClient, EntitySettings entitySettings)
+        public EntityService(IEncentivizeRestClient restClient, EntitySettings entitySettings)
         {
             RestClient = restClient;
             EntitySettings = entitySettings;

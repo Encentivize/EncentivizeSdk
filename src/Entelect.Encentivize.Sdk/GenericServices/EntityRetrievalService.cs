@@ -10,7 +10,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
     {
         const string IdNotSetVerb = "retrieve";
 
-        public EntityRetrievalService(IRestClient restClient, EntitySettings entitySettings)
+        public EntityRetrievalService(IEncentivizeRestClient restClient, EntitySettings entitySettings)
             :base(restClient, entitySettings)
         {
             QueryStringBuilder = new QueryStringBuilder(propertiesToExclude: new[] { "PageNumber", "PageSize" });
@@ -55,7 +55,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             var queryString = GetQueryString(searchCriteria);
             return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString)));
         }
-
 
         public PagedResult<TOutput> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
         {

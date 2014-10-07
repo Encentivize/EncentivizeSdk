@@ -72,11 +72,21 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void SaveTimestoreForMember()
         {
-            dynamic dataToSave = new {SomeThing = "Word", ABool = true};
-            var data = MemberClient.WriteTimestoreForMember(1, dataToSave);
+            dynamic dataToSave = new System.Dynamic.ExpandoObject();
+            var guidString = Guid.NewGuid().ToString();
+            dataToSave.encentivizeId = "1";
+            dataToSave.name = guidString;
+            dataToSave.surname = guidString;
+            dataToSave.mobile = "0825555555";
+            dataToSave.email = guidString;
+            MemberClient.WriteTimestoreForMember(1, dataToSave);
             var retrievedData = MemberClient.GetTimestoreForMember(1);
-            Assert.AreEqual("Word", retrievedData.SomeThing);
-            Assert.AreEqual(true, retrievedData.ABool);
+            Assert.AreEqual("1", retrievedData.encentivizeId.ToString());
+            Assert.AreEqual(guidString, retrievedData.name.ToString());
+            Assert.AreEqual(guidString, retrievedData.surname.ToString());
+            Assert.AreEqual("0825555555", retrievedData.mobile.ToString());
+            Assert.AreEqual(guidString, retrievedData.email.ToString());
+            
         }
     }
 }

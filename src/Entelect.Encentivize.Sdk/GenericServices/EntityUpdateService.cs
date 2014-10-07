@@ -11,7 +11,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
     {
         const string IdNotSetVerb = "update";
 
-        public EntityUpdateService(IRestClient restClient, EntitySettings entitySettings) 
+        public EntityUpdateService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
             : base(restClient, entitySettings)
         {
         }

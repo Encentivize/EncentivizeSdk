@@ -5,9 +5,9 @@ namespace Entelect.Encentivize.Sdk.Otp.Creation
 {
     public class OtpClient : IOtpClient
     {
-        private readonly IRestClient _restClient;
+        private readonly IEncentivizeRestClient _restClient;
 
-        public OtpClient(IRestClient restClient)
+        public OtpClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
             

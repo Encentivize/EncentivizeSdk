@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EncentivizeRestClient : RestClient
+    public class EncentivizeRestClient : RestClient, IEncentivizeRestClient
     {
         protected readonly EncentivizeSettings Settings;
 

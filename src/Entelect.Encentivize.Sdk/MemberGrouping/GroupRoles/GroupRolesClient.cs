@@ -9,7 +9,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
         private readonly IEntityRetrievalService<GroupRoleOutput> _entityRetrievalService;
         private readonly IEntityCreationService<GroupRoleInput, GroupRoleOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
-        public GroupRolesClient(IRestClient restClient)
+        public GroupRolesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Group Role", "Group Roles", "GroupRoles");
             _entityUpdateService = new EntityUpdateService<GroupRoleInput, GroupRoleOutput>(restClient, entitySettings);

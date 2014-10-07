@@ -7,7 +7,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Programs
     public class ProgramsClient
     {
         private readonly IEntityRetrievalService<ProgramOutput> _entityRetrievalService;
-        public ProgramsClient(IRestClient restClient)
+        public ProgramsClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Program", "Programs", "Programs");
             _entityRetrievalService = new EntityRetrievalService<ProgramOutput>(restClient, entitySettings);

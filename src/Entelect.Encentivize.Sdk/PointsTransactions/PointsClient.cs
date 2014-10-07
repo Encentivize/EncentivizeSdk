@@ -6,10 +6,10 @@ namespace Entelect.Encentivize.Sdk.Points
 {
     public class PointsClient : IPointsClient
     {
-        private readonly IRestClient _restClient;
+        private readonly IEncentivizeRestClient _restClient;
         private EntityRetrievalService<object> _entityRetrievalService;
 
-        public PointsClient(IRestClient restClient) 
+        public PointsClient(IEncentivizeRestClient restClient) 
         {
             _restClient = restClient;
             _entityRetrievalService = new EntityRetrievalService<object>(_restClient, new EntitySettings("Points Transaction", "Points Transactions", "PointsTransactions"));

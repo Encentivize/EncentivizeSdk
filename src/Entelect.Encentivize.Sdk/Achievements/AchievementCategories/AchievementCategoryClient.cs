@@ -9,7 +9,7 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
         private readonly IEntityRetrievalService<AchievementCategoryOutput> _entityRetrievalService;
         private readonly IEntityCreationService<AchievementCategoryInput, AchievementCategoryOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
-        public AchievementCategoryClient(IRestClient restClient)
+        public AchievementCategoryClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Achievement Category", "Achievement Categories", "AchievementCategories");
             _entityUpdateService = new EntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, entitySettings);

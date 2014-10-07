@@ -10,7 +10,7 @@ namespace Entelect.Encentivize.Sdk.Achievements
         private readonly EntityCreationService<AchievementInput, AchievementOutput> _entityCreationService;
         private readonly EntityDeletionService _entityDeletionService;
 
-        public AchievementClient(IRestClient restClient)
+        public AchievementClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Achievement", "Achievements", "Achievements");
             _entityUpdateService = new EntityUpdateService<AchievementInput, AchievementOutput>(restClient, entitySettings);

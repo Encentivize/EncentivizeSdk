@@ -5,14 +5,14 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
 {
     public class GroupMembersClient : IGroupMembersClient
     {
-        private readonly IRestClient _restClient;
+        private readonly IEncentivizeRestClient _restClient;
         private IEntityUpdateService<GroupMemberInput, GroupMemberOutput> _entityUpdateService;
         private IEntityRetrievalService<GroupMemberOutput> _entityRetrievalService;
         private IEntityCreationService<GroupMemberInput, GroupMemberOutput> _entityCreationService;
         private IEntityDeletionService _entityDeletionService;
         private const string SingularEntityName = "Group Member";
         private const string PluralEntityName = "Group Members";
-        public GroupMembersClient(IRestClient restClient)
+        public GroupMembersClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
             

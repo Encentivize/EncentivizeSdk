@@ -7,7 +7,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         where TInput : BaseInput
         where TOutput : class, new()
     {
-        public EntityCreationService(IRestClient restClient, EntitySettings entitySettings) 
+        public EntityCreationService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
             : base(restClient, entitySettings)
         {
         }
