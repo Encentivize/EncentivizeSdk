@@ -33,8 +33,9 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
-        public void RedeemReward()
+        public void RedeemRewardNoOtp()
         {
+            EnsureOtpDisabledForRewards();
             var reward = MemberRewardsClient.GetAvailableRewardsForMember(1, new RewardSearchCriteria()).Data.First();
             var transaction = MemberRewardsClient.RedeemReward(1, new RedeemRewardInput
             {
@@ -44,6 +45,11 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
                 RewardId = reward.RewardId
             });
             Assert.NotNull(transaction);
+        }
+
+        private void EnsureOtpDisabledForRewards()
+        {
+            OneTimePinConfigurationClient.Delete(2);
         }
 
         [Test]
