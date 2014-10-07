@@ -20,36 +20,36 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         protected QueryStringBuilder QueryStringBuilder { get; set; }
 
-        public virtual TOutput GetById(int id, bool returnDynamic = false)
+        public virtual TOutput GetById(int id)
         {
             if (id <= 0)
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return GetById(id.ToString(CultureInfo.InvariantCulture), returnDynamic);
+            return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
-        public virtual TOutput GetById(long id, bool returnDynamic = false)
+        public virtual TOutput GetById(long id)
         {
             if (id <= 0)
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return GetById(id.ToString(CultureInfo.InvariantCulture), returnDynamic);
+            return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
-        public virtual TOutput GetById(Guid id, bool returnDynamic = false)
+        public virtual TOutput GetById(Guid id)
         {
             if (id == null)
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return GetById(id.ToString(), returnDynamic);
+            return GetById(id.ToString());
         }
 
-        public virtual TOutput Get(string customPath, bool returnDynamic = false)
+        public virtual TOutput Get(string customPath)
         {
-            return DoGet(new RestRequest(customPath), returnDynamic);
+            return DoGet(new RestRequest(customPath));
         }
 
         public virtual PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
@@ -64,24 +64,16 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", customPath, queryString)));
         }
 
-        protected virtual TOutput GetById(string id, bool returnDynamic = false)
+        protected virtual TOutput GetById(string id)
         {
-            return DoGet(new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)), returnDynamic);
+            return DoGet(new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
         }
 
-        protected virtual TOutput DoGet(RestRequest restRequest, bool returnDynamic = false)
+        protected virtual TOutput DoGet(RestRequest restRequest)
         {
             restRequest.Method = Method.GET;
             restRequest.RequestFormat = DataFormat.Json;
-            if (returnDynamic)
-            {
-                _restClient.AddHandler("application/json", new DynamicJsonDeserializer());
-            }
             var response = RestClient.Execute<TOutput>(restRequest);
-            if (returnDynamic)
-            {
-                _restClient.RemoveHandler("application/json");
-            }
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new DataRetrievalFailedException(response);
             return response.Data;

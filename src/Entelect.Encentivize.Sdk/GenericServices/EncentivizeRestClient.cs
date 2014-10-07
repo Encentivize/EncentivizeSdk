@@ -11,6 +11,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         {
             Settings = settings;
             Authenticator = new HttpBasicAuthenticator(Settings.Username, Settings.Password);
+            AddHandler("application/json", new DynamicJsonDeserializer());
         }
 
         public string GetErrorMessage(IRestResponse response)

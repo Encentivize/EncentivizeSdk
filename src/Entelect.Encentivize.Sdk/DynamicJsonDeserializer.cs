@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Deserializers;
 
@@ -12,7 +13,11 @@ namespace Entelect.Encentivize.Sdk
 
         public T Deserialize<T>(IRestResponse response)
         {
-            return JsonConvert.DeserializeObject<dynamic>(response.Content);
+            if (typeof(T).Name.Equals("Objet",StringComparison.OrdinalIgnoreCase))
+            {
+                return JsonConvert.DeserializeObject<dynamic>(response.Content);
+            }
+            return JsonConvert.DeserializeObject<T>(response.Content);
         }
     }
 }
