@@ -48,6 +48,13 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return Update(input, new RestRequest(customPath));
         }
 
+        /* todo rk, implement this across all outputs */
+        //public TOutput Update<TOutput>(TOutput output) 
+        //    where TOutput : BaseOutput<TInput>
+        //{
+        //    return DoUpdate(output.GetIdentityUrlString(), output.ToInput());
+        //}
+
         protected virtual TOutput DoUpdate(string id, TInput input)
         {
             return Update(input, new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));

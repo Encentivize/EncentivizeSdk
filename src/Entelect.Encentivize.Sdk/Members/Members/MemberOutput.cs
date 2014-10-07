@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public class MemberOutput
+    public class MemberOutput : BaseOutput<MemberInput>
     {
         public long MemberId { get; set; }
 
@@ -37,5 +38,28 @@ namespace Entelect.Encentivize.Sdk.Members.Members
         public bool CanEarnPoints { get; set; }
 
         public string ProfilePictureUrl { get; set; }
+
+        public override MemberInput ToInput()
+        {
+            return new MemberInput()
+                   {
+                       CanEarnPoints = CanEarnPoints,
+                       CanSpendPoints = CanSpendPoints,
+                       EmailAddress = EmailAddress,
+                       ExternalReferenceCode = ExternalReferenceCode,
+                       FirstName = FirstName,
+                       MemberStatusId = MemberStatus.MemberStatusId,
+                       MemberTypeId = MemberType.MemberTypeId,
+                       MobileNumber = MobileNumber,
+                       ProfilePictureUrl = ProfilePictureUrl,
+                       StructureId = StructureId,
+                       Surname = Surname
+                   };
+        }
+
+        public override string GetIdentityUrlString()
+        {
+            return MemberId.ToString(CultureInfo.InvariantCulture);
+        }
     }
 }

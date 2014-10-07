@@ -1,4 +1,5 @@
-﻿using Entelect.Encentivize.Sdk.Members.Members;
+﻿using System;
+using Entelect.Encentivize.Sdk.Members.Members;
 using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
@@ -25,8 +26,19 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var me = MemberClient.Get(1);
+            var member = MemberClient.Get(1);
+            Assert.NotNull(member);
+        }
+
+        [Test]
+        public void Update()
+        {
+            var member = MemberClient.Get(1);
+            var guidString = Guid.NewGuid().ToString();
+            member.FirstName = guidString;
+            var me = MemberClient.UpdateMember(member.MemberId, member.ToInput());
             Assert.NotNull(me);
+            Assert.AreEqual(guidString, me.FirstName);
         }
     }
 }

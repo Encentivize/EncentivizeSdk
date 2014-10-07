@@ -124,6 +124,7 @@
     <Compile Include="Members\Achievements\MemberAchievementSearchCriteria.cs" />
     <Compile Include="Members\Achievements\MemberAchievementInput.cs" />
     <Compile Include="Members\Achievements\MemberAchievementOutput.cs" />
+    <Compile Include="BaseOutput.cs" />
     <Compile Include="Members\Members\CompletePasswordResetInput.cs" />
     <Compile Include="Members\Members\MemberInput.cs" />
     <Compile Include="Members\Members\MemberOutput.cs" />

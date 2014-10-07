@@ -10,12 +10,15 @@ namespace Entelect.Encentivize.Sdk.Members
     public class MemberClient
     {
         private readonly IRestClient _restClient;
-        private EntityRetrievalService<MemberOutput> _entityRetrievalService;
+        private readonly EntityRetrievalService<MemberOutput> _entityRetrievalService;
+        private readonly EntityUpdateService<MemberInput, MemberOutput> _entityUpdateService;
 
         public MemberClient(IRestClient restClient)
         {
             _restClient = restClient;
-            _entityRetrievalService = new EntityRetrievalService<MemberOutput>(_restClient, new EntitySettings("Member", "Members", "members"));
+            var memberSettings = new EntitySettings("Member", "Members", "members");
+            _entityRetrievalService = new EntityRetrievalService<MemberOutput>(_restClient, memberSettings);
+            _entityUpdateService = new EntityUpdateService<MemberInput, MemberOutput>(_restClient, memberSettings);
         }
 
         public MemberOutput GetMe()
@@ -33,17 +36,15 @@ namespace Entelect.Encentivize.Sdk.Members
             return _entityRetrievalService.GetById(memberId);
         }
 
-
-        public void UpdateMember(MemberInput member, long encentivizeMemberId)
+        public MemberOutput UpdateMember(long memberId, MemberInput memberInput)
         {
-            var request = new RestRequest("members/" + encentivizeMemberId, Method.PUT);
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(member);
-            var response = _restClient.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new UpdateFailedException(response);
-            }
+            return _entityUpdateService.Update(memberId, memberInput);
+        }
+
+        public MemberOutput UpdateMember(MemberOutput memberOutput)
+        {
+            /*todo rk update this to use the new base once implemented*/
+            return _entityUpdateService.Update(memberOutput.MemberId, memberOutput.ToInput());
         }
 
         public void UpdateMember(MemberUpdate member, long encentivizeMemberId)
