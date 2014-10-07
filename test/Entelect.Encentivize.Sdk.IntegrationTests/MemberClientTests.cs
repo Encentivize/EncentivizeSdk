@@ -40,5 +40,27 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             Assert.NotNull(me);
             Assert.AreEqual(guidString, me.FirstName);
         }
+
+        [Test]
+        public void Create()
+        {
+            var guidString = Guid.NewGuid().ToString();
+            var memeberInput = new MemberInput
+                               {
+                                   CanEarnPoints = true,
+                                   CanSpendPoints = true,
+                                   EmailAddress = guidString,
+                                   ExternalReferenceCode = guidString,
+                                   FirstName = guidString,
+                                   MemberStatusId = 1,
+                                   MemberTypeId = 1,
+                                   MobileNumber = guidString.Substring(0,15),
+                                   ProfilePictureUrl = null,
+                                   StructureId = 1,
+                                   Surname = guidString,
+                               };
+            var output = MemberClient.CreateMember(memeberInput);
+            Assert.NotNull(output);
+        }
     }
 }

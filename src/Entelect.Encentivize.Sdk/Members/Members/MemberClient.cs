@@ -12,6 +12,7 @@ namespace Entelect.Encentivize.Sdk.Members
         private readonly IRestClient _restClient;
         private readonly EntityRetrievalService<MemberOutput> _entityRetrievalService;
         private readonly EntityUpdateService<MemberInput, MemberOutput> _entityUpdateService;
+        private EntityCreationService<MemberInput, MemberOutput> _entityCreationService;
 
         public MemberClient(IRestClient restClient)
         {
@@ -19,6 +20,7 @@ namespace Entelect.Encentivize.Sdk.Members
             var memberSettings = new EntitySettings("Member", "Members", "members");
             _entityRetrievalService = new EntityRetrievalService<MemberOutput>(_restClient, memberSettings);
             _entityUpdateService = new EntityUpdateService<MemberInput, MemberOutput>(_restClient, memberSettings);
+            _entityCreationService = new EntityCreationService<MemberInput, MemberOutput>(_restClient, memberSettings);
         }
 
         public MemberOutput GetMe()
@@ -47,28 +49,9 @@ namespace Entelect.Encentivize.Sdk.Members
             return _entityUpdateService.Update(memberOutput.MemberId, memberOutput.ToInput());
         }
 
-        public void UpdateMember(MemberUpdate member, long encentivizeMemberId)
+        public MemberOutput CreateMember(MemberInput memberInput)
         {
-            var request = new RestRequest("members/" + encentivizeMemberId, Method.PUT);
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(member);
-            var response = _restClient.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK)
-            { 
-                throw new UpdateFailedException(response);
-            }
-        }
-
-        public void AddMember(MemberInput member)
-        {
-            var request = new RestRequest("members", Method.POST);
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(member);
-            var response = _restClient.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new CreationFailedException(response); 
-            }
+            return _entityCreationService.Create(memberInput);
         }
 
         public dynamic GetTimestoreForMember(long memberId)
