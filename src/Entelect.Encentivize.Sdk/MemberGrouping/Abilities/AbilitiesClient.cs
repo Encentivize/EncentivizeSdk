@@ -11,12 +11,12 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Abilities
             _entityRetrievalService = new EntityRetrievalService<AbilityOutput>(restClient, entitySettings);
         }
 
-        public AbilityOutput Get(long abilityId)
+        public virtual AbilityOutput Get(long abilityId)
         {
             return _entityRetrievalService.GetById(abilityId);
         }
 
-        public PagedResult<AbilityOutput> Search(AbilitySearchCriteria abilitySearchCriteria)
+        public virtual PagedResult<AbilityOutput> Search(AbilitySearchCriteria abilitySearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(abilitySearchCriteria);
         }

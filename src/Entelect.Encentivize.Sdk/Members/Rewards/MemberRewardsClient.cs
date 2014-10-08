@@ -10,7 +10,6 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
     public class MemberRewardsClient : IMemberRewardsClient
     {
         private readonly IEncentivizeRestClient _restClient;
-        private readonly IEntityUpdateService<RedeemRewardInput, RewardTransactionOutput> _entityUpdateService;
         private readonly IEntityRetrievalService<RewardTransactionOutput> _entityRetrievalService;
         private readonly IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
@@ -19,7 +18,6 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
         {
             _restClient = restClient;
             var entitySettings = new EntitySettings("Member Reward", "Member Rewards", "MemberRewards");
-            _entityUpdateService = new EntityUpdateService<RedeemRewardInput, RewardTransactionOutput>(restClient, entitySettings);
             _entityRetrievalService = new EntityRetrievalService<RewardTransactionOutput>(restClient, entitySettings);
             _entityCreationService = new EntityCreationService<RedeemRewardInput, RewardTransactionOutput>(restClient, entitySettings);
             _entityDeletionService = new EntityDeletionService(restClient, entitySettings);

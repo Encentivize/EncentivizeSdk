@@ -17,27 +17,27 @@ namespace Entelect.Encentivize.Sdk.Otp.Configuration
             _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
         }
 
-        public OneTimePinConfigurationOutput Get(long oneTimePinTypeId)
+        public virtual OneTimePinConfigurationOutput Get(long oneTimePinTypeId)
         {
             return _entityRetrievalService.GetById(oneTimePinTypeId);
         }
 
-        public PagedResult<OneTimePinConfigurationOutput> Search(OneTimePinConfigurationSearchCriteria oneTimePinConfigurationSearchCriteria)
+        public virtual PagedResult<OneTimePinConfigurationOutput> Search(OneTimePinConfigurationSearchCriteria oneTimePinConfigurationSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(oneTimePinConfigurationSearchCriteria);
         }
 
-        public OneTimePinConfigurationOutput Create(OneTimePinConfigurationInput oneTimePinConfigurationInput)
+        public virtual OneTimePinConfigurationOutput Create(OneTimePinConfigurationInput oneTimePinConfigurationInput)
         {
             return _entityCreationService.Create(oneTimePinConfigurationInput);
         }
 
-        public OneTimePinConfigurationOutput Update(OneTimePinConfigurationInput oneTimePinConfigurationInput)
+        public virtual OneTimePinConfigurationOutput Update(OneTimePinConfigurationInput oneTimePinConfigurationInput)
         {
             return _entityUpdateService.Update(oneTimePinConfigurationInput.OneTimePinTypeId, oneTimePinConfigurationInput);
         }
 
-        public void Delete(long oneTimePinTypeId)
+        public virtual void Delete(long oneTimePinTypeId)
         {
             _entityDeletionService.Delete(oneTimePinTypeId);
         }

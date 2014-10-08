@@ -15,22 +15,22 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
             _entityCreationService = new EntityCreationService<SupportTicketInput, SupportTicketOutput>(restClient, entitySettings);
         }
 
-        public SupportTicketOutput Get(long supportTicketId)
+        public virtual SupportTicketOutput Get(long supportTicketId)
         {
             return _entityRetrievalService.GetById(supportTicketId);
         }
 
-        public PagedResult<SupportTicketOutput> Search(SupportTicketSearchCriteria supportTicketSearchCriteria)
+        public virtual PagedResult<SupportTicketOutput> Search(SupportTicketSearchCriteria supportTicketSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(supportTicketSearchCriteria);
         }
 
-        public SupportTicketOutput Create(SupportTicketInput supportTicketInput)
+        public virtual SupportTicketOutput Create(SupportTicketInput supportTicketInput)
         {
             return _entityCreationService.Create(supportTicketInput);
         }
 
-        public SupportTicketOutput Update(long supportTicketId, EditSupportTicketInput editSupportTicketInput)
+        public virtual SupportTicketOutput Update(long supportTicketId, EditSupportTicketInput editSupportTicketInput)
         {
             return _entityUpdateService.Update(supportTicketId, editSupportTicketInput);
         }

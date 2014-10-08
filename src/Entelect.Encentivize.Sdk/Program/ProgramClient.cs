@@ -11,7 +11,7 @@ namespace Entelect.Encentivize.Sdk.Program
             _entityRetrievalService = new EntityRetrievalService<ProgramOutput>(restClient, entitySettings);
         }
 
-        public ProgramOutput Get()
+        public virtual ProgramOutput Get()
         {
             return _entityRetrievalService.Get("Programs");
         }

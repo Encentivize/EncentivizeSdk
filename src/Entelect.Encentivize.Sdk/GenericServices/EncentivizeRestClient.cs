@@ -14,7 +14,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             AddHandler("application/json", new DynamicJsonDeserializer());
         }
 
-        public string GetErrorMessage(IRestResponse response)
+        public virtual string GetErrorMessage(IRestResponse response)
         {
             return string.Format("Error response returned ({0} :{1}), Content: {2}", (int)response.StatusCode, response.StatusCode, response.Content);
         }

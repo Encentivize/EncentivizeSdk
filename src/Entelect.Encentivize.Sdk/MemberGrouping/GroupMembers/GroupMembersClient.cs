@@ -11,37 +11,38 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
         private IEntityDeletionService _entityDeletionService;
         private const string SingularEntityName = "Group Member";
         private const string PluralEntityName = "Group Members";
+
         public GroupMembersClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
             
         }
 
-        public PagedResult<GroupMemberOutput> GetMembersInGroup(long groupId)
+        public virtual PagedResult<GroupMemberOutput> GetMembersInGroup(long groupId)
         {
             InitialiseServices(groupId);
             return _entityRetrievalService.FindBySearchCriteria(new BaseSearchCriteria(1, int.MaxValue));
         }
 
-        public GroupMemberOutput AddMemberToGroup(GroupMemberInput groupMemberInput, long groupId)
+        public virtual GroupMemberOutput AddMemberToGroup(GroupMemberInput groupMemberInput, long groupId)
         {
             InitialiseServices(groupId);
             return _entityCreationService.Create(groupMemberInput);
         }
 
-        public GroupMemberOutput UpdateMemberRole(long groupId, GroupMemberInput groupMemberInput)
+        public virtual GroupMemberOutput UpdateMemberRole(long groupId, GroupMemberInput groupMemberInput)
         {
             InitialiseServices(groupId);
             return _entityUpdateService.Update(string.Format("Groups/{0}/Members/{1}", groupId, groupMemberInput.MemberId), groupMemberInput);
         }
 
-        public void RemovedMemberFromGroup(long groupId, long memberId)
+        public virtual void RemovedMemberFromGroup(long groupId, long memberId)
         {
             InitialiseServices(groupId);
             _entityDeletionService.Delete(string.Format("Groups/{0}/Members/{1}", groupId, memberId));
         }
 
-        private void InitialiseServices(long groupId)
+        protected virtual void InitialiseServices(long groupId)
         {
             var entitySettings = new EntitySettings(SingularEntityName, PluralEntityName, string.Format("Groups/{0}/Members", groupId));
             _entityUpdateService = new EntityUpdateService<GroupMemberInput, GroupMemberOutput>(_restClient, entitySettings);

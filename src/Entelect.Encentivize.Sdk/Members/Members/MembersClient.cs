@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using Entelect.Encentivize.Sdk.Exceptions;
 using Entelect.Encentivize.Sdk.GenericServices;
@@ -23,45 +24,45 @@ namespace Entelect.Encentivize.Sdk.Members.Members
             _entityCreationService = new EntityCreationService<MemberInput, MemberOutput>(_restClient, memberSettings);
         }
 
-        public MemberOutput GetMe()
+        public virtual MemberOutput GetMe()
         {
             return _entityRetrievalService.Get("members/me");
         }
 
-        public PagedResult<MemberOutput> Search(MemberSearchCriteria memberSearchCriteria)
+        public virtual PagedResult<MemberOutput> Search(MemberSearchCriteria memberSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(memberSearchCriteria);
         }
 
-        public MemberOutput Get(long memberId)
+        public virtual MemberOutput Get(long memberId)
         {
             return _entityRetrievalService.GetById(memberId);
         }
 
-        public MemberOutput UpdateMember(long memberId, MemberInput memberInput)
+        public virtual MemberOutput UpdateMember(long memberId, MemberInput memberInput)
         {
             return _entityUpdateService.Update(memberId, memberInput);
         }
 
-        public MemberOutput UpdateMember(MemberOutput memberOutput)
+        public virtual MemberOutput UpdateMember(MemberOutput memberOutput)
         {
             /*todo rk update this to use the new base once implemented*/
             return _entityUpdateService.Update(memberOutput.MemberId, memberOutput.ToInput());
         }
 
-        public MemberOutput CreateMember(MemberInput memberInput)
+        public virtual MemberOutput CreateMember(MemberInput memberInput)
         {
             return _entityCreationService.Create(memberInput);
         }
 
-        public dynamic GetTimestoreForMember(long memberId)
+        public virtual dynamic GetTimestoreForMember(long memberId)
         {
             var entityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, _timeStoreEntitySettings);
             var data = entityRetrievalService.Get(TimeStoreUrl(memberId));
             return data;
         }
 
-        public void WriteTimestoreForMember(long memberId, dynamic timestoreData)
+        public virtual void WriteTimestoreForMember(long memberId, dynamic timestoreData)
         {
             var request = new RestRequest(TimeStoreUrl(memberId))
             {
@@ -76,12 +77,8 @@ namespace Entelect.Encentivize.Sdk.Members.Members
             }
         }
 
-        private string TimeStoreUrl(long memberId)
-        {
-            return string.Format("members/{0}/timestore", memberId);
-        }
-
-        public void ResetPasswordPin(long memberId)
+        [Obsolete("Don't use this method, rather use the OTP system")]
+        public virtual void ResetPasswordPin(long memberId)
         {
             var request = new RestRequest(string.Format("members/{0}/passwordPinReset", memberId), Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -90,6 +87,11 @@ namespace Entelect.Encentivize.Sdk.Members.Members
             {
                 throw new DataRetrievalFailedException(response);
             }
+        }
+
+        protected virtual string TimeStoreUrl(long memberId)
+        {
+            return string.Format("members/{0}/timestore", memberId);
         }
 
     }

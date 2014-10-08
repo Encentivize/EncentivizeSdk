@@ -17,27 +17,27 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
             _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
         }
 
-        public GroupRoleOutput Get(long groupRoleId)
+        public virtual GroupRoleOutput Get(long groupRoleId)
         {
             return _entityRetrievalService.GetById(groupRoleId);
         }
 
-        public PagedResult<GroupRoleOutput> Search(GroupRoleSearchCriteria groupRoleSearchCriteria)
+        public virtual PagedResult<GroupRoleOutput> Search(GroupRoleSearchCriteria groupRoleSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(groupRoleSearchCriteria);
         }
 
-        public GroupRoleOutput Create(GroupRoleInput groupRoleInput)
+        public virtual GroupRoleOutput Create(GroupRoleInput groupRoleInput)
         {
             return _entityCreationService.Create(groupRoleInput);
         }
 
-        public GroupRoleOutput Update(long groupRoleId, GroupRoleInput groupRoleInput)
+        public virtual GroupRoleOutput Update(long groupRoleId, GroupRoleInput groupRoleInput)
         {
             return _entityUpdateService.Update(groupRoleId, groupRoleInput);
         }
 
-        public void Delete(long groupRoleId)
+        public virtual void Delete(long groupRoleId)
         {
             _entityDeletionService.Delete(groupRoleId);
         }

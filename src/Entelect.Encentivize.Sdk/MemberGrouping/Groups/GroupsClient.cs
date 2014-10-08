@@ -17,27 +17,27 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
             _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
         }
 
-        public GroupOutput Get(long groupId)
+        public virtual GroupOutput Get(long groupId)
         {
             return _entityRetrievalService.GetById(groupId);
         }
 
-        public PagedResult<GroupOutput> Search(GroupSearchCriteria groupSearchCriteria)
+        public virtual PagedResult<GroupOutput> Search(GroupSearchCriteria groupSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(groupSearchCriteria);
         }
 
-        public GroupOutput Create(GroupInput groupInput)
+        public virtual GroupOutput Create(GroupInput groupInput)
         {
             return _entityCreationService.Create(groupInput);
         }
 
-        public GroupOutput Update(long groupId, GroupInput groupInput)
+        public virtual GroupOutput Update(long groupId, GroupInput groupInput)
         {
             return _entityUpdateService.Update(groupId, groupInput);
         }
 
-        public void Delete(long groupId)
+        public virtual void Delete(long groupId)
         {
             _entityDeletionService.Delete(groupId);
         }

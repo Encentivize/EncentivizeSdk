@@ -17,27 +17,27 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
             _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
         }
 
-        public AchievementCategoryOutput Get(long achievementCategoryId)
+        public virtual AchievementCategoryOutput Get(long achievementCategoryId)
         {
             return _entityRetrievalService.GetById(achievementCategoryId);
         }
 
-        public PagedResult<AchievementCategoryOutput> Search(AchievementCategorySearchCriteria achievementCategorySearchCriteria)
+        public virtual PagedResult<AchievementCategoryOutput> Search(AchievementCategorySearchCriteria achievementCategorySearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(achievementCategorySearchCriteria);
         }
 
-        public AchievementCategoryOutput Create(AchievementCategoryInput achievementCategoryInput)
+        public virtual AchievementCategoryOutput Create(AchievementCategoryInput achievementCategoryInput)
         {
             return _entityCreationService.Create(achievementCategoryInput);
         }
 
-        public AchievementCategoryOutput Update(long achievementCategoryId, AchievementCategoryInput achievementCategoryInput)
+        public virtual AchievementCategoryOutput Update(long achievementCategoryId, AchievementCategoryInput achievementCategoryInput)
         {
             return _entityUpdateService.Update(achievementCategoryId, achievementCategoryInput);
         }
 
-        public void Delete(long achievementCategoryId)
+        public virtual void Delete(long achievementCategoryId)
         {
             _entityDeletionService.Delete(achievementCategoryId);
         }

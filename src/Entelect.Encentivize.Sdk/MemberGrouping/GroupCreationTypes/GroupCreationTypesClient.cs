@@ -11,12 +11,12 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupCreationTypes
             _entityRetrievalService = new EntityRetrievalService<GroupCreationTypeOutput>(restClient, entitySettings);
         }
 
-        public GroupCreationTypeOutput Get(long groupCreationTypeId)
+        public virtual GroupCreationTypeOutput Get(long groupCreationTypeId)
         {
             return _entityRetrievalService.GetById(groupCreationTypeId);
         }
 
-        public PagedResult<GroupCreationTypeOutput> Search(GroupCreationTypeSearchCriteria groupCreationTypeSearchCriteria)
+        public virtual PagedResult<GroupCreationTypeOutput> Search(GroupCreationTypeSearchCriteria groupCreationTypeSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(groupCreationTypeSearchCriteria);
         }

@@ -15,27 +15,27 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
             _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
         }
 
-        public PagedResult<MemberAchievementOutput> Search(MemberAchievementSearchCriteria memberAchievementSearchCriteria)
+        public virtual PagedResult<MemberAchievementOutput> Search(MemberAchievementSearchCriteria memberAchievementSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(memberAchievementSearchCriteria);
         }
 
-        public PagedResult<MemberAchievementOutput> SearchMembersAchievements(long memberId, MemberAchievementSearchCriteria memberAchievementSearchCriteria)
+        public virtual PagedResult<MemberAchievementOutput> SearchMembersAchievements(long memberId, MemberAchievementSearchCriteria memberAchievementSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(GetMemberPath(memberId), memberAchievementSearchCriteria);
         }
 
-        public MemberAchievementOutput AwardAchievement(long memberId, MemberAchievementInput memberAchievementInput)
+        public virtual MemberAchievementOutput AwardAchievement(long memberId, MemberAchievementInput memberAchievementInput)
         {
             return _entityCreationService.Create(GetMemberPath(memberId), memberAchievementInput);
         }
 
-        public void RetractAchievement(long memberId, long memberAchievementId)
+        public virtual void RetractAchievement(long memberId, long memberAchievementId)
         {
             _entityDeletionService.Delete(string.Format("{0}{1}", GetMemberPath(memberId), memberAchievementId));
         }
 
-        private string GetMemberPath(long memberId)
+        protected virtual string GetMemberPath(long memberId)
         {
             return string.Format("members/{0}/achievements/", memberId);
         }

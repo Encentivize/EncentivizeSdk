@@ -11,12 +11,12 @@ namespace Entelect.Encentivize.Sdk.SupportTickets.Categories
             _entityRetrievalService = new EntityRetrievalService<SupportTicketCategoryOutput>(restClient, entitySettings);
         }
 
-        public SupportTicketCategoryOutput Get(long supportTicketCategoryId)
+        public virtual SupportTicketCategoryOutput Get(long supportTicketCategoryId)
         {
             return _entityRetrievalService.GetById(supportTicketCategoryId);
         }
 
-        public PagedResult<SupportTicketCategoryOutput> Search(SupportTicketCategorySearchCriteria supportTicketCategorySearchCriteria)
+        public virtual PagedResult<SupportTicketCategoryOutput> Search(SupportTicketCategorySearchCriteria supportTicketCategorySearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(supportTicketCategorySearchCriteria);
         }

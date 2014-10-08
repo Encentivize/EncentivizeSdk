@@ -60,7 +60,7 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
             return mappedResult;
         }
 
-        private static Dictionary<string, Type> NameToTypeMapping
+        protected virtual Dictionary<string, Type> NameToTypeMapping
         {
             get
             {

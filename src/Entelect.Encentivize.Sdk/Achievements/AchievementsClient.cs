@@ -18,27 +18,27 @@ namespace Entelect.Encentivize.Sdk.Achievements
             _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
         }
 
-        public AchievementOutput Get(long achievementId)
+        public virtual AchievementOutput Get(long achievementId)
         {
             return _entityRetrievalService.GetById(achievementId);
         }
 
-        public PagedResult<AchievementOutput> Search(AchievementSearchCriteria achievementSearchCriteria)
+        public virtual PagedResult<AchievementOutput> Search(AchievementSearchCriteria achievementSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(achievementSearchCriteria);
         }
 
-        public AchievementOutput Create(AchievementInput achievementInput)
+        public virtual AchievementOutput Create(AchievementInput achievementInput)
         {
             return _entityCreationService.Create(achievementInput);
         }
 
-        public AchievementOutput Update(long achievementId, AchievementInput achievementInput)
+        public virtual AchievementOutput Update(long achievementId, AchievementInput achievementInput)
         {
             return _entityUpdateService.Update(achievementId, achievementInput);
         }
 
-        public void Delete(long achievementId)
+        public virtual void Delete(long achievementId)
         {
             _entityDeletionService.Delete(achievementId);
         }

@@ -11,12 +11,12 @@ namespace Entelect.Encentivize.Sdk.Otp.Type
             _entityRetrievalService = new EntityRetrievalService<OneTimePinTypeOutput>(restClient, entitySettings);
         }
 
-        public OneTimePinTypeOutput Get(long oneTimePinTypeId)
+        public virtual OneTimePinTypeOutput Get(long oneTimePinTypeId)
         {
             return _entityRetrievalService.GetById(oneTimePinTypeId);
         }
 
-        public PagedResult<OneTimePinTypeOutput> Search(OneTimePinTypeSearchCriteria oneTimePinTypeSearchCriteria)
+        public virtual PagedResult<OneTimePinTypeOutput> Search(OneTimePinTypeSearchCriteria oneTimePinTypeSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(oneTimePinTypeSearchCriteria);
         }
