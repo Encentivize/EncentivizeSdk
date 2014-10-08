@@ -1,9 +1,9 @@
 ﻿namespace Entelect.Encentivize.Sdk
 {
-    public abstract class BaseOutput<TInput>
+    public interface IBaseOutput<TInput>
         where TInput : BaseInput
     {
-        public abstract TInput ToInput();
-        public abstract string GetIdentityUrlString();
+        TInput ToInput();
+        string GetIdentityUrlString();
     }
 }
