@@ -5,6 +5,12 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupCreationTypes
     public class GroupCreationTypesClient : IGroupCreationTypesClient
     {
         private readonly IEntityRetrievalService<GroupCreationTypeOutput> _entityRetrievalService;
+
+        public GroupCreationTypesClient(IEntityRetrievalService<GroupCreationTypeOutput> entityRetrievalService)
+        {
+            _entityRetrievalService = entityRetrievalService;
+        }
+
         public GroupCreationTypesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Group Creation Type", "Group Creation Types", "GroupCreationTypes");

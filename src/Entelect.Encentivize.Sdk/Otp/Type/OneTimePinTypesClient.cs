@@ -5,6 +5,12 @@ namespace Entelect.Encentivize.Sdk.Otp.Type
     public class OneTimePinTypesClient : IOneTimePinTypesClient
     {
         private readonly IEntityRetrievalService<OneTimePinTypeOutput> _entityRetrievalService;
+
+        public OneTimePinTypesClient(IEntityRetrievalService<OneTimePinTypeOutput> entityRetrievalService)
+        {
+            _entityRetrievalService = entityRetrievalService;
+        }
+
         public OneTimePinTypesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("One Time Pin Type", "One Time Pin Types", "OneTimePinTypes");

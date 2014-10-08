@@ -1,20 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entelect.Encentivize.Sdk.GenericServices;
-using Entelect.Encentivize.Sdk.Points;
 using Newtonsoft.Json;
 
 namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
     public class PointsClient : IPointsClient
     {
-        private readonly IEncentivizeRestClient _restClient;
-        private EntityRetrievalService<object> _entityRetrievalService;
+        private readonly IEntityRetrievalService<dynamic> _entityRetrievalService;
+        private readonly IEntityCreationService<AdHocPointsInput, AdHocTransactionOutput> _adHocCreationService;
+        private readonly IEntityCreationService<TransferPointsInput, TransferPointsOutput> _transferCreationService;
+
+        public PointsClient(IEntityRetrievalService<dynamic> entityRetrievalService, 
+            IEntityCreationService<AdHocPointsInput, AdHocTransactionOutput> adHocCreationService, 
+            IEntityCreationService<TransferPointsInput, TransferPointsOutput> transferCreationService)
+        {
+            _entityRetrievalService = entityRetrievalService;
+            _adHocCreationService = adHocCreationService;
+            _transferCreationService = transferCreationService;
+        }
 
         public PointsClient(IEncentivizeRestClient restClient) 
         {
-            _restClient = restClient;
-            _entityRetrievalService = new EntityRetrievalService<object>(_restClient, new EntitySettings("Points Transaction", "Points Transactions", "PointsTransactions"));
+            var pointsTransactionSettings = new EntitySettings("Points Transaction", "Points Transactions", "PointsTransactions");
+            _entityRetrievalService = new EntityRetrievalService<dynamic>(restClient, pointsTransactionSettings);
+            var adHocSettings = new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints");
+            _adHocCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransactionOutput>(restClient, adHocSettings);
+            var transferSettings = new EntitySettings("Transfer Points", "Transfer Points", "members/{fromMemberId:long}/TransferPoints");
+            _transferCreationService = new EntityCreationService<TransferPointsInput, TransferPointsOutput>(restClient, transferSettings);
         }
 
         public virtual PagedResult<PointsTransactionOutput> Get(PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
@@ -37,14 +50,12 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
 
         public virtual AdHocTransactionOutput AddAdhocPoints(long memberId, AdHocPointsInput adhocInput)
         {
-            var entityCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransactionOutput>(_restClient, new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints"));
-            return entityCreationService.Create(string.Format("members/{0}/AdHocPoints", memberId), adhocInput);
+            return _adHocCreationService.Create(string.Format("members/{0}/AdHocPoints", memberId), adhocInput);
         }
 
         public virtual TransferPointsOutput TransferPoints(long fromMemberId, TransferPointsInput transferPointsInput)
         {
-            var entityCreationService = new EntityCreationService<TransferPointsInput, TransferPointsOutput>(_restClient, new EntitySettings("Transfer Points", "Transfer Points", "members/{fromMemberId:long}/TransferPoints"));
-            return entityCreationService.Create(string.Format("members/{0}/TransferPoints", fromMemberId), transferPointsInput);
+            return _transferCreationService.Create(string.Format("members/{0}/TransferPoints", fromMemberId), transferPointsInput);
         }
 
         protected virtual PagedResult<PointsTransactionOutput> Map(PagedResult<dynamic> result)

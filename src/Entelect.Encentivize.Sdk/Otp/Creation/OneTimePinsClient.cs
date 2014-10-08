@@ -4,24 +4,31 @@ namespace Entelect.Encentivize.Sdk.Otp.Creation
 {
     public class OneTimePinsClient : IOneTimePinsClient
     {
-        private readonly IEncentivizeRestClient _restClient;
+        private readonly IEntityCreationService<CreateOneTimePinRequest, object> _createOneTimePinRequestService;
+        private readonly IEntityCreationService<OneTimePinPasswordResetInput, object> _passwordResetCreationService;
+
+        public OneTimePinsClient(IEntityCreationService<CreateOneTimePinRequest, object> createOneTimePinRequestService, IEntityCreationService<OneTimePinPasswordResetInput, object> passwordResetCreationService)
+        {
+            _createOneTimePinRequestService = createOneTimePinRequestService;
+            _passwordResetCreationService = passwordResetCreationService;
+        }
 
         public OneTimePinsClient(IEncentivizeRestClient restClient)
         {
-            _restClient = restClient;
-            
+            var createOneTimePinRequestSettings = new EntitySettings("One Time Pin", "One Time Pins", "Otp");
+            _createOneTimePinRequestService = new EntityCreationService<CreateOneTimePinRequest, object>(restClient, createOneTimePinRequestSettings);
+            var passwordResetSettings = new EntitySettings("One Time Pin Password Reset", "One Time Pin Password Resets", "OtpPasswordReset");
+            _passwordResetCreationService = new EntityCreationService<OneTimePinPasswordResetInput, object>(restClient, passwordResetSettings);
         }
 
         public virtual void Create(CreateOneTimePinRequest createOneTimePinRequest)
         {
-            var entityCreationService = new EntityCreationService<CreateOneTimePinRequest, object>(_restClient, new EntitySettings("One Time Pin", "One Time Pins", "Otp"));
-            entityCreationService.CreateExpectNullResponse(createOneTimePinRequest);
+            _createOneTimePinRequestService.CreateExpectNullResponse(createOneTimePinRequest);
         }
 
         public virtual void PasswordReset(OneTimePinPasswordResetInput oneTimePinPasswordResetInput)
         {
-            var entityCreationService = new EntityCreationService<OneTimePinPasswordResetInput, object>(_restClient, new EntitySettings("One Time Pin Password Reset", "One Time Pin Password Resets", "OtpPasswordReset"));
-            entityCreationService.CreateExpectNullResponse("otp/PasswordReset", oneTimePinPasswordResetInput);
+            _passwordResetCreationService.CreateExpectNullResponse("otp/PasswordReset", oneTimePinPasswordResetInput);
         }
     }
 }

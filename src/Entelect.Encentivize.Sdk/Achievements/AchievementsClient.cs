@@ -4,10 +4,21 @@ namespace Entelect.Encentivize.Sdk.Achievements
 {
     public class AchievementsClient : IAchievementClient
     {
-        private readonly EntityUpdateService<AchievementInput, AchievementOutput> _entityUpdateService;
-        private readonly EntityRetrievalService<AchievementOutput> _entityRetrievalService;
-        private readonly EntityCreationService<AchievementInput, AchievementOutput> _entityCreationService;
-        private readonly EntityDeletionService _entityDeletionService;
+        private readonly IEntityUpdateService<AchievementInput, AchievementOutput> _entityUpdateService;
+        private readonly IEntityRetrievalService<AchievementOutput> _entityRetrievalService;
+        private readonly IEntityCreationService<AchievementInput, AchievementOutput> _entityCreationService;
+        private readonly IEntityDeletionService _entityDeletionService;
+
+        public AchievementsClient(IEntityUpdateService<AchievementInput, AchievementOutput> entityUpdateService, 
+            IEntityRetrievalService<AchievementOutput> entityRetrievalService, 
+            IEntityCreationService<AchievementInput, AchievementOutput> entityCreationService, 
+            IEntityDeletionService entityDeletionService)
+        {
+            _entityUpdateService = entityUpdateService;
+            _entityRetrievalService = entityRetrievalService;
+            _entityCreationService = entityCreationService;
+            _entityDeletionService = entityDeletionService;
+        }
 
         public AchievementsClient(IEncentivizeRestClient restClient)
         {

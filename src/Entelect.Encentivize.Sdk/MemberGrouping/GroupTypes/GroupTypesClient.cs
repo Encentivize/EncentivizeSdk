@@ -8,6 +8,18 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupTypes
         private readonly IEntityRetrievalService<GroupTypeOutput> _entityRetrievalService;
         private readonly IEntityCreationService<GroupTypeInput, GroupTypeOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
+
+        public GroupTypesClient(IEntityUpdateService<GroupTypeInput, GroupTypeOutput> entityUpdateService, 
+            IEntityRetrievalService<GroupTypeOutput> entityRetrievalService, 
+            IEntityCreationService<GroupTypeInput, GroupTypeOutput> entityCreationService, 
+            IEntityDeletionService entityDeletionService)
+        {
+            _entityUpdateService = entityUpdateService;
+            _entityRetrievalService = entityRetrievalService;
+            _entityCreationService = entityCreationService;
+            _entityDeletionService = entityDeletionService;
+        }
+
         public GroupTypesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Group Type", "Group Types", "GroupTypes");
