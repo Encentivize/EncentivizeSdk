@@ -64,11 +64,11 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Achievements\AchievementCategories\AchievementCategoryClient.cs" />
+    <Compile Include="Achievements\AchievementCategories\AchievementCategoriesClient.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryInput.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryOutput.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategorySearchCriteria.cs" />
-    <Compile Include="Achievements\AchievementClient.cs" />
+    <Compile Include="Achievements\AchievementsClient.cs" />
     <Compile Include="Achievements\AchievementSearchCriteria.cs" />
     <Compile Include="Achievements\IAchievementClient.cs" />
     <Compile Include="BaseSearchCriteria.cs" />

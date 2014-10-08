@@ -40,7 +40,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         public MemberAchievementInput GetMemberAchievementInput()
         {
-            var achievement = new AchievementClientTests().GetSomeEntity();
+            var achievement = new AchievementsClientTests().GetSomeEntity();
             return new MemberAchievementInput
             {
                 AchievementId = achievement.AchievementId,

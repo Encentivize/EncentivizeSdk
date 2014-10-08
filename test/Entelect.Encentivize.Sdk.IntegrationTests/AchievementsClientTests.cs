@@ -5,12 +5,12 @@ using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
-    public class AchievementClientTests : SdkTestBase
+    public class AchievementsClientTests : SdkTestBase
     {
         [Test]
         public void Search()
         {
-            var searchResult = AchievementClient.Search(new AchievementSearchCriteria());
+            var searchResult = AchievementsClient.Search(new AchievementSearchCriteria());
             Assert.NotNull(searchResult);
             Assert.Greater(searchResult.Data.Count, 0);
         }
@@ -18,7 +18,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var item = AchievementClient.Get(10);
+            var item = AchievementsClient.Get(10);
             Assert.NotNull(item);
         }
 
@@ -35,7 +35,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public void Update()
         {
             var guid = Guid.NewGuid().ToString();
-            var updated = AchievementClient.Update(GetSomeEntity().AchievementId, GetSomeInput(guid));
+            var updated = AchievementsClient.Update(GetSomeEntity().AchievementId, GetSomeInput(guid));
             Assert.NotNull(updated);
             Assert.AreEqual(updated.Name, guid);
             Assert.AreEqual(updated.Description, guid);
@@ -47,12 +47,12 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public void Delete()
         {
             var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
-            AchievementClient.Delete(existingItem.AchievementId);
+            AchievementsClient.Delete(existingItem.AchievementId);
         }
 
         public AchievementOutput GetSomeEntity()
         {
-            var pagedItems = AchievementClient.Search(new AchievementSearchCriteria());
+            var pagedItems = AchievementsClient.Search(new AchievementSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
             if (firstItem == null)
             {
@@ -64,13 +64,13 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public AchievementOutput CreateSomeEntity(string guidString)
         {
             var itemToCreate = GetSomeInput(guidString);
-            var createdItem = AchievementClient.Create(itemToCreate);
+            var createdItem = AchievementsClient.Create(itemToCreate);
             return createdItem;
         }
 
         public AchievementInput GetSomeInput(string guidString)
         {
-            var someAchievementCategory = new AchievementCategoryClientTests().GetSomeEntity();
+            var someAchievementCategory = new AchievementCategoriesClientTests().GetSomeEntity();
             var itemToCreate = new AchievementInput
             {
                 AchievementCaptureTypeId = 1,

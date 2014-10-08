@@ -14,7 +14,6 @@ using Entelect.Encentivize.Sdk.Members.Rewards;
 using Entelect.Encentivize.Sdk.Otp.Configuration;
 using Entelect.Encentivize.Sdk.Otp.Creation;
 using Entelect.Encentivize.Sdk.Otp.Type;
-using Entelect.Encentivize.Sdk.Points;
 using Entelect.Encentivize.Sdk.PointsTransactions;
 using Entelect.Encentivize.Sdk.SupportTickets;
 using Entelect.Encentivize.Sdk.SupportTickets.Categories;
@@ -42,9 +41,9 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             _encentivizeRestClient = new EncentivizeRestClient(_encentivizeSettings);
         }
 
-        public AchievementCategoryClient AchievementCategoryClient { get { return new AchievementCategoryClient(_encentivizeRestClient); } }
+        public AchievementCategoriesClient AchievementCategoriesClient { get { return new AchievementCategoriesClient(_encentivizeRestClient); } }
 
-        public AchievementClient AchievementClient { get { return new AchievementClient(_encentivizeRestClient); } }
+        public AchievementsClient AchievementsClient { get { return new AchievementsClient(_encentivizeRestClient); } }
 
         public AbilitiesClient AbilitiesClient { get { return new AbilitiesClient(_encentivizeRestClient); } }
 

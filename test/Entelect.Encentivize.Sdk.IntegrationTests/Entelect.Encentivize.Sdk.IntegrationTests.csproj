@@ -52,8 +52,8 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AbilitiesClientTests.cs" />
-    <Compile Include="AchievementCategoryClientTests.cs" />
-    <Compile Include="AchievementClientTests.cs" />
+    <Compile Include="AchievementCategoriesClientTests.cs" />
+    <Compile Include="AchievementsClientTests.cs" />
     <Compile Include="GroupClientTests.cs" />
     <Compile Include="GroupCreationTypesClientTests.cs" />
     <Compile Include="GroupMembersClientTests.cs" />

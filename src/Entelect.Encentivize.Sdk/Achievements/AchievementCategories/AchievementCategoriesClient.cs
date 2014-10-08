@@ -1,15 +1,14 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
-using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
-    public class AchievementCategoryClient : IAchievementCategoryClient
+    public class AchievementCategoriesClient : IAchievementCategoryClient
     {
         private readonly IEntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput> _entityUpdateService;
         private readonly IEntityRetrievalService<AchievementCategoryOutput> _entityRetrievalService;
         private readonly IEntityCreationService<AchievementCategoryInput, AchievementCategoryOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
-        public AchievementCategoryClient(IEncentivizeRestClient restClient)
+        public AchievementCategoriesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Achievement Category", "Achievement Categories", "AchievementCategories");
             _entityUpdateService = new EntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, entitySettings);

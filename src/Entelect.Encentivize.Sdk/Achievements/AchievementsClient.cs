@@ -3,14 +3,14 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Achievements
 {
-    public class AchievementClient : IAchievementClient
+    public class AchievementsClient : IAchievementClient
     {
         private readonly EntityUpdateService<AchievementInput, AchievementOutput> _entityUpdateService;
         private readonly EntityRetrievalService<AchievementOutput> _entityRetrievalService;
         private readonly EntityCreationService<AchievementInput, AchievementOutput> _entityCreationService;
         private readonly EntityDeletionService _entityDeletionService;
 
-        public AchievementClient(IEncentivizeRestClient restClient)
+        public AchievementsClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Achievement", "Achievements", "Achievements");
             _entityUpdateService = new EntityUpdateService<AchievementInput, AchievementOutput>(restClient, entitySettings);

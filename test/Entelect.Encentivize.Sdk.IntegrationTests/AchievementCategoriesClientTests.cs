@@ -6,12 +6,12 @@ using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
-    public class AchievementCategoryClientTests: SdkTestBase
+    public class AchievementCategoriesClientTests: SdkTestBase
     {
         [Test]
         public void GetById()
         {
-            var achievementCategoryOutput = AchievementCategoryClient.Get(2);
+            var achievementCategoryOutput = AchievementCategoriesClient.Get(2);
             Assert.NotNull(achievementCategoryOutput);
         }
 
@@ -19,7 +19,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [ExpectedException(typeof(IdNotSetException))]
         public void GetByIdThatIsNegative()
         {
-            var achievementCategoryOutput = AchievementCategoryClient.Get(-1);
+            var achievementCategoryOutput = AchievementCategoriesClient.Get(-1);
             Assert.NotNull(achievementCategoryOutput);
         }
 
@@ -27,14 +27,14 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [ExpectedException(typeof(DataRetrievalFailedException))]
         public void GetByIdThatDoesntExist()
         {
-            var achievementCategoryOutput = AchievementCategoryClient.Get(int.MaxValue);
+            var achievementCategoryOutput = AchievementCategoriesClient.Get(int.MaxValue);
             Assert.NotNull(achievementCategoryOutput);
         }
 
         [Test]
         public void Search()
         {
-            var pagedAchievementCategory = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria());
+            var pagedAchievementCategory = AchievementCategoriesClient.Search(new AchievementCategorySearchCriteria());
             Assert.NotNull(pagedAchievementCategory);
             Assert.Greater(pagedAchievementCategory.Data.Count, 0);
         }
@@ -53,7 +53,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [ExpectedException(typeof(NullReferenceException))]
         public void CreateWithNoBody()
         {
-            AchievementCategoryClient.Create(null);
+            AchievementCategoriesClient.Create(null);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
                 Name = guid
             };
             var existingItem = GetSomeEntity();
-            var updated = AchievementCategoryClient.Update(existingItem.AchievementCategoryId, input);
+            var updated = AchievementCategoriesClient.Update(existingItem.AchievementCategoryId, input);
             Assert.AreEqual(guid, updated.Name);
             Assert.AreEqual(guid, updated.Description);
         }
@@ -75,12 +75,12 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public void Delete()
         {
             var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
-            AchievementCategoryClient.Delete(existingItem.AchievementCategoryId);
+            AchievementCategoriesClient.Delete(existingItem.AchievementCategoryId);
         }
 
         public AchievementCategoryOutput GetSomeEntity()
         {
-            var pagedAchievementCategoryResults = AchievementCategoryClient.Search(new AchievementCategorySearchCriteria { PageSize = 1, PageNumber = 1 });
+            var pagedAchievementCategoryResults = AchievementCategoriesClient.Search(new AchievementCategorySearchCriteria { PageSize = 1, PageNumber = 1 });
             var firstAchievementCategory = pagedAchievementCategoryResults.Data.FirstOrDefault();
             if (firstAchievementCategory == null)
             {
@@ -96,7 +96,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
                 Name = guid,
                 Description = guid
             };
-            return AchievementCategoryClient.Create(input);
+            return AchievementCategoriesClient.Create(input);
         }
     }
 }
