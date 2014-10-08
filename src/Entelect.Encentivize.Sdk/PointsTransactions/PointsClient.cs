@@ -1,8 +1,10 @@
-﻿using Entelect.Encentivize.Sdk.GenericServices;
-using Entelect.Encentivize.Sdk.PointsTransactions;
-using RestSharp;
+﻿using System;
+using System.Collections.Generic;
+using Entelect.Encentivize.Sdk.GenericServices;
+using Entelect.Encentivize.Sdk.Points;
+using Newtonsoft.Json;
 
-namespace Entelect.Encentivize.Sdk.Points
+namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
     public class PointsClient : IPointsClient
     {
@@ -45,54 +47,37 @@ namespace Entelect.Encentivize.Sdk.Points
             return entityCreationService.Create(string.Format("members/{0}/TransferPoints", fromMemberId), transferPointsInput);
         }
 
-        protected virtual PagedResult<PointsTransactionOutput> Map(PagedResult<object> result)
+        protected virtual PagedResult<PointsTransactionOutput> Map(PagedResult<dynamic> result)
         {
-            /* todo rk, this whole method is shit and might not work, test and find a better way*/
-            var mappedResult = new PagedResult<PointsTransactionOutput>();
-            foreach (var item in result.Data)
+            var mappedResult = new PagedResult<PointsTransactionOutput>(result);
+            foreach (var itemm in result.Data)
             {
-                var achievement = item as AchievementTransactionOutput;
-                if (achievement != null)
-                {
-                    mappedResult.Data.Add(achievement);
-                }
-                var adHocTransactionOutput = item as AdHocTransactionOutput;
-                if (adHocTransactionOutput != null)
-                {
-                    mappedResult.Data.Add(adHocTransactionOutput);
-                }
-                var fromPointsTransferTransactionOutput = item as FromPointsTransferTransactionOutput;
-                if (fromPointsTransferTransactionOutput != null)
-                {
-                    mappedResult.Data.Add(fromPointsTransferTransactionOutput);
-                }
-                var lostPointsTransactionOutput = item as LostPointsTransactionOutput;
-                if (lostPointsTransactionOutput != null)
-                {
-                    mappedResult.Data.Add(lostPointsTransactionOutput);
-                }
-                var payoutTransactionOutput = item as PayoutTransactionOutput;
-                if (payoutTransactionOutput != null)
-                {
-                    mappedResult.Data.Add(payoutTransactionOutput);
-                }
-                var refundTransactionOutput = item as RefundTransactionOutput;
-                if (refundTransactionOutput != null)
-                {
-                    mappedResult.Data.Add(refundTransactionOutput);
-                }
-                var rewardTransactionOutput = item as RewardTransactionOutput;
-                if (rewardTransactionOutput != null)
-                {
-                    mappedResult.Data.Add(rewardTransactionOutput);
-                }
-                var toPointsTransferTransactionOutput = item as ToPointsTransferTransactionOutput;
-                if (toPointsTransferTransactionOutput != null)
-                {
-                    mappedResult.Data.Add(toPointsTransferTransactionOutput);
-                }
+                Type type = NameToTypeMapping[itemm.pointsTransactionType.ToString()];
+                var deserialisedObject = JsonConvert.DeserializeObject(itemm.ToString(), type);
+                var pointsTransactionOutput = (PointsTransactionOutput)deserialisedObject;
+                mappedResult.Data.Add(pointsTransactionOutput);
             }
             return mappedResult;
+        }
+
+        private static Dictionary<string, Type> NameToTypeMapping
+        {
+            get
+            {
+                return new Dictionary<string, Type>
+                {
+                    {"AdHoc", typeof (AdHocTransactionOutput)},
+                    {"FromPointsTransfer", typeof (FromPointsTransferTransactionOutput)},
+                    {"ToPointsTransfer", typeof (ToPointsTransferTransactionOutput)},
+                    {"LostPoints", typeof (LostPointsTransactionOutput)},
+                    {"Payout", typeof (PayoutTransactionOutput)},
+                    {"Refund", typeof (RefundTransactionOutput)},
+                    {"Reward", typeof (RewardTransactionOutput)},
+                    {"Points", typeof (PointsTransactionOutput)},
+                    {"Achievement", typeof (AchievementTransactionOutput)},
+                    {"RetractedAchievement", typeof (RetractedAchievementTransactionOutput)}
+                };
+            }
         }
     }
 }
