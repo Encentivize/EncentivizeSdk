@@ -1,9 +1,8 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
-using Entelect.Encentivize.Sdk.Program;
 
-namespace Entelect.Encentivize.Sdk.MemberGrouping.Programs
+namespace Entelect.Encentivize.Sdk.Program
 {
-    public class ProgramsClient
+    public class ProgramsClient : IProgramsClient
     {
         private readonly IEntityRetrievalService<ProgramOutput> _entityRetrievalService;
         public ProgramsClient(IEncentivizeRestClient restClient)
