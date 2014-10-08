@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.Otp.Configuration
 {
-    public interface IOneTimePinConfigurationClient
+    public interface IOneTimePinConfigurationsClient
     {
         OneTimePinConfigurationOutput Get(long oneTimePinTypeId);
         PagedResult<OneTimePinConfigurationOutput> Search(OneTimePinConfigurationSearchCriteria oneTimePinConfigurationSearchCriteria);

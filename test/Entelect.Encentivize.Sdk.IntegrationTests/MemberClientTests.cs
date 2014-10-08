@@ -10,14 +10,14 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetMe()
         {
-            var me = MemberClient.GetMe();
+            var me = MembersClient.GetMe();
             Assert.NotNull(me);
         }
 
         [Test]
         public void Search()
         {
-            var results = MemberClient.Search(new MemberSearchCriteria());
+            var results = MembersClient.Search(new MemberSearchCriteria());
             Assert.NotNull(results);
             Assert.NotNull(results.Data);
             Assert.Greater(results.Data.Count, 0);
@@ -26,17 +26,17 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var member = MemberClient.Get(1);
+            var member = MembersClient.Get(1);
             Assert.NotNull(member);
         }
 
         [Test]
         public void Update()
         {
-            var member = MemberClient.Get(1);
+            var member = MembersClient.Get(1);
             var guidString = Guid.NewGuid().ToString();
             member.FirstName = guidString;
-            var me = MemberClient.UpdateMember(member.MemberId, member.ToInput());
+            var me = MembersClient.UpdateMember(member.MemberId, member.ToInput());
             Assert.NotNull(me);
             Assert.AreEqual(guidString, me.FirstName);
         }
@@ -59,14 +59,14 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
                                    StructureId = 1,
                                    Surname = guidString,
                                };
-            var output = MemberClient.CreateMember(memeberInput);
+            var output = MembersClient.CreateMember(memeberInput);
             Assert.NotNull(output);
         }
 
         [Test]
         public void GetTimestoreForMember()
         {
-            var data = MemberClient.GetTimestoreForMember(1);
+            var data = MembersClient.GetTimestoreForMember(1);
         }
 
         [Test]
@@ -79,8 +79,8 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             dataToSave.surname = guidString;
             dataToSave.mobile = "0825555555";
             dataToSave.email = guidString;
-            MemberClient.WriteTimestoreForMember(1, dataToSave);
-            var retrievedData = MemberClient.GetTimestoreForMember(1);
+            MembersClient.WriteTimestoreForMember(1, dataToSave);
+            var retrievedData = MembersClient.GetTimestoreForMember(1);
             Assert.AreEqual("1", retrievedData.encentivizeId.ToString());
             Assert.AreEqual(guidString, retrievedData.name.ToString());
             Assert.AreEqual(guidString, retrievedData.surname.ToString());
@@ -92,7 +92,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void ResetPasswordPin()
         {
-            MemberClient.ResetPasswordPin(2);
+            MembersClient.ResetPasswordPin(2);
         }
     }
 }

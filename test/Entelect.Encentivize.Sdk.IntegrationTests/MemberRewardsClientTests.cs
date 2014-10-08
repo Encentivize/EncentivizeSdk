@@ -84,7 +84,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         private void EnsureOtpDisabledForRewards()
         {
-            OneTimePinConfigurationClient.Delete(2);
+            OneTimePinConfigurationsClient.Delete(2);
         }
     }
 }

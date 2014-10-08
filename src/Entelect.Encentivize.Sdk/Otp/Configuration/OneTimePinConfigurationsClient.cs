@@ -2,13 +2,13 @@
 
 namespace Entelect.Encentivize.Sdk.Otp.Configuration
 {
-    public class OneTimePinConfigurationClient : IOneTimePinConfigurationClient
+    public class OneTimePinConfigurationsClient : IOneTimePinConfigurationsClient
     {
         private readonly IEntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput> _entityUpdateService;
         private readonly IEntityRetrievalService<OneTimePinConfigurationOutput> _entityRetrievalService;
         private readonly IEntityCreationService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput> _entityCreationService;
         private readonly IEntityDeletionService _entityDeletionService;
-        public OneTimePinConfigurationClient(IEncentivizeRestClient restClient)
+        public OneTimePinConfigurationsClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("OneTime Pin Configuration", "OneTime Pin Configurations", "OneTimePinConfigurations");
             _entityUpdateService = new EntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput>(restClient, entitySettings);

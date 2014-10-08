@@ -10,7 +10,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void Search()
         {
-            var searchResult = OneTimePinConfigurationClient.Search(new OneTimePinConfigurationSearchCriteria());
+            var searchResult = OneTimePinConfigurationsClient.Search(new OneTimePinConfigurationSearchCriteria());
             Assert.NotNull(searchResult);
             Assert.Greater(searchResult.Data.Count, 0);
         }
@@ -18,7 +18,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var item = OneTimePinConfigurationClient.Get(1);
+            var item = OneTimePinConfigurationsClient.Get(1);
             Assert.NotNull(item);
         }
 
@@ -35,7 +35,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         {
             var entity = GetSomeEntity();
             var isActive = entity.IsActive;
-            var updated = OneTimePinConfigurationClient.Update(new OneTimePinConfigurationInput
+            var updated = OneTimePinConfigurationsClient.Update(new OneTimePinConfigurationInput
             {
                 IsActive = !isActive,
                 MaxNumberOfRetries = entity.MaxNumberOfRetries,
@@ -49,12 +49,12 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public void Delete()
         {
             var existingItem = GetSomeEntity();
-            OneTimePinConfigurationClient.Delete(existingItem.OneTimePinTypeId);
+            OneTimePinConfigurationsClient.Delete(existingItem.OneTimePinTypeId);
         }
 
         public OneTimePinConfigurationOutput GetSomeEntity()
         {
-            var pagedItems = OneTimePinConfigurationClient.Search(new OneTimePinConfigurationSearchCriteria());
+            var pagedItems = OneTimePinConfigurationsClient.Search(new OneTimePinConfigurationSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
             if (firstItem == null)
             {
@@ -66,7 +66,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public OneTimePinConfigurationOutput CreateSomeEntity()
         {
             var itemToCreate = GetSomeInput();
-            var createdItem = OneTimePinConfigurationClient.Create(itemToCreate);
+            var createdItem = OneTimePinConfigurationsClient.Create(itemToCreate);
             return createdItem;
         }
 

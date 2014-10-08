@@ -59,13 +59,13 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         public MemberAchievementsClient MemberAchievementsClient { get { return new MemberAchievementsClient(_encentivizeRestClient); } }
 
-        public MemberClient MemberClient { get { return new MemberClient(_encentivizeRestClient); } }
+        public MembersClient MembersClient { get { return new MembersClient(_encentivizeRestClient); } }
 
         public MemberRewardsClient MemberRewardsClient { get { return new MemberRewardsClient(_encentivizeRestClient); } }
 
-        public OneTimePinConfigurationClient OneTimePinConfigurationClient { get { return new OneTimePinConfigurationClient(_encentivizeRestClient); } }
+        public OneTimePinConfigurationsClient OneTimePinConfigurationsClient { get { return new OneTimePinConfigurationsClient(_encentivizeRestClient); } }
 
-        public OtpClient OtpClient { get { return new OtpClient(_encentivizeRestClient); } }
+        public OneTimePinsClient OneTimePinsClient { get { return new OneTimePinsClient(_encentivizeRestClient); } }
 
         public OneTimePinTypesClient OneTimePinTypesClient { get { return new OneTimePinTypesClient(_encentivizeRestClient); } }
 
@@ -73,7 +73,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         public ProgramsClient ProgramsClient { get { return new ProgramsClient(_encentivizeRestClient); } }
 
-        public SupportTicketCategorysClient SupportTicketCategorysClient { get { return new SupportTicketCategorysClient(_encentivizeRestClient); } }
+        public SupportTicketCategoriesClient SupportTicketCategoriesClient { get { return new SupportTicketCategoriesClient(_encentivizeRestClient); } }
 
         public SupportTicketTypesClient SupportTicketTypesClient { get { return new SupportTicketTypesClient(_encentivizeRestClient); } }
 

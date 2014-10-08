@@ -2,12 +2,12 @@
 
 namespace Entelect.Encentivize.Sdk.SupportTickets.Categories
 {
-    public class SupportTicketCategorysClient : ISupportTicketCategorysClient
+    public class SupportTicketCategoriesClient : ISupportTicketCategoriesClient
     {
         private readonly IEntityRetrievalService<SupportTicketCategoryOutput> _entityRetrievalService;
-        public SupportTicketCategorysClient(IEncentivizeRestClient restClient)
+        public SupportTicketCategoriesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("SupportTicketCategory", "SupportTicketCategories", "SupportTicketCategories");
+            var entitySettings = new EntitySettings("Support Ticket Category", "Support Ticket Categories", "SupportTicketCategories");
             _entityRetrievalService = new EntityRetrievalService<SupportTicketCategoryOutput>(restClient, entitySettings);
         }
 

@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public class MemberClient : IMemberClient
+    public class MembersClient : IMembersClient
     {
         private readonly IEncentivizeRestClient _restClient;
         private readonly EntityRetrievalService<MemberOutput> _entityRetrievalService;
@@ -13,7 +13,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
         private readonly EntityCreationService<MemberInput, MemberOutput> _entityCreationService;
         private readonly EntitySettings _timeStoreEntitySettings;
 
-        public MemberClient(IEncentivizeRestClient restClient)
+        public MembersClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
             var memberSettings = new EntitySettings("Member", "Members", "members");

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entelect.Encentivize.Sdk.Otp.Creation
 {
-    public class CreateOtpRequest: BaseInput
+    public class CreateOneTimePinRequest: BaseInput
     {
         [Required]
         public string UserIdentifier { get; set; }

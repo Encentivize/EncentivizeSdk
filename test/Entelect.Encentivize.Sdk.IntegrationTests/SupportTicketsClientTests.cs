@@ -70,7 +70,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             {
                 Comment = guidString,
                 Subject = guidString,
-                SupportTicketCategoryId = SupportTicketCategorysClient.Search(new SupportTicketCategorySearchCriteria()).Data.First().SupportTicketCategoryId,
+                SupportTicketCategoryId = SupportTicketCategoriesClient.Search(new SupportTicketCategorySearchCriteria()).Data.First().SupportTicketCategoryId,
                 SupportTicketTypeId = SupportTicketTypesClient.Search(new SupportTicketTypeSearchCriteria()).Data.First().SupportTicketTypeId,
                 SupportTicketPriorityId = 2
                 

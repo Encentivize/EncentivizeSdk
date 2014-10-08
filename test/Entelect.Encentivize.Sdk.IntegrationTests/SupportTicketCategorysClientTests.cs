@@ -8,7 +8,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void Search()
         {
-            var searchResult = SupportTicketCategorysClient.Search(new SupportTicketCategorySearchCriteria());
+            var searchResult = SupportTicketCategoriesClient.Search(new SupportTicketCategorySearchCriteria());
             Assert.NotNull(searchResult);
             Assert.Greater(searchResult.Data.Count, 0);
         }
@@ -16,7 +16,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var item = SupportTicketCategorysClient.Get(1);
+            var item = SupportTicketCategoriesClient.Get(1);
             Assert.NotNull(item);
 
         }

@@ -7,7 +7,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets.Types
         private readonly IEntityRetrievalService<SupportTicketTypeOutput> _entityRetrievalService;
         public SupportTicketTypesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("SupportTicketType", "SupportTicketTypes", "SupportTicketTypes");
+            var entitySettings = new EntitySettings("Support Ticket Type", "Support Ticket Types", "SupportTicketTypes");
             _entityRetrievalService = new EntityRetrievalService<SupportTicketTypeOutput>(restClient, entitySettings);
         }
 

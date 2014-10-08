@@ -1,6 +1,6 @@
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public interface IMemberClient
+    public interface IMembersClient
     {
         MemberOutput GetMe();
         PagedResult<MemberOutput> Search(MemberSearchCriteria memberSearchCriteria);

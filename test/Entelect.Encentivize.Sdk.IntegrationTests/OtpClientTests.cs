@@ -10,10 +10,10 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [TestFixtureSetUp]
         public void Initi()
         {
-            var existingConfig = OneTimePinConfigurationClient.Get(1);
+            var existingConfig = OneTimePinConfigurationsClient.Get(1);
             if (existingConfig == null)
             {
-                OneTimePinConfigurationClient.Create(new OneTimePinConfigurationInput
+                OneTimePinConfigurationsClient.Create(new OneTimePinConfigurationInput
                 {
                     IsActive = true,
                     MaxNumberOfRetries = 3,
@@ -22,14 +22,14 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             }
             else if (!existingConfig.IsActive)
             {
-                OneTimePinConfigurationClient.Update(new OneTimePinConfigurationInput {IsActive = true, MaxNumberOfRetries = 3, OneTimePinTypeId = 1});
+                OneTimePinConfigurationsClient.Update(new OneTimePinConfigurationInput {IsActive = true, MaxNumberOfRetries = 3, OneTimePinTypeId = 1});
             }
         }
 
         [Test]
         public void Create()
         {
-            OtpClient.Create(new CreateOtpRequest
+            OneTimePinsClient.Create(new CreateOneTimePinRequest
             {
                 ChannelTypeId = 2,
                 OtpTypeId = 1,
@@ -40,7 +40,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void PasswordReset()
         {
-            OtpClient.PasswordReset(new OtpPasswordResetInput
+            OneTimePinsClient.PasswordReset(new OneTimePinPasswordResetInput
             {
                 OtpCode = 1, 
                 Password = "NewPassword",
