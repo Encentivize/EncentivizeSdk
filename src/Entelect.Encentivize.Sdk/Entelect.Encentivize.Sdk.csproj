@@ -141,7 +141,7 @@
     <Compile Include="Members\Rewards\OtpRedeemRewardInput.cs" />
     <Compile Include="Members\Rewards\RedeemRewardInput.cs" />
     <Compile Include="Members\Rewards\RewardRedemptionStatus.cs" />
-    <Compile Include="Members\Rewards\RewardStructureOutput.cs" />
+    <Compile Include="Rewards\RewardStructureOutput.cs" />
     <Compile Include="Otp\Configuration\IOneTimePinConfigurationClient.cs" />
     <Compile Include="Otp\Configuration\OneTimePinConfigurationClient.cs" />
     <Compile Include="Otp\Configuration\OneTimePinConfigurationInput.cs" />

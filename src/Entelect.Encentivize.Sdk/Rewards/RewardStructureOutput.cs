@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entelect.Encentivize.Sdk.Members.Rewards
+namespace Entelect.Encentivize.Sdk.Rewards
 {
     public class RewardStructureOutput
     {
