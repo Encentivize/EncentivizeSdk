@@ -15,6 +15,7 @@ using Entelect.Encentivize.Sdk.Otp.Configuration;
 using Entelect.Encentivize.Sdk.Otp.Creation;
 using Entelect.Encentivize.Sdk.Otp.Type;
 using Entelect.Encentivize.Sdk.Points;
+using Entelect.Encentivize.Sdk.SupportTickets;
 using Entelect.Encentivize.Sdk.SupportTickets.Categories;
 using Entelect.Encentivize.Sdk.SupportTickets.Types;
 

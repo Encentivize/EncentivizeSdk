@@ -70,6 +70,7 @@
     <Compile Include="QueryStringBuilderTests.cs" />
     <Compile Include="SdkTestBase.cs" />
     <Compile Include="SupportTicketCategorysClientTests.cs" />
+    <Compile Include="SupportTicketsClientTests.cs" />
     <Compile Include="SupportTicketTypesClientTests.cs" />
     <Compile Include="TestSerialisationObject.cs" />
     <Compile Include="TimestoreTests.cs" />

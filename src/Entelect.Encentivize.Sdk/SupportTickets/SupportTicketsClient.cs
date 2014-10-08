@@ -1,8 +1,6 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
-using Entelect.Encentivize.Sdk.SupportTickets;
-using RestSharp;
 
-namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
+namespace Entelect.Encentivize.Sdk.SupportTickets
 {
     public class SupportTicketsClient
     {
