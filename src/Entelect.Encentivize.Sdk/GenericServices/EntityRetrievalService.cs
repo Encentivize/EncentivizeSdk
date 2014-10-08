@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Net;
 using Entelect.Encentivize.Sdk.Exceptions;
 using RestSharp;
 
@@ -74,8 +75,14 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             restRequest.Method = Method.GET;
             restRequest.RequestFormat = DataFormat.Json;
             var response = RestClient.Execute<TOutput>(restRequest);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
                 throw new DataRetrievalFailedException(response);
+            }
             return response.Data;
         }
 
@@ -84,8 +91,12 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.Method = Method.GET;
             var response = RestClient.Execute<PagedResult<TOutput>>(restRequest);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
                 throw new DataRetrievalFailedException(response);
             }
             return response.Data;
