@@ -38,6 +38,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore("This is difficult to test in an automated way since the otp is not actually returned but sent through the provided channel")]
         public void PasswordReset()
         {
             OneTimePinsClient.PasswordReset(new OneTimePinPasswordResetInput
