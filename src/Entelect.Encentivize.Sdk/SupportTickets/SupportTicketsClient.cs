@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.SupportTickets
 {
-    public class SupportTicketsClient
+    public class SupportTicketsClient : ISupportTicketsClient
     {
         private readonly IEntityUpdateService<EditSupportTicketInput, SupportTicketOutput> _entityUpdateService;
         private readonly IEntityRetrievalService<SupportTicketOutput> _entityRetrievalService;
