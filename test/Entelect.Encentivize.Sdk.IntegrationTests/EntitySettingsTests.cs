@@ -30,8 +30,4 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             Assert.AreEqual(expectedBaseRoute, entitySettings.BaseRoute);
         }
     }
-
-    public class TestEntity : IEntity
-    {
-    }
 }
