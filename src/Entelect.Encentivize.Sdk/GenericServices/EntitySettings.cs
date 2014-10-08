@@ -24,26 +24,25 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         {
         }
 
-        public void PopulateBasedOnType<TEntity>()
+        public EntitySettings Populate<TEntity>()
             where TEntity : IEntity
         {
-            PopulateBasedOnType(typeof (TEntity));
+            Populate(typeof (TEntity));
+            return this;
         }
 
-        public void PopulateBasedOnType(Type entityType)
+        public EntitySettings Populate(Type entityType)
         {
             var entityName = entityType.Name;
             EntityNameSingular = entityName.PascalToSpacedString();
             EntityNamePlural = Plurarlise(EntityNameSingular);
             BaseRoute = Plurarlise(entityName);
+            return this;
         }
 
-        internal EntitySettings(Type entityType)
+        public EntitySettings(Type entityType)
         {
-            var entityName = entityType.Name;
-            EntityNameSingular = entityName.PascalToSpacedString();
-            EntityNamePlural = Plurarlise(EntityNameSingular);
-            BaseRoute = Plurarlise(entityName);
+            Populate(entityType);
         }
 
         public EntitySettings(string entityNameSingular, string entityNamePlural, string baseRoute)

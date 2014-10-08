@@ -119,4 +119,27 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return string.Format("$page={0}&$pageSize={1}", searchCriteria.PageNumber, searchCriteria.PageSize);
         }
     }
+
+    public class EntityRetrievalService : EntityService, IEntityRetrievalService
+    {
+        public EntityRetrievalService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
+            : base(restClient, entitySettings)
+        {
+        }
+
+        public dynamic Get(string customPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PagedResult<dynamic> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PagedResult<dynamic> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

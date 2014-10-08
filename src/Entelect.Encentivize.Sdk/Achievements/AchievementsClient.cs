@@ -22,7 +22,7 @@ namespace Entelect.Encentivize.Sdk.Achievements
 
         public AchievementsClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings<Achievement>("Achievement", "Achievements", "Achievements");
+            var entitySettings = new EntitySettings().Populate<Achievement>();
             _entityUpdateService = new EntityUpdateService<AchievementInput, Achievement>(restClient, entitySettings);
             _entityRetrievalService = new EntityRetrievalService<Achievement>(restClient, entitySettings);
             _entityCreationService = new EntityCreationService<AchievementInput, Achievement>(restClient, entitySettings);

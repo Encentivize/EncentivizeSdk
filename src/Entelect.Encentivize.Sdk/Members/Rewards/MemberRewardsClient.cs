@@ -14,14 +14,14 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
         private readonly IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> _memberRewardCreationService;
         private readonly IEntityDeletionService<RedeemRewardInput, RewardTransactionOutput> _memberRewardDeletionService;
         private readonly IEntityRetrievalService<RewardStructureOutput> _rewardRetrievalService;
-        private readonly IEntityRetrievalService<dynamic> _dynamicEntityRetrievalService;
+        private readonly IEntityRetrievalService _dynamicEntityRetrievalService;
 
         public MemberRewardsClient(IEncentivizeRestClient restClient, 
             IEntityRetrievalService<RewardTransactionOutput> memberRewardRetrievalService, 
             IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> memberRewardCreationService,
             IEntityDeletionService<RedeemRewardInput, RewardTransactionOutput> memberRewardDeletionService, 
             IEntityRetrievalService<RewardStructureOutput> rewardRetrievalService, 
-            IEntityRetrievalService<dynamic> dynamicEntityRetrievalService)
+            IEntityRetrievalService dynamicEntityRetrievalService)
         {
             _restClient = restClient;
             _memberRewardRetrievalService = memberRewardRetrievalService;
@@ -40,7 +40,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             _memberRewardDeletionService = new EntityDeletionService<RedeemRewardInput, RewardTransactionOutput>(restClient, memberRewardSettings);
             var additionalInformationEntitySettings = new EntitySettings("Additional Information", "Additional Information",
                 "members/{memberId:long}/rewards/{rewardTransactionId:long}/additionalInformation");
-            _dynamicEntityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, additionalInformationEntitySettings);
+            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient, additionalInformationEntitySettings);
             /* todo rk move to own client ? */
             var rewardSettings = new EntitySettings("Reward", "Rewards", null);
             _rewardRetrievalService = new EntityRetrievalService<RewardStructureOutput>(_restClient, rewardSettings);

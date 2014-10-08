@@ -19,7 +19,7 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
 
         public MemberAchievementsClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings<MemberAchievement>("Member Achievement", "Member Achievements", "MemberAchievements");
+            var entitySettings = new EntitySettings().Populate<MemberAchievement>();
             _entityRetrievalService = new EntityRetrievalService<MemberAchievement>(restClient, entitySettings);
             _entityCreationService = new EntityCreationService<MemberAchievementInput, MemberAchievement>(restClient, entitySettings);
             _entityDeletionService = new EntityDeletionService<MemberAchievementInput, MemberAchievement>(restClient, entitySettings);

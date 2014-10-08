@@ -22,7 +22,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
 
         public GroupRolesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings<GroupRole>("Group Role", "Group Roles", "GroupRoles");
+            var entitySettings = new EntitySettings().Populate<GroupRole>();
             _entityUpdateService = new EntityUpdateService<GroupRoleInput, GroupRole>(restClient, entitySettings);
             _entityRetrievalService = new EntityRetrievalService<GroupRole>(restClient, entitySettings);
             _entityCreationService = new EntityCreationService<GroupRoleInput, GroupRole>(restClient, entitySettings);

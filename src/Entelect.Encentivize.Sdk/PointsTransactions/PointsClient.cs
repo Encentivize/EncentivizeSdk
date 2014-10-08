@@ -7,11 +7,11 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
     public class PointsClient : IPointsClient
     {
-        private readonly IEntityRetrievalService<dynamic> _entityRetrievalService;
+        private readonly IEntityRetrievalService _entityRetrievalService;
         private readonly IEntityCreationService<AdHocPointsInput, AdHocTransaction> _adHocCreationService;
         private readonly IEntityCreationService<TransferPointsInput, TransferPoints> _transferCreationService;
 
-        public PointsClient(IEntityRetrievalService<dynamic> entityRetrievalService, 
+        public PointsClient(IEntityRetrievalService entityRetrievalService, 
             IEntityCreationService<AdHocPointsInput, AdHocTransaction> adHocCreationService, 
             IEntityCreationService<TransferPointsInput, TransferPoints> transferCreationService)
         {
@@ -23,7 +23,7 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
         public PointsClient(IEncentivizeRestClient restClient) 
         {
             var pointsTransactionSettings = new EntitySettings("Points Transaction", "Points Transactions", "PointsTransactions");
-            _entityRetrievalService = new EntityRetrievalService<dynamic>(restClient, pointsTransactionSettings);
+            _entityRetrievalService = new EntityRetrievalService(restClient, pointsTransactionSettings);
             var adHocSettings = new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints");
             _adHocCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransaction>(restClient, adHocSettings);
             var transferSettings = new EntitySettings("Transfer Points", "Transfer Points", "members/{fromMemberId:long}/TransferPoints");

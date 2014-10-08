@@ -11,4 +11,11 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         void CreateExpectNullResponse(string customPath, TInput input);
         void CreateExpectNullResponse(TEntity entity);
     }
+
+    public interface IEntityCreationService<in TInput>
+        where TInput : BaseInput
+    {
+        void Create(TInput input);
+        void Create(string customPath, TInput input);
+    }
 }

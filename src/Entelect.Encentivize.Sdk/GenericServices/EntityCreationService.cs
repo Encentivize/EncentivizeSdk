@@ -72,4 +72,23 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             }
         }
     }
+
+    public class EntityCreationService<TInput> : EntityService, IEntityCreationService<TInput>
+        where TInput : BaseInput
+    {
+        public EntityCreationService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
+            : base(restClient, entitySettings)
+        {
+        }
+
+        public void Create(TInput input)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Create(string customPath, TInput input)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

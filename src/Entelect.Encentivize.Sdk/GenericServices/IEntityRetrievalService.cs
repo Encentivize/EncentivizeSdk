@@ -12,4 +12,11 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         PagedResult<TEntity> FindBySearchCriteria(BaseSearchCriteria searchCriteria);
         PagedResult<TEntity> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria);
     }
+
+    public interface IEntityRetrievalService
+    {
+        dynamic Get(string customPath);
+        PagedResult<dynamic> FindBySearchCriteria(BaseSearchCriteria searchCriteria);
+        PagedResult<dynamic> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria);
+    }
 }

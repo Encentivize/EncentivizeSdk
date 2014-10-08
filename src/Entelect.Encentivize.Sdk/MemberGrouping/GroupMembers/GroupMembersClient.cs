@@ -22,7 +22,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
 
         public GroupMembersClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings<GroupMember>("Group Member", "Group Members", "Groups/{groupId:long}/Members");
+            var entitySettings = new EntitySettings().Populate<GroupMember>();
             _entityUpdateService = new EntityUpdateService<GroupMemberInput, GroupMember>(restClient, entitySettings);
             _entityRetrievalService = new EntityRetrievalService<GroupMember>(restClient, entitySettings);
             _entityCreationService = new EntityCreationService<GroupMemberInput, GroupMember>(restClient, entitySettings);

@@ -12,13 +12,13 @@ namespace Entelect.Encentivize.Sdk.Members.Members
         private readonly IEntityRetrievalService<Member> _entityRetrievalService;
         private readonly IEntityUpdateService<MemberInput, Member> _entityUpdateService;
         private readonly IEntityCreationService<MemberInput, Member> _entityCreationService;
-        private readonly IEntityRetrievalService<dynamic> _dynamicEntityRetrievalService;
+        private readonly IEntityRetrievalService _dynamicEntityRetrievalService;
 
         public MembersClient(IEncentivizeRestClient restClient, 
             IEntityRetrievalService<Member> entityRetrievalService, 
             IEntityUpdateService<MemberInput, Member> entityUpdateService, 
             IEntityCreationService<MemberInput, Member> entityCreationService,
-            IEntityRetrievalService<dynamic> dynamicEntityRetrievalService)
+            IEntityRetrievalService dynamicEntityRetrievalService)
         {
             _restClient = restClient;
             _entityRetrievalService = entityRetrievalService;
@@ -35,7 +35,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
             _entityRetrievalService = new EntityRetrievalService<Member>(_restClient, memberSettings);
             _entityUpdateService = new EntityUpdateService<MemberInput, Member>(_restClient, memberSettings);
             _entityCreationService = new EntityCreationService<MemberInput, Member>(_restClient, memberSettings);
-            _dynamicEntityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, timeStoreEntitySettings);
+            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient, timeStoreEntitySettings);
         }
 
         public virtual Member GetMe()
