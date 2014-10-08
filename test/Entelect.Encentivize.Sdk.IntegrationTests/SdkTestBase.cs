@@ -24,19 +24,19 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
     {
         private readonly EncentivizeRestClient _encentivizeRestClient;
         private readonly EncentivizeSettings _encentivizeSettings;
-
+#if !DEBUG
+            public const string Username = "alex66@doe66.co.zaQA";
+            public const string Password = "tX3AyNWpwu8xG8tJ5EqujtNP";
+            public const string BaseUrl = "https://qa.encentivize.co.za/api/v1/";
+#else
+        public const string Username = "encentivizeExceptions@entelect.co.za";
+        public const string Password = "123456";
+        public const string BaseUrl = "http://localhost:57441/api/v1/";
+#endif
         public SdkTestBase()
         {
-#if !DEBUG
-            const string username = "alex66@doe66.co.zaQA";
-            const string password = "tX3AyNWpwu8xG8tJ5EqujtNP";
-            const string baseUrl = "https://qa.encentivize.co.za/api/v1/";
-#else
-            const string username = "encentivizeExceptions@entelect.co.za";
-            const string password = "123456";
-            const string baseUrl = "http://localhost:57441/api/v1/";
-#endif
-            _encentivizeSettings = new EncentivizeSettings(username, password, baseUrl);
+
+            _encentivizeSettings = new EncentivizeSettings(Username, Password, BaseUrl);
             _encentivizeRestClient = new EncentivizeRestClient(_encentivizeSettings);
         }
 

@@ -35,7 +35,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         {
             var entity = GetSomeEntity();
             var isActive = entity.IsActive;
-            var updated = OneTimePinConfigurationClient.Update(GetSomeEntity().OneTimePinTypeId, new OneTimePinConfigurationInput
+            var updated = OneTimePinConfigurationClient.Update(new OneTimePinConfigurationInput
             {
                 IsActive = !isActive,
                 MaxNumberOfRetries = entity.MaxNumberOfRetries,

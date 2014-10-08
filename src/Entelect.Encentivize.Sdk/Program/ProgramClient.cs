@@ -1,6 +1,5 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.Program;
-using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.Programs
 {
