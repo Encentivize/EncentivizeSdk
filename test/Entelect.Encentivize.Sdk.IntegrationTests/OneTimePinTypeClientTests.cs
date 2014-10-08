@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using Entelect.Encentivize.Sdk.Otp.Configuration;
-using Entelect.Encentivize.Sdk.Otp.Type;
+﻿using Entelect.Encentivize.Sdk.Otp.Type;
 using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests

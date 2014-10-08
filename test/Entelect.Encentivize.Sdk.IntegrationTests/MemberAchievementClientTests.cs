@@ -1,5 +1,4 @@
 ﻿using System;
-using Entelect.Encentivize.Sdk.Achievements.AchievementCategories;
 using Entelect.Encentivize.Sdk.Members.Achievements;
 using NUnit.Framework;
 

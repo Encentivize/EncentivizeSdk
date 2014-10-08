@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers;
 using Entelect.Encentivize.Sdk.MemberGrouping.Groups;
 using NUnit.Framework;

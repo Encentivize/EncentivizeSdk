@@ -1,5 +1,4 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
-using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Otp.Configuration
 {
