@@ -9,19 +9,33 @@ namespace Entelect.Encentivize.Sdk.Members.Members
     public class MembersClient : IMembersClient
     {
         private readonly IEncentivizeRestClient _restClient;
-        private readonly EntityRetrievalService<MemberOutput> _entityRetrievalService;
-        private readonly EntityUpdateService<MemberInput, MemberOutput> _entityUpdateService;
-        private readonly EntityCreationService<MemberInput, MemberOutput> _entityCreationService;
-        private readonly EntitySettings _timeStoreEntitySettings;
+        private readonly IEntityRetrievalService<MemberOutput> _entityRetrievalService;
+        private readonly IEntityUpdateService<MemberInput, MemberOutput> _entityUpdateService;
+        private readonly IEntityCreationService<MemberInput, MemberOutput> _entityCreationService;
+        private readonly IEntityRetrievalService<dynamic> _dynamicEntityRetrievalService;
+
+        public MembersClient(IEncentivizeRestClient restClient, 
+            IEntityRetrievalService<MemberOutput> entityRetrievalService, 
+            IEntityUpdateService<MemberInput, MemberOutput> entityUpdateService, 
+            IEntityCreationService<MemberInput, MemberOutput> entityCreationService,
+            IEntityRetrievalService<dynamic> dynamicEntityRetrievalService)
+        {
+            _restClient = restClient;
+            _entityRetrievalService = entityRetrievalService;
+            _entityUpdateService = entityUpdateService;
+            _entityCreationService = entityCreationService;
+            _dynamicEntityRetrievalService = dynamicEntityRetrievalService;
+        }
 
         public MembersClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
             var memberSettings = new EntitySettings("Member", "Members", "members");
-            _timeStoreEntitySettings = new EntitySettings("Timestore", "Timestore", "members/{memberId:long}/timestore/");
+            var timeStoreEntitySettings = new EntitySettings("Timestore", "Timestore", "members/{memberId:long}/timestore/");
             _entityRetrievalService = new EntityRetrievalService<MemberOutput>(_restClient, memberSettings);
             _entityUpdateService = new EntityUpdateService<MemberInput, MemberOutput>(_restClient, memberSettings);
             _entityCreationService = new EntityCreationService<MemberInput, MemberOutput>(_restClient, memberSettings);
+            _dynamicEntityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, timeStoreEntitySettings);
         }
 
         public virtual MemberOutput GetMe()
@@ -57,9 +71,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public virtual dynamic GetTimestoreForMember(long memberId)
         {
-            var entityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, _timeStoreEntitySettings);
-            var data = entityRetrievalService.Get(TimeStoreUrl(memberId));
-            return data;
+            return _dynamicEntityRetrievalService.Get(TimeStoreUrl(memberId));
         }
 
         public virtual void WriteTimestoreForMember(long memberId, dynamic timestoreData)

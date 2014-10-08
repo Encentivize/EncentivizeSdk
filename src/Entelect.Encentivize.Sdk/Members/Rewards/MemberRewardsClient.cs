@@ -10,55 +10,74 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
     public class MemberRewardsClient : IMemberRewardsClient
     {
         private readonly IEncentivizeRestClient _restClient;
-        private readonly IEntityRetrievalService<RewardTransactionOutput> _entityRetrievalService;
-        private readonly IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> _entityCreationService;
-        private readonly IEntityDeletionService _entityDeletionService;
+        private readonly IEntityRetrievalService<RewardTransactionOutput> _memberRewardRetrievalService;
+        private readonly IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> _memberRewardCreationService;
+        private readonly IEntityDeletionService _memberRewardDeletionService;
+        private readonly IEntityRetrievalService<RewardStructureOutput> _rewardRetrievalService;
+        private readonly IEntityRetrievalService<dynamic> _dynamicEntityRetrievalService;
+
+        public MemberRewardsClient(IEncentivizeRestClient restClient, 
+            IEntityRetrievalService<RewardTransactionOutput> memberRewardRetrievalService, 
+            IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> memberRewardCreationService, 
+            IEntityDeletionService memberRewardDeletionService, IEntityRetrievalService<RewardStructureOutput> rewardRetrievalService, 
+            IEntityRetrievalService<dynamic> dynamicEntityRetrievalService)
+        {
+            _restClient = restClient;
+            _memberRewardRetrievalService = memberRewardRetrievalService;
+            _memberRewardCreationService = memberRewardCreationService;
+            _memberRewardDeletionService = memberRewardDeletionService;
+            _rewardRetrievalService = rewardRetrievalService;
+            _dynamicEntityRetrievalService = dynamicEntityRetrievalService;
+        }
 
         public MemberRewardsClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
-            var entitySettings = new EntitySettings("Member Reward", "Member Rewards", "MemberRewards");
-            _entityRetrievalService = new EntityRetrievalService<RewardTransactionOutput>(restClient, entitySettings);
-            _entityCreationService = new EntityCreationService<RedeemRewardInput, RewardTransactionOutput>(restClient, entitySettings);
-            _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
+            var memberRewardSettings = new EntitySettings("Member Reward", "Member Rewards", "MemberRewards");
+            _memberRewardRetrievalService = new EntityRetrievalService<RewardTransactionOutput>(restClient, memberRewardSettings);
+            _memberRewardCreationService = new EntityCreationService<RedeemRewardInput, RewardTransactionOutput>(restClient, memberRewardSettings);
+            _memberRewardDeletionService = new EntityDeletionService(restClient, memberRewardSettings);
+            var additionalInformationEntitySettings = new EntitySettings("Additional Information", "Additional Information",
+                "members/{memberId:long}/rewards/{rewardTransactionId:long}/additionalInformation");
+            _dynamicEntityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, additionalInformationEntitySettings);
+            /* todo rk move to own client */
+            var rewardSettings = new EntitySettings("Reward", "Rewards", null);
+            _rewardRetrievalService = new EntityRetrievalService<RewardStructureOutput>(_restClient, rewardSettings);
         }
 
         public virtual PagedResult<RewardTransactionOutput> Search(RewardTransactionSearchCriteria rewardSearchCriteria)
         {
-            return _entityRetrievalService.FindBySearchCriteria(rewardSearchCriteria);
+            return _memberRewardRetrievalService.FindBySearchCriteria(rewardSearchCriteria);
         }
 
         public virtual PagedResult<RewardTransactionOutput> MemberHistory(long memberId, RewardTransactionSearchCriteria rewardSearchCriteria)
         {
-            return _entityRetrievalService.FindBySearchCriteria(string.Format("members/{0}/rewards/", memberId), rewardSearchCriteria);
+            return _memberRewardRetrievalService.FindBySearchCriteria(string.Format("members/{0}/rewards/", memberId), rewardSearchCriteria);
         }
 
         public virtual PagedResult<RewardStructureOutput> GetAvailableRewardsForMember(long memberId, RewardSearchCriteria rewardSearchCriteria)
         {
-            return new EntityRetrievalService<RewardStructureOutput>(_restClient, new EntitySettings("Reward", "Rewards", null))
-                .FindBySearchCriteria(string.Format("members/{0}/availableRewards", memberId), rewardSearchCriteria);
+            return _rewardRetrievalService.FindBySearchCriteria(string.Format("members/{0}/availableRewards", memberId), rewardSearchCriteria);
         }
 
         public virtual RewardTransactionOutput RedeemReward(long memberId, RedeemRewardInput redeemRewardInput)
         {
-            return _entityCreationService.Create(string.Format("members/{0}/redeemReward/", memberId), redeemRewardInput);
+            return _memberRewardCreationService.Create(string.Format("members/{0}/redeemReward/", memberId), redeemRewardInput);
         }
 
         public virtual RewardTransactionOutput Get(long memberId, long rewardTransactionId)
         {
-            return _entityRetrievalService.Get(string.Format("members/{0}/rewards/{1}", memberId, rewardTransactionId));
+            return _memberRewardRetrievalService.Get(string.Format("members/{0}/rewards/{1}", memberId, rewardTransactionId));
         }
 
         public virtual void RefundReward(long memberId, long rewardTransactionId)
         {
-            _entityDeletionService.Delete(string.Format("members/{0}/rewards/{1}/", memberId, rewardTransactionId));
+            _memberRewardDeletionService.Delete(string.Format("members/{0}/rewards/{1}/", memberId, rewardTransactionId));
         }
 
         public virtual dynamic GetRewardAdditionalInformation(long memberId, long rewardTransactionId)
         {
-            const string entityName = "Additional Information";
-            return new EntityRetrievalService<dynamic>(_restClient, new EntitySettings(entityName, entityName, entityName))
-                .Get(string.Format("members/{0}/rewards/{1}/additionalInformation", memberId, rewardTransactionId));
+            return _dynamicEntityRetrievalService.Get(string.Format("members/{0}/rewards/{1}/additionalInformation", memberId, rewardTransactionId));
         }
 
         public virtual dynamic UpdateRewardAdditionalInformation(long memberId, long rewardTransactionId, dynamic additionalInformation)
