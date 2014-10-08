@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
+    [TestFixture]
     public class OneTimePinTypesClientTests : SdkTestBase
     {
         [Test]

@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
+    [TestFixture]
     public class SupportTicketsClientTests : SdkTestBase
     {
         [Test]
