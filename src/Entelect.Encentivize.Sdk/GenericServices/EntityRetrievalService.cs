@@ -9,13 +9,11 @@ namespace Entelect.Encentivize.Sdk.GenericServices
     public class EntityRetrievalService<TOutput> : EntityService, IEntityRetrievalService<TOutput> 
         where TOutput : class, new()
     {
-        private readonly IEncentivizeRestClient _restClient;
         const string IdNotSetVerb = "retrieve";
 
         public EntityRetrievalService(IEncentivizeRestClient restClient, EntitySettings entitySettings)
             :base(restClient, entitySettings)
         {
-            _restClient = restClient;
             QueryStringBuilder = new QueryStringBuilder(propertiesToExclude: new[] { "PageNumber", "PageSize" });
         }
 

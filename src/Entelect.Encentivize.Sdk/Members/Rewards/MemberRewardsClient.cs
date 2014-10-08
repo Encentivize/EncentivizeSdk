@@ -40,7 +40,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             var additionalInformationEntitySettings = new EntitySettings("Additional Information", "Additional Information",
                 "members/{memberId:long}/rewards/{rewardTransactionId:long}/additionalInformation");
             _dynamicEntityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, additionalInformationEntitySettings);
-            /* todo rk move to own client */
+            /* todo rk move to own client ? */
             var rewardSettings = new EntitySettings("Reward", "Rewards", null);
             _rewardRetrievalService = new EntityRetrievalService<RewardStructureOutput>(_restClient, rewardSettings);
         }
