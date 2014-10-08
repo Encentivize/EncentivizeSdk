@@ -3,7 +3,7 @@ using Entelect.Encentivize.Sdk.Members.Members;
 
 namespace Entelect.Encentivize.Sdk.Members.Achievements
 {
-    public class MemberAchievementOutput
+    public class MemberAchievement: IEditableEntity<MemberAchievementInput>
     {
         public long MemberAchievementId { get; set; }
         public long MemberId { get; set; }
@@ -18,5 +18,14 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
         public MemberType MemberType { get; set; }
         public string AchievementReferenceNumber { get; set; }
         public long TimesAwarded { get; set; }
+        public MemberAchievementInput ToInput()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetModificationUrl()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

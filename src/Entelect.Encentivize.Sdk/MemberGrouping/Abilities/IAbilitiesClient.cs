@@ -2,7 +2,7 @@
 {
     public interface IAbilitiesClient
     {
-        AbilityOutput Get(long abilityId);
-        PagedResult<AbilityOutput> Search(AbilitySearchCriteria abilitySearchCriteria);
+        Ability Get(long abilityId);
+        PagedResult<Ability> Search(AbilitySearchCriteria abilitySearchCriteria);
     }
 }

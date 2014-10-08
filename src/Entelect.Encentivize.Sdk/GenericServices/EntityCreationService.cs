@@ -3,28 +3,38 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EntityCreationService<TInput, TOutput> : EntityService, IEntityCreationService<TInput, TOutput> 
+    public class EntityCreationService<TInput, TEntity> : EntityService, IEntityCreationService<TInput, TEntity> 
         where TInput : BaseInput
-        where TOutput : class, new()
+        where TEntity : class, IEditableEntity<TInput>, new()
     {
         public EntityCreationService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
             : base(restClient, entitySettings)
         {
         }
 
-        public TOutput Create(TInput input)
+        public TEntity Create(TInput input)
         {
-            return DoCreate(new RestRequest(string.Format("{0}", EntitySettings.EntityRoute)), input);
+            return DoCreate(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
         }
 
-        public TOutput Create(string customPath, TInput input)
+        public TEntity Create(TEntity entity)
+        {
+            return Create(entity.ToInput());
+        }
+
+        public TEntity Create(string customPath, TInput input)
         {
             return DoCreate(new RestRequest(customPath), input);
         }
-
+        
         public void CreateExpectNullResponse(TInput input)
         {
-            DoCreateExpectNullResponse(new RestRequest(string.Format("{0}", EntitySettings.EntityRoute)), input);
+            DoCreateExpectNullResponse(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
+        }
+
+        public void CreateExpectNullResponse(TEntity entity)
+        {
+            CreateExpectNullResponse(entity.ToInput());
         }
 
         public void CreateExpectNullResponse(string customPath, TInput input)
@@ -32,10 +42,10 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             DoCreateExpectNullResponse(new RestRequest(customPath), input);
         }
 
-        protected virtual TOutput DoCreate(RestRequest restRequest, TInput input)
+        protected virtual TEntity DoCreate(RestRequest restRequest, TInput input)
         {
             PrepareCreateRequest(restRequest, input);
-            var response = RestClient.Execute<TOutput>(restRequest);
+            var response = RestClient.Execute<TEntity>(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new CreationFailedException(response);

@@ -35,9 +35,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Entelect, Version=0.0.63.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Entelect, Version=0.0.66.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Entelect.0.0.63\lib\net45\Entelect.dll</HintPath>
+      <HintPath>..\..\packages\Entelect.0.0.66\lib\net45\Entelect.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -66,7 +66,7 @@
     </Compile>
     <Compile Include="Achievements\AchievementCategories\AchievementCategoriesClient.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategoryInput.cs" />
-    <Compile Include="Achievements\AchievementCategories\AchievementCategoryOutput.cs" />
+    <Compile Include="Achievements\AchievementCategories\AchievementCategory.cs" />
     <Compile Include="Achievements\AchievementCategories\AchievementCategorySearchCriteria.cs" />
     <Compile Include="Achievements\AchievementsClient.cs" />
     <Compile Include="Achievements\AchievementSearchCriteria.cs" />
@@ -74,7 +74,7 @@
     <Compile Include="BaseSearchCriteria.cs" />
     <Compile Include="Achievements\AchievementCategories\IAchievementCategoryClient.cs" />
     <Compile Include="Achievements\AchievementInput.cs" />
-    <Compile Include="Achievements\AchievementOutput.cs" />
+    <Compile Include="Achievements\Achievement.cs" />
     <Compile Include="BaseInput.cs" />
     <Compile Include="Exceptions\IdNotSetException.cs" />
     <Compile Include="GenericServices\EncentivizeRestClient.cs" />
@@ -91,6 +91,7 @@
     <Compile Include="GenericServices\IEntityRetrievalService.cs" />
     <Compile Include="GenericServices\IEntityUpdateService.cs" />
     <Compile Include="DynamicJsonDeserializer.cs" />
+    <Compile Include="IEditableEntity.cs" />
     <Compile Include="MemberGrouping\Abilities\AbilitiesClient.cs" />
     <Compile Include="MemberGrouping\Abilities\IAbilitiesClient.cs" />
     <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypesClient.cs" />
@@ -100,22 +101,22 @@
     <Compile Include="MemberGrouping\GroupRoles\GroupRolesClient.cs" />
     <Compile Include="MemberGrouping\GroupRoles\IGroupRolesClient.cs" />
     <Compile Include="MemberGrouping\Groups\GroupsClient.cs" />
-    <Compile Include="MemberGrouping\Abilities\AbilityOutput.cs" />
+    <Compile Include="MemberGrouping\Abilities\Ability.cs" />
     <Compile Include="MemberGrouping\Abilities\AbilitySearchCriteria.cs" />
-    <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypeOutput.cs" />
+    <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationType.cs" />
     <Compile Include="MemberGrouping\GroupCreationTypes\GroupCreationTypeSearchCriteria.cs" />
     <Compile Include="MemberGrouping\GroupMembers\GroupMemberSearchCriteria.cs" />
     <Compile Include="MemberGrouping\GroupMembers\GroupMemberInput.cs" />
-    <Compile Include="MemberGrouping\GroupMembers\GroupMemberOutput.cs" />
+    <Compile Include="MemberGrouping\GroupMembers\GroupMember.cs" />
     <Compile Include="MemberGrouping\GroupRoles\GroupRoleInput.cs" />
-    <Compile Include="MemberGrouping\GroupRoles\GroupRoleOutput.cs" />
+    <Compile Include="MemberGrouping\GroupRoles\GroupRole.cs" />
     <Compile Include="MemberGrouping\GroupRoles\GroupRoleSearchCriteria.cs" />
     <Compile Include="MemberGrouping\Groups\GroupInput.cs" />
-    <Compile Include="MemberGrouping\Groups\GroupOutput.cs" />
+    <Compile Include="MemberGrouping\Groups\Group.cs" />
     <Compile Include="MemberGrouping\Groups\GroupSearchCriteria.cs" />
     <Compile Include="MemberGrouping\Groups\IGroupsClient.cs" />
     <Compile Include="MemberGrouping\GroupTypes\GroupTypeInput.cs" />
-    <Compile Include="MemberGrouping\GroupTypes\GroupTypeOutput.cs" />
+    <Compile Include="MemberGrouping\GroupTypes\GroupType.cs" />
     <Compile Include="MemberGrouping\GroupTypes\GroupTypesClient.cs" />
     <Compile Include="MemberGrouping\GroupTypes\GroupTypeSearchCriteria.cs" />
     <Compile Include="MemberGrouping\GroupTypes\IGroupTypeClient.cs" />
@@ -124,12 +125,12 @@
     <Compile Include="Members\Achievements\MemberAchievementsClient.cs" />
     <Compile Include="Members\Achievements\MemberAchievementSearchCriteria.cs" />
     <Compile Include="Members\Achievements\MemberAchievementInput.cs" />
-    <Compile Include="Members\Achievements\MemberAchievementOutput.cs" />
-    <Compile Include="BaseOutput.cs" />
+    <Compile Include="Members\Achievements\MemberAchievement.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="Members\Members\CompletePasswordResetInput.cs" />
     <Compile Include="Members\Members\IMembersClient.cs" />
     <Compile Include="Members\Members\MemberInput.cs" />
-    <Compile Include="Members\Members\MemberOutput.cs" />
+    <Compile Include="Members\Members\Member.cs" />
     <Compile Include="Members\Members\MemberSearchCriteria.cs" />
     <Compile Include="Members\Members\MemberStatus.cs" />
     <Compile Include="Members\Members\MemberType.cs" />
@@ -147,24 +148,24 @@
     <Compile Include="Otp\Configuration\IOneTimePinConfigurationsClient.cs" />
     <Compile Include="Otp\Configuration\OneTimePinConfigurationsClient.cs" />
     <Compile Include="Otp\Configuration\OneTimePinConfigurationInput.cs" />
-    <Compile Include="Otp\Configuration\OneTimePinConfigurationOutput.cs" />
+    <Compile Include="Otp\Configuration\OneTimePinConfiguration.cs" />
     <Compile Include="Otp\Configuration\OneTimePinConfigurationSearchCriteria.cs" />
     <Compile Include="Otp\Creation\CreateOneTimePinRequest.cs" />
     <Compile Include="Otp\Creation\IOneTimePinsClient.cs" />
     <Compile Include="Otp\Creation\OneTimePinsClient.cs" />
     <Compile Include="Otp\Creation\OneTimePinPasswordResetInput.cs" />
     <Compile Include="Otp\Type\IOneTimePinTypesClient.cs" />
-    <Compile Include="Otp\Type\OneTimePinTypeOutput.cs" />
+    <Compile Include="Otp\Type\OneTimePinType.cs" />
     <Compile Include="Otp\Type\OneTimePinTypesClient.cs" />
     <Compile Include="Otp\Type\OneTimePinTypeSearchCriteria.cs" />
     <Compile Include="PointsTransactions\AchievementTransactionOutput.cs" />
     <Compile Include="PointsTransactions\AdHocPointsInput.cs" />
-    <Compile Include="PointsTransactions\AdHocTransactionOutput.cs" />
+    <Compile Include="PointsTransactions\AdHocTransaction.cs" />
     <Compile Include="PointsTransactions\FromPointsTransferTransactionOutput.cs" />
     <Compile Include="PointsTransactions\LostPointsTransactionOutput.cs" />
     <Compile Include="PointsTransactions\PayoutTransactionOutput.cs" />
     <Compile Include="PointsTransactions\PointsTransactionOutput.cs" />
-    <Compile Include="PointsTransactions\TransferPointsOutput.cs" />
+    <Compile Include="PointsTransactions\TransferPoints.cs" />
     <Compile Include="PointsTransactions\RefundTransactionOutput.cs" />
     <Compile Include="PointsTransactions\RewardTransactionOutput.cs" />
     <Compile Include="PointsTransactions\ToPointsTransferTransactionOutput.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="PointsTransactions\IPointsClient.cs" />
     <Compile Include="PointsTransactions\PointsTransactionSearchCriteria.cs" />
     <Compile Include="Program\ProgramClient.cs" />
-    <Compile Include="Program\ProgramOutput.cs" />
+    <Compile Include="Program\Program.cs" />
     <Compile Include="QueryStringBuilder.cs" />
     <Compile Include="Members\Members\MembersClient.cs" />
     <Compile Include="EncentivizeSettings.cs" />
@@ -187,17 +188,17 @@
     <Compile Include="Rewards\RewardSearchCriteria.cs" />
     <Compile Include="SupportTickets\Categories\ISupportTicketCategoriesClient.cs" />
     <Compile Include="SupportTickets\Categories\SupportTicketCategoriesClient.cs" />
-    <Compile Include="SupportTickets\Categories\SupportTicketCategoryOutput.cs" />
+    <Compile Include="SupportTickets\Categories\SupportTicketCategory.cs" />
     <Compile Include="SupportTickets\Categories\SupportTicketCategorySearchCriteria.cs" />
     <Compile Include="SupportTickets\CommentOutput.cs" />
     <Compile Include="SupportTickets\EditSupportTicketInput.cs" />
     <Compile Include="SupportTickets\ISupportTicketsClient.cs" />
     <Compile Include="SupportTickets\SupportTicketInput.cs" />
     <Compile Include="SupportTickets\SupportTicketSearchCriteria.cs" />
-    <Compile Include="SupportTickets\SupportTicketOutput.cs" />
+    <Compile Include="SupportTickets\SupportTicket.cs" />
     <Compile Include="SupportTickets\SupportTicketsClient.cs" />
     <Compile Include="SupportTickets\Types\ISupportTicketTypesClient.cs" />
-    <Compile Include="SupportTickets\Types\SupportTicketTypeOutput.cs" />
+    <Compile Include="SupportTickets\Types\SupportTicketType.cs" />
     <Compile Include="SupportTickets\Types\SupportTicketTypesClient.cs" />
     <Compile Include="SupportTickets\Types\SupportTicketTypeSearchCriteria.cs" />
     <Compile Include="ValidationFailedError.cs" />

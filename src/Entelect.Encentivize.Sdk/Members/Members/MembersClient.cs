@@ -9,15 +9,15 @@ namespace Entelect.Encentivize.Sdk.Members.Members
     public class MembersClient : IMembersClient
     {
         private readonly IEncentivizeRestClient _restClient;
-        private readonly IEntityRetrievalService<MemberOutput> _entityRetrievalService;
-        private readonly IEntityUpdateService<MemberInput, MemberOutput> _entityUpdateService;
-        private readonly IEntityCreationService<MemberInput, MemberOutput> _entityCreationService;
+        private readonly IEntityRetrievalService<Member> _entityRetrievalService;
+        private readonly IEntityUpdateService<MemberInput, Member> _entityUpdateService;
+        private readonly IEntityCreationService<MemberInput, Member> _entityCreationService;
         private readonly IEntityRetrievalService<dynamic> _dynamicEntityRetrievalService;
 
         public MembersClient(IEncentivizeRestClient restClient, 
-            IEntityRetrievalService<MemberOutput> entityRetrievalService, 
-            IEntityUpdateService<MemberInput, MemberOutput> entityUpdateService, 
-            IEntityCreationService<MemberInput, MemberOutput> entityCreationService,
+            IEntityRetrievalService<Member> entityRetrievalService, 
+            IEntityUpdateService<MemberInput, Member> entityUpdateService, 
+            IEntityCreationService<MemberInput, Member> entityCreationService,
             IEntityRetrievalService<dynamic> dynamicEntityRetrievalService)
         {
             _restClient = restClient;
@@ -32,39 +32,39 @@ namespace Entelect.Encentivize.Sdk.Members.Members
             _restClient = restClient;
             var memberSettings = new EntitySettings("Member", "Members", "members");
             var timeStoreEntitySettings = new EntitySettings("Timestore", "Timestore", "members/{memberId:long}/timestore/");
-            _entityRetrievalService = new EntityRetrievalService<MemberOutput>(_restClient, memberSettings);
-            _entityUpdateService = new EntityUpdateService<MemberInput, MemberOutput>(_restClient, memberSettings);
-            _entityCreationService = new EntityCreationService<MemberInput, MemberOutput>(_restClient, memberSettings);
+            _entityRetrievalService = new EntityRetrievalService<Member>(_restClient, memberSettings);
+            _entityUpdateService = new EntityUpdateService<MemberInput, Member>(_restClient, memberSettings);
+            _entityCreationService = new EntityCreationService<MemberInput, Member>(_restClient, memberSettings);
             _dynamicEntityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, timeStoreEntitySettings);
         }
 
-        public virtual MemberOutput GetMe()
+        public virtual Member GetMe()
         {
             return _entityRetrievalService.Get("members/me");
         }
 
-        public virtual PagedResult<MemberOutput> Search(MemberSearchCriteria memberSearchCriteria)
+        public virtual PagedResult<Member> Search(MemberSearchCriteria memberSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(memberSearchCriteria);
         }
 
-        public virtual MemberOutput Get(long memberId)
+        public virtual Member Get(long memberId)
         {
             return _entityRetrievalService.GetById(memberId);
         }
 
-        public virtual MemberOutput UpdateMember(long memberId, MemberInput memberInput)
+        public virtual Member UpdateMember(long memberId, MemberInput memberInput)
         {
             return _entityUpdateService.Update(memberId, memberInput);
         }
 
-        public virtual MemberOutput UpdateMember(MemberOutput memberOutput)
+        public virtual Member UpdateMember(Member member)
         {
             /*todo rk update this to use the new base once implemented*/
-            return _entityUpdateService.Update(memberOutput.MemberId, memberOutput.ToInput());
+            return _entityUpdateService.Update(member.MemberId, member.ToInput());
         }
 
-        public virtual MemberOutput CreateMember(MemberInput memberInput)
+        public virtual Member CreateMember(MemberInput memberInput)
         {
             return _entityCreationService.Create(memberInput);
         }

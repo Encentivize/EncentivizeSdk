@@ -7,7 +7,8 @@ namespace Entelect.Encentivize.Sdk.Otp.Creation
         private readonly IEntityCreationService<CreateOneTimePinRequest, object> _createOneTimePinRequestService;
         private readonly IEntityCreationService<OneTimePinPasswordResetInput, object> _passwordResetCreationService;
 
-        public OneTimePinsClient(IEntityCreationService<CreateOneTimePinRequest, object> createOneTimePinRequestService, IEntityCreationService<OneTimePinPasswordResetInput, object> passwordResetCreationService)
+        public OneTimePinsClient(IEntityCreationService<CreateOneTimePinRequest, object> createOneTimePinRequestService, 
+            IEntityCreationService<OneTimePinPasswordResetInput, object> passwordResetCreationService)
         {
             _createOneTimePinRequestService = createOneTimePinRequestService;
             _passwordResetCreationService = passwordResetCreationService;

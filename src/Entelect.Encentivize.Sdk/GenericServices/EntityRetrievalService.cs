@@ -6,8 +6,8 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EntityRetrievalService<TOutput> : EntityService, IEntityRetrievalService<TOutput> 
-        where TOutput : class, new()
+    public class EntityRetrievalService<TEntity> : EntityService, IEntityRetrievalService<TEntity> 
+        where TEntity : class, IEntity, new()
     {
         const string IdNotSetVerb = "retrieve";
 
@@ -19,7 +19,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         protected QueryStringBuilder QueryStringBuilder { get; set; }
 
-        public virtual TOutput GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             if (id <= 0)
             {
@@ -28,7 +28,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
-        public virtual TOutput GetById(long id)
+        public virtual TEntity GetById(long id)
         {
             if (id <= 0)
             {
@@ -37,7 +37,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
-        public virtual TOutput GetById(Guid id)
+        public virtual TEntity GetById(Guid id)
         {
             if (id == null)
             {
@@ -46,33 +46,33 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return GetById(id.ToString());
         }
 
-        public virtual TOutput Get(string customPath)
+        public virtual TEntity Get(string customPath)
         {
             return DoGet(new RestRequest(customPath));
         }
 
-        public virtual PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
+        public virtual PagedResult<TEntity> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
         {
             var queryString = GetQueryString(searchCriteria);
-            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString)));
+            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", EntitySettings.BaseRoute, queryString)));
         }
 
-        public PagedResult<TOutput> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
+        public PagedResult<TEntity> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
         {
             var queryString = GetQueryString(searchCriteria);
             return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", customPath, queryString)));
         }
 
-        protected virtual TOutput GetById(string id)
+        protected virtual TEntity GetById(string id)
         {
-            return DoGet(new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
+            return DoGet(new RestRequest(string.Format("{0}/{1}", EntitySettings.BaseRoute, id)));
         }
 
-        protected virtual TOutput DoGet(RestRequest restRequest)
+        protected virtual TEntity DoGet(RestRequest restRequest)
         {
             restRequest.Method = Method.GET;
             restRequest.RequestFormat = DataFormat.Json;
-            var response = RestClient.Execute<TOutput>(restRequest);
+            var response = RestClient.Execute<TEntity>(restRequest);
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 if (response.StatusCode == HttpStatusCode.NotFound)
@@ -84,11 +84,11 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
 
-        protected virtual PagedResult<TOutput> DoFindBySearchCriteria(RestRequest restRequest)
+        protected virtual PagedResult<TEntity> DoFindBySearchCriteria(RestRequest restRequest)
         {
             restRequest.RequestFormat = DataFormat.Json;
             restRequest.Method = Method.GET;
-            var response = RestClient.Execute<PagedResult<TOutput>>(restRequest);
+            var response = RestClient.Execute<PagedResult<TEntity>>(restRequest);
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 if (response.StatusCode == HttpStatusCode.NotFound)

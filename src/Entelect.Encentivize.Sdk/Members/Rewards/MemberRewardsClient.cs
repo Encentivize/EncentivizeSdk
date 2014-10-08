@@ -12,14 +12,15 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
         private readonly IEncentivizeRestClient _restClient;
         private readonly IEntityRetrievalService<RewardTransactionOutput> _memberRewardRetrievalService;
         private readonly IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> _memberRewardCreationService;
-        private readonly IEntityDeletionService _memberRewardDeletionService;
+        private readonly IEntityDeletionService<RedeemRewardInput, RewardTransactionOutput> _memberRewardDeletionService;
         private readonly IEntityRetrievalService<RewardStructureOutput> _rewardRetrievalService;
         private readonly IEntityRetrievalService<dynamic> _dynamicEntityRetrievalService;
 
         public MemberRewardsClient(IEncentivizeRestClient restClient, 
             IEntityRetrievalService<RewardTransactionOutput> memberRewardRetrievalService, 
-            IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> memberRewardCreationService, 
-            IEntityDeletionService memberRewardDeletionService, IEntityRetrievalService<RewardStructureOutput> rewardRetrievalService, 
+            IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> memberRewardCreationService,
+            IEntityDeletionService<RedeemRewardInput, RewardTransactionOutput> memberRewardDeletionService, 
+            IEntityRetrievalService<RewardStructureOutput> rewardRetrievalService, 
             IEntityRetrievalService<dynamic> dynamicEntityRetrievalService)
         {
             _restClient = restClient;
@@ -36,7 +37,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             var memberRewardSettings = new EntitySettings("Member Reward", "Member Rewards", "MemberRewards");
             _memberRewardRetrievalService = new EntityRetrievalService<RewardTransactionOutput>(restClient, memberRewardSettings);
             _memberRewardCreationService = new EntityCreationService<RedeemRewardInput, RewardTransactionOutput>(restClient, memberRewardSettings);
-            _memberRewardDeletionService = new EntityDeletionService(restClient, memberRewardSettings);
+            _memberRewardDeletionService = new EntityDeletionService<RedeemRewardInput, RewardTransactionOutput>(restClient, memberRewardSettings);
             var additionalInformationEntitySettings = new EntitySettings("Additional Information", "Additional Information",
                 "members/{memberId:long}/rewards/{rewardTransactionId:long}/additionalInformation");
             _dynamicEntityRetrievalService = new EntityRetrievalService<dynamic>(_restClient, additionalInformationEntitySettings);

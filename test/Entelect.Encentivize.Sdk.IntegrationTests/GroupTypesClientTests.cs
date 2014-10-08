@@ -49,7 +49,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             GroupTypesClient.Delete(existingItem.GroupTypeId);
         }
 
-        public GroupTypeOutput GetSomeEntity()
+        public GroupType GetSomeEntity()
         {
             var pagedItems = GroupTypesClient.Search(new GroupTypeSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
@@ -60,7 +60,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             return firstItem;
         }
 
-        public GroupTypeOutput CreateSomeEntity(string guidString)
+        public GroupType CreateSomeEntity(string guidString)
         {
             var itemToCreate = GetSomeInput(guidString);
             var createdItem = GroupTypesClient.Create(itemToCreate);

@@ -46,7 +46,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             Assert.NotNull(updated);
         }
 
-        public SupportTicketOutput GetSomeEntity()
+        public SupportTicket GetSomeEntity()
         {
             var pagedItems = SupportTicketsClient.Search(new SupportTicketSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
@@ -57,7 +57,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             return firstItem;
         }
 
-        public SupportTicketOutput CreateSomeEntity(string guidString)
+        public SupportTicket CreateSomeEntity(string guidString)
         {
             var itemToCreate = GetSomeInput(guidString);
             var createdItem = SupportTicketsClient.Create(itemToCreate);

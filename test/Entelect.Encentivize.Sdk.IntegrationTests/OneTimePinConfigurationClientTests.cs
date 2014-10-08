@@ -53,7 +53,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             OneTimePinConfigurationsClient.Delete(existingItem.OneTimePinTypeId);
         }
 
-        public OneTimePinConfigurationOutput GetSomeEntity()
+        public OneTimePinConfiguration GetSomeEntity()
         {
             var pagedItems = OneTimePinConfigurationsClient.Search(new OneTimePinConfigurationSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
@@ -64,7 +64,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             return firstItem;
         }
 
-        public OneTimePinConfigurationOutput CreateSomeEntity()
+        public OneTimePinConfiguration CreateSomeEntity()
         {
             var itemToCreate = GetSomeInput();
             var createdItem = OneTimePinConfigurationsClient.Create(itemToCreate);

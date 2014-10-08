@@ -4,9 +4,9 @@ namespace Entelect.Encentivize.Sdk.Program
 {
     public class ProgramsClient : IProgramsClient
     {
-        private readonly IEntityRetrievalService<ProgramOutput> _entityRetrievalService;
+        private readonly IEntityRetrievalService<Program> _entityRetrievalService;
 
-        public ProgramsClient(IEntityRetrievalService<ProgramOutput> entityRetrievalService)
+        public ProgramsClient(IEntityRetrievalService<Program> entityRetrievalService)
         {
             _entityRetrievalService = entityRetrievalService;
         }
@@ -14,10 +14,10 @@ namespace Entelect.Encentivize.Sdk.Program
         public ProgramsClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Program", "Programs", "Programs");
-            _entityRetrievalService = new EntityRetrievalService<ProgramOutput>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<Program>(restClient, entitySettings);
         }
 
-        public virtual ProgramOutput Get()
+        public virtual Program Get()
         {
             return _entityRetrievalService.Get("Programs");
         }

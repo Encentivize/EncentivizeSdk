@@ -2,6 +2,6 @@
 {
     public interface IProgramsClient
     {
-        ProgramOutput Get();
+        Program Get();
     }
 }

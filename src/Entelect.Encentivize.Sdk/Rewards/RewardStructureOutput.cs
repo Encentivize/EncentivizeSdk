@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Rewards
 {
-    public class RewardStructureOutput
+    public class RewardStructureOutput: IEntity
     {
         public long RewardId { get; set; }
         public string Name { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.Otp.Type
 {
-    public class OneTimePinTypeOutput
+    public class OneTimePinType : IEntity
     {
         public int OneTimePinTypeId { get; set; }
         public string Name { get; set; }

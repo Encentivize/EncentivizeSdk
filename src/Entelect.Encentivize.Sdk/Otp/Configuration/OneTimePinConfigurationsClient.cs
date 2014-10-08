@@ -4,15 +4,15 @@ namespace Entelect.Encentivize.Sdk.Otp.Configuration
 {
     public class OneTimePinConfigurationsClient : IOneTimePinConfigurationsClient
     {
-        private readonly IEntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput> _entityUpdateService;
-        private readonly IEntityRetrievalService<OneTimePinConfigurationOutput> _entityRetrievalService;
-        private readonly IEntityCreationService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput> _entityCreationService;
-        private readonly IEntityDeletionService _entityDeletionService;
+        private readonly IEntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfiguration> _entityUpdateService;
+        private readonly IEntityRetrievalService<OneTimePinConfiguration> _entityRetrievalService;
+        private readonly IEntityCreationService<OneTimePinConfigurationInput, OneTimePinConfiguration> _entityCreationService;
+        private readonly IEntityDeletionService<OneTimePinConfigurationInput, OneTimePinConfiguration> _entityDeletionService;
 
-        public OneTimePinConfigurationsClient(IEntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput> entityUpdateService, 
-            IEntityRetrievalService<OneTimePinConfigurationOutput> entityRetrievalService, 
-            IEntityCreationService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput> entityCreationService, 
-            IEntityDeletionService entityDeletionService)
+        public OneTimePinConfigurationsClient(IEntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfiguration> entityUpdateService, 
+            IEntityRetrievalService<OneTimePinConfiguration> entityRetrievalService, 
+            IEntityCreationService<OneTimePinConfigurationInput, OneTimePinConfiguration> entityCreationService,
+            IEntityDeletionService<OneTimePinConfigurationInput, OneTimePinConfiguration> entityDeletionService)
         {
             _entityUpdateService = entityUpdateService;
             _entityRetrievalService = entityRetrievalService;
@@ -22,29 +22,29 @@ namespace Entelect.Encentivize.Sdk.Otp.Configuration
 
         public OneTimePinConfigurationsClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("OneTime Pin Configuration", "OneTime Pin Configurations", "OneTimePinConfigurations");
-            _entityUpdateService = new EntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput>(restClient, entitySettings);
-            _entityRetrievalService = new EntityRetrievalService<OneTimePinConfigurationOutput>(restClient, entitySettings);
-            _entityCreationService = new EntityCreationService<OneTimePinConfigurationInput, OneTimePinConfigurationOutput>(restClient, entitySettings);
-            _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
+            var entitySettings = new EntitySettings<OneTimePinConfiguration>("OneTime Pin Configuration", "OneTime Pin Configurations", "OneTimePinConfigurations");
+            _entityUpdateService = new EntityUpdateService<OneTimePinConfigurationInput, OneTimePinConfiguration>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<OneTimePinConfiguration>(restClient, entitySettings);
+            _entityCreationService = new EntityCreationService<OneTimePinConfigurationInput, OneTimePinConfiguration>(restClient, entitySettings);
+            _entityDeletionService = new EntityDeletionService<OneTimePinConfigurationInput, OneTimePinConfiguration>(restClient, entitySettings);
         }
 
-        public virtual OneTimePinConfigurationOutput Get(long oneTimePinTypeId)
+        public virtual OneTimePinConfiguration Get(long oneTimePinTypeId)
         {
             return _entityRetrievalService.GetById(oneTimePinTypeId);
         }
 
-        public virtual PagedResult<OneTimePinConfigurationOutput> Search(OneTimePinConfigurationSearchCriteria oneTimePinConfigurationSearchCriteria)
+        public virtual PagedResult<OneTimePinConfiguration> Search(OneTimePinConfigurationSearchCriteria oneTimePinConfigurationSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(oneTimePinConfigurationSearchCriteria);
         }
 
-        public virtual OneTimePinConfigurationOutput Create(OneTimePinConfigurationInput oneTimePinConfigurationInput)
+        public virtual OneTimePinConfiguration Create(OneTimePinConfigurationInput oneTimePinConfigurationInput)
         {
             return _entityCreationService.Create(oneTimePinConfigurationInput);
         }
 
-        public virtual OneTimePinConfigurationOutput Update(OneTimePinConfigurationInput oneTimePinConfigurationInput)
+        public virtual OneTimePinConfiguration Update(OneTimePinConfigurationInput oneTimePinConfigurationInput)
         {
             return _entityUpdateService.Update(oneTimePinConfigurationInput.OneTimePinTypeId, oneTimePinConfigurationInput);
         }

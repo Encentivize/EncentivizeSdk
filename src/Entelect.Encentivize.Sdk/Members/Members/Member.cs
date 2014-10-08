@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Globalization;
 
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
-    public class MemberOutput : BaseOutput<MemberInput>
+    public class Member : IEditableEntity<MemberInput>
     {
         public long MemberId { get; set; }
 
@@ -39,7 +38,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public string ProfilePictureUrl { get; set; }
 
-        public override MemberInput ToInput()
+        public MemberInput ToInput()
         {
             return new MemberInput()
                    {
@@ -57,9 +56,9 @@ namespace Entelect.Encentivize.Sdk.Members.Members
                    };
         }
 
-        public override string GetIdentityUrlString()
+        public string GetModificationUrl()
         {
-            return MemberId.ToString(CultureInfo.InvariantCulture);
+            throw new NotImplementedException();
         }
     }
 }

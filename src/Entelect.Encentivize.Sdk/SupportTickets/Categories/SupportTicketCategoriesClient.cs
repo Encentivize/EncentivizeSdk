@@ -4,9 +4,9 @@ namespace Entelect.Encentivize.Sdk.SupportTickets.Categories
 {
     public class SupportTicketCategoriesClient : ISupportTicketCategoriesClient
     {
-        private readonly IEntityRetrievalService<SupportTicketCategoryOutput> _entityRetrievalService;
+        private readonly IEntityRetrievalService<SupportTicketCategory> _entityRetrievalService;
 
-        public SupportTicketCategoriesClient(IEntityRetrievalService<SupportTicketCategoryOutput> entityRetrievalService)
+        public SupportTicketCategoriesClient(IEntityRetrievalService<SupportTicketCategory> entityRetrievalService)
         {
             _entityRetrievalService = entityRetrievalService;
         }
@@ -14,15 +14,15 @@ namespace Entelect.Encentivize.Sdk.SupportTickets.Categories
         public SupportTicketCategoriesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Support Ticket Category", "Support Ticket Categories", "SupportTicketCategories");
-            _entityRetrievalService = new EntityRetrievalService<SupportTicketCategoryOutput>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<SupportTicketCategory>(restClient, entitySettings);
         }
 
-        public virtual SupportTicketCategoryOutput Get(long supportTicketCategoryId)
+        public virtual SupportTicketCategory Get(long supportTicketCategoryId)
         {
             return _entityRetrievalService.GetById(supportTicketCategoryId);
         }
 
-        public virtual PagedResult<SupportTicketCategoryOutput> Search(SupportTicketCategorySearchCriteria supportTicketCategorySearchCriteria)
+        public virtual PagedResult<SupportTicketCategory> Search(SupportTicketCategorySearchCriteria supportTicketCategorySearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(supportTicketCategorySearchCriteria);
         }

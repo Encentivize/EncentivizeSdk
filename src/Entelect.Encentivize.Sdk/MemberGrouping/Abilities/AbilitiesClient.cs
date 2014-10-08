@@ -4,9 +4,9 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Abilities
 {
     public class AbilitiesClient : IAbilitiesClient
     {
-        private readonly IEntityRetrievalService<AbilityOutput> _entityRetrievalService;
+        private readonly IEntityRetrievalService<Ability> _entityRetrievalService;
 
-        public AbilitiesClient(IEntityRetrievalService<AbilityOutput> entityRetrievalService)
+        public AbilitiesClient(IEntityRetrievalService<Ability> entityRetrievalService)
         {
             _entityRetrievalService = entityRetrievalService;
         }
@@ -14,15 +14,15 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Abilities
         public AbilitiesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Ability", "Abilities", "Abilities");
-            _entityRetrievalService = new EntityRetrievalService<AbilityOutput>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<Ability>(restClient, entitySettings);
         }
 
-        public virtual AbilityOutput Get(long abilityId)
+        public virtual Ability Get(long abilityId)
         {
             return _entityRetrievalService.GetById(abilityId);
         }
 
-        public virtual PagedResult<AbilityOutput> Search(AbilitySearchCriteria abilitySearchCriteria)
+        public virtual PagedResult<Ability> Search(AbilitySearchCriteria abilitySearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(abilitySearchCriteria);
         }

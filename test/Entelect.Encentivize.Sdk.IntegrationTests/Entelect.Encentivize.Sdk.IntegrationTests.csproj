@@ -54,6 +54,7 @@
     <Compile Include="AbilitiesClientTests.cs" />
     <Compile Include="AchievementCategoriesClientTests.cs" />
     <Compile Include="AchievementsClientTests.cs" />
+    <Compile Include="EntitySettingsTests.cs" />
     <Compile Include="GroupClientTests.cs" />
     <Compile Include="GroupCreationTypesClientTests.cs" />
     <Compile Include="GroupMembersClientTests.cs" />

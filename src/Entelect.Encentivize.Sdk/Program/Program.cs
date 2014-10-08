@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Program
 {
-    public class ProgramOutput
+    public class Program : IEntity
     {
         public string SystemURL { get; set; }
         public long ProgramId { get; set; }

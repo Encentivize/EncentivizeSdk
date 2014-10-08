@@ -4,13 +4,13 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
 {
     public class MemberAchievementsClient : IMemberAchievementsClient
     {
-        private readonly IEntityRetrievalService<MemberAchievementOutput> _entityRetrievalService;
-        private readonly IEntityCreationService<MemberAchievementInput, MemberAchievementOutput> _entityCreationService;
-        private readonly IEntityDeletionService _entityDeletionService;
+        private readonly IEntityRetrievalService<MemberAchievement> _entityRetrievalService;
+        private readonly IEntityCreationService<MemberAchievementInput, MemberAchievement> _entityCreationService;
+        private readonly IEntityDeletionService<MemberAchievementInput, MemberAchievement> _entityDeletionService;
 
-        public MemberAchievementsClient(IEntityRetrievalService<MemberAchievementOutput> entityRetrievalService, 
-            IEntityCreationService<MemberAchievementInput, MemberAchievementOutput> entityCreationService, 
-            IEntityDeletionService entityDeletionService)
+        public MemberAchievementsClient(IEntityRetrievalService<MemberAchievement> entityRetrievalService, 
+            IEntityCreationService<MemberAchievementInput, MemberAchievement> entityCreationService,
+            IEntityDeletionService<MemberAchievementInput, MemberAchievement> entityDeletionService)
         {
             _entityRetrievalService = entityRetrievalService;
             _entityCreationService = entityCreationService;
@@ -19,23 +19,23 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
 
         public MemberAchievementsClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Member Achievement", "Member Achievements", "MemberAchievements");
-            _entityRetrievalService = new EntityRetrievalService<MemberAchievementOutput>(restClient, entitySettings);
-            _entityCreationService = new EntityCreationService<MemberAchievementInput, MemberAchievementOutput>(restClient, entitySettings);
-            _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
+            var entitySettings = new EntitySettings<MemberAchievement>("Member Achievement", "Member Achievements", "MemberAchievements");
+            _entityRetrievalService = new EntityRetrievalService<MemberAchievement>(restClient, entitySettings);
+            _entityCreationService = new EntityCreationService<MemberAchievementInput, MemberAchievement>(restClient, entitySettings);
+            _entityDeletionService = new EntityDeletionService<MemberAchievementInput, MemberAchievement>(restClient, entitySettings);
         }
 
-        public virtual PagedResult<MemberAchievementOutput> Search(MemberAchievementSearchCriteria memberAchievementSearchCriteria)
+        public virtual PagedResult<MemberAchievement> Search(MemberAchievementSearchCriteria memberAchievementSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(memberAchievementSearchCriteria);
         }
 
-        public virtual PagedResult<MemberAchievementOutput> SearchMembersAchievements(long memberId, MemberAchievementSearchCriteria memberAchievementSearchCriteria)
+        public virtual PagedResult<MemberAchievement> SearchMembersAchievements(long memberId, MemberAchievementSearchCriteria memberAchievementSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(GetMemberPath(memberId), memberAchievementSearchCriteria);
         }
 
-        public virtual MemberAchievementOutput AwardAchievement(long memberId, MemberAchievementInput memberAchievementInput)
+        public virtual MemberAchievement AwardAchievement(long memberId, MemberAchievementInput memberAchievementInput)
         {
             return _entityCreationService.Create(GetMemberPath(memberId), memberAchievementInput);
         }

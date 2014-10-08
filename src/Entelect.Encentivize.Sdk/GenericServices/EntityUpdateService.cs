@@ -5,9 +5,9 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EntityUpdateService<TInput, TOutput> : EntityService, IEntityUpdateService<TInput, TOutput> 
+    public class EntityUpdateService<TInput, TEntity> : EntityService, IEntityUpdateService<TInput, TEntity> 
         where TInput : BaseInput
-        where TOutput : class, new()
+        where TEntity : class, IEditableEntity<TInput>, new()
     {
         const string IdNotSetVerb = "update";
 
@@ -16,57 +16,55 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         {
         }
 
-        public virtual TOutput Update(int id, TInput input)
+        public virtual TEntity Update(int id, TInput input)
         {
             if (id <= 0)
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return DoUpdate(id.ToString(CultureInfo.InvariantCulture), input);
+            return UpdateById(id.ToString(CultureInfo.InvariantCulture), input);
         }
 
-        public virtual TOutput Update(long id, TInput input)
+        public virtual TEntity Update(long id, TInput input)
         {
             if (id <= 0)
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return DoUpdate(id.ToString(CultureInfo.InvariantCulture), input);
+            return UpdateById(id.ToString(CultureInfo.InvariantCulture), input);
         }
 
-        public virtual TOutput Update(Guid id, TInput input)
+        public virtual TEntity Update(Guid id, TInput input)
         {
             if (id == null)
             {
                 throw new IdNotSetException(EntitySettings.EntityNameSingular, IdNotSetVerb);
             }
-            return DoUpdate(id.ToString(), input);
+            return UpdateById(id.ToString(), input);
         }
 
-        public TOutput Update(string customPath, TInput input)
+        public TEntity Update(string customPath, TInput input)
         {
             return Update(input, new RestRequest(customPath));
         }
 
-        /* todo rk, implement this across all outputs */
-        //public TOutput Update<TOutput>(TOutput output) 
-        //    where TOutput : BaseOutput<TInput>
-        //{
-        //    return DoUpdate(output.GetIdentityUrlString(), output.ToInput());
-        //}
-
-        protected virtual TOutput DoUpdate(string id, TInput input)
+        public TEntity Update(TEntity entity)
         {
-            return Update(input, new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
+            return Update(entity.GetModificationUrl(), entity.ToInput());
         }
 
-        protected virtual TOutput Update(TInput input, RestRequest restRequest)
+        protected virtual TEntity UpdateById(string id, TInput input)
+        {
+            return Update(input, new RestRequest(string.Format("{0}/{1}", EntitySettings.BaseRoute, id)));
+        }
+
+        protected virtual TEntity Update(TInput input, RestRequest restRequest)
         {
             restRequest.Method = Method.PUT;
             restRequest.RequestFormat = DataFormat.Json;
             input.Validate();
             restRequest.AddBody(input);
-            var response = RestClient.Execute<TOutput>(restRequest);
+            var response = RestClient.Execute<TEntity>(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new UpdateFailedException(response);

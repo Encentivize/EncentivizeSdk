@@ -2,15 +2,14 @@
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public interface IEntityRetrievalService<TOutput,TInput>
-        where TInput: BaseInput
-        where TOutput : class, IBaseOutput<TInput>, new()
+    public interface IEntityRetrievalService<TEntity>
+        where TEntity : class, IEntity, new()
     {
-        TOutput GetById(int id);
-        TOutput GetById(long id);
-        TOutput GetById(Guid id);
-        TOutput Get(string customPath);
-        PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria);
-        PagedResult<TOutput> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria);
+        TEntity GetById(int id);
+        TEntity GetById(long id);
+        TEntity GetById(Guid id);
+        TEntity Get(string customPath);
+        PagedResult<TEntity> FindBySearchCriteria(BaseSearchCriteria searchCriteria);
+        PagedResult<TEntity> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria);
     }
 }

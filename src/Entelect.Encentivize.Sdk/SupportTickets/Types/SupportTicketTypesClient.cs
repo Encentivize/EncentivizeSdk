@@ -4,9 +4,9 @@ namespace Entelect.Encentivize.Sdk.SupportTickets.Types
 {
     public class SupportTicketTypesClient : ISupportTicketTypesClient
     {
-        private readonly IEntityRetrievalService<SupportTicketTypeOutput> _entityRetrievalService;
+        private readonly IEntityRetrievalService<SupportTicketType> _entityRetrievalService;
 
-        public SupportTicketTypesClient(IEntityRetrievalService<SupportTicketTypeOutput> entityRetrievalService)
+        public SupportTicketTypesClient(IEntityRetrievalService<SupportTicketType> entityRetrievalService)
         {
             _entityRetrievalService = entityRetrievalService;
         }
@@ -14,15 +14,15 @@ namespace Entelect.Encentivize.Sdk.SupportTickets.Types
         public SupportTicketTypesClient(IEncentivizeRestClient restClient)
         {
             var entitySettings = new EntitySettings("Support Ticket Type", "Support Ticket Types", "SupportTicketTypes");
-            _entityRetrievalService = new EntityRetrievalService<SupportTicketTypeOutput>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<SupportTicketType>(restClient, entitySettings);
         }
 
-        public virtual SupportTicketTypeOutput Get(long supportTicketTypeId)
+        public virtual SupportTicketType Get(long supportTicketTypeId)
         {
             return _entityRetrievalService.GetById(supportTicketTypeId);
         }
 
-        public virtual PagedResult<SupportTicketTypeOutput> Search(SupportTicketTypeSearchCriteria supportTicketTypeSearchCriteria)
+        public virtual PagedResult<SupportTicketType> Search(SupportTicketTypeSearchCriteria supportTicketTypeSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(supportTicketTypeSearchCriteria);
         }

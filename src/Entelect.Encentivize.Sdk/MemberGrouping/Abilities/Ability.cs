@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.MemberGrouping.Abilities
 {
-    public class AbilityOutput
+    public class Ability: IEntity
     {
         public int AbilityId { get; set; }
         public string Name { get; set; }

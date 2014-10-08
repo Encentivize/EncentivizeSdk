@@ -2,9 +2,9 @@
 {
     public interface IAchievementCategoryClient
     {
-        AchievementCategoryOutput Get(long achievementCategoryId);
-        AchievementCategoryOutput Create(AchievementCategoryInput achievementCategoryInput);
-        AchievementCategoryOutput Update(long achievementCategoryId, AchievementCategoryInput achievementCategoryInput);
+        AchievementCategory Get(long achievementCategoryId);
+        AchievementCategory Create(AchievementCategoryInput achievementCategoryInput);
+        AchievementCategory Update(long achievementCategoryId, AchievementCategoryInput achievementCategoryInput);
         void Delete(long achievementCategoryId);
     }
 }

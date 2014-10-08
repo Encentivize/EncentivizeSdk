@@ -79,7 +79,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             AchievementCategoriesClient.Delete(existingItem.AchievementCategoryId);
         }
 
-        public AchievementCategoryOutput GetSomeEntity()
+        public AchievementCategory GetSomeEntity()
         {
             var pagedAchievementCategoryResults = AchievementCategoriesClient.Search(new AchievementCategorySearchCriteria { PageSize = 1, PageNumber = 1 });
             var firstAchievementCategory = pagedAchievementCategoryResults.Data.FirstOrDefault();
@@ -90,7 +90,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             return firstAchievementCategory;
         }
 
-        public AchievementCategoryOutput CreateSomeEntity(string guid)
+        public AchievementCategory CreateSomeEntity(string guid)
         {
             var input = new AchievementCategoryInput
             {

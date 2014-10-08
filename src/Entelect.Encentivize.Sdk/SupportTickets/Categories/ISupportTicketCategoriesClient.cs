@@ -2,7 +2,7 @@
 {
     public interface ISupportTicketCategoriesClient
     {
-        SupportTicketCategoryOutput Get(long supportTicketCategoryId);
-        PagedResult<SupportTicketCategoryOutput> Search(SupportTicketCategorySearchCriteria supportTicketCategorySearchCriteria);
+        SupportTicketCategory Get(long supportTicketCategoryId);
+        PagedResult<SupportTicketCategory> Search(SupportTicketCategorySearchCriteria supportTicketCategorySearchCriteria);
     }
 }

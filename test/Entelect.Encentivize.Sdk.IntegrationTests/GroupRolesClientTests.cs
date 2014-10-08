@@ -49,7 +49,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             GroupRolesClient.Delete(existingItem.GroupRoleId);
         }
 
-        public GroupRoleOutput GetSomeEntity()
+        public GroupRole GetSomeEntity()
         {
             var pagedItems = GroupRolesClient.Search(new GroupRoleSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
@@ -60,7 +60,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             return firstItem;
         }
 
-        public GroupRoleOutput CreateSomeEntity(string guidString)
+        public GroupRole CreateSomeEntity(string guidString)
         {
             var itemToCreate = GetSomeInput(guidString);
             var createdItem = GroupRolesClient.Create(itemToCreate);

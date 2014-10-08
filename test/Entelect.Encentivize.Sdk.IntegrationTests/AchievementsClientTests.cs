@@ -51,7 +51,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             AchievementsClient.Delete(existingItem.AchievementId);
         }
 
-        public AchievementOutput GetSomeEntity()
+        public Achievement GetSomeEntity()
         {
             var pagedItems = AchievementsClient.Search(new AchievementSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
@@ -62,7 +62,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             return firstItem;
         }
 
-        public AchievementOutput CreateSomeEntity(string guidString)
+        public Achievement CreateSomeEntity(string guidString)
         {
             var itemToCreate = GetSomeInput(guidString);
             var createdItem = AchievementsClient.Create(itemToCreate);

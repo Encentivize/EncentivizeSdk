@@ -2,7 +2,7 @@ using System;
 
 namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
-    public class TransferPointsOutput
+    public class TransferPoints: IEditableEntity<TransferPointsInput>
     {
         public long PointsTransferId { get; set; }
         public string Comment { get; set; }
@@ -13,5 +13,14 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
         public long FromUserId { get; set; }
         public long ToPointsTransactionId { get; set; }
         public long ToUserId { get; set; }
+        public TransferPointsInput ToInput()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetModificationUrl()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

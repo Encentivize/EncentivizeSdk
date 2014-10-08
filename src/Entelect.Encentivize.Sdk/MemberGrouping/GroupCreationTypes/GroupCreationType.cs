@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupCreationTypes
 {
-    public class GroupCreationTypeOutput
+    public class GroupCreationType : IEntity
     {
         public int GroupCreationTypeId { get; set; }
         public string Name { get; set; }

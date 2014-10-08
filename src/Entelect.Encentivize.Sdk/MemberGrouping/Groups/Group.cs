@@ -2,7 +2,7 @@ using System;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
 {
-    public class GroupOutput
+    public class Group: IEditableEntity<GroupInput>
     {
         public long GroupId { get; set; }
         public long GroupTypeId { get; set; }
@@ -13,5 +13,14 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
         public long? LastUpdatedById { get; set; }
         public DateTime? LastUpdatedDateUtc { get; set; }
         public bool IsActive { get; set; }
+        public GroupInput ToInput()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetModificationUrl()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
