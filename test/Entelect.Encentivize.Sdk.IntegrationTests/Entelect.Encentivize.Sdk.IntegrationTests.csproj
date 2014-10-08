@@ -63,6 +63,7 @@
     <Compile Include="MemberClientTests.cs" />
     <Compile Include="MemberRewardsClientTests.cs" />
     <Compile Include="OneTimePinConfigurationClientTests.cs" />
+    <Compile Include="OneTimePinTypeClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryStringBuilderTests.cs" />
     <Compile Include="SdkTestBase.cs" />
