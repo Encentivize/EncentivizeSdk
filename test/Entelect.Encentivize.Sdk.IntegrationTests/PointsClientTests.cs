@@ -42,5 +42,18 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             Assert.NotNull(transaction);
             Assert.AreEqual(1, transaction.PointsValue);
         }
+
+        [Test]
+        public void TransferPoints()
+        {
+            var transaction = PointsClient.TransferPoints(2, new TransferPointsInput
+            {
+                Comment = "Mine!",
+                PointsToTransfer = 1,
+                ToUserId = 1
+            });
+            Assert.NotNull(transaction);
+            Assert.AreEqual(1, transaction.PointsTransfered);
+        }
     }
 }
