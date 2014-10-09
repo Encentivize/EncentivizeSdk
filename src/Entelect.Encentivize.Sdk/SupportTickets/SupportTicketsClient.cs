@@ -4,13 +4,13 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
 {
     public class SupportTicketsClient : ISupportTicketsClient
     {
-        private readonly IEntityUpdateService<EditSupportTicketInput, SupportTicketOutput> _entityUpdateService;
-        private readonly IEntityRetrievalService<SupportTicketOutput> _entityRetrievalService;
-        private readonly IEntityCreationService<SupportTicketInput, SupportTicketOutput> _entityCreationService;
+        private readonly IEntityUpdateService<EditSupportTicketInput, SupportTicket> _entityUpdateService;
+        private readonly IEntityRetrievalService<SupportTicket> _entityRetrievalService;
+        private readonly IEntityCreationService<SupportTicketInput, SupportTicket> _entityCreationService;
 
-        public SupportTicketsClient(IEntityUpdateService<EditSupportTicketInput, SupportTicketOutput> entityUpdateService, 
-            IEntityRetrievalService<SupportTicketOutput> entityRetrievalService, 
-            IEntityCreationService<SupportTicketInput, SupportTicketOutput> entityCreationService)
+        public SupportTicketsClient(IEntityUpdateService<EditSupportTicketInput, SupportTicket> entityUpdateService, 
+            IEntityRetrievalService<SupportTicket> entityRetrievalService, 
+            IEntityCreationService<SupportTicketInput, SupportTicket> entityCreationService)
         {
             _entityUpdateService = entityUpdateService;
             _entityRetrievalService = entityRetrievalService;
@@ -19,28 +19,28 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
 
         public SupportTicketsClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Support Ticket", "Support Tickets", "SupportTickets");
-            _entityUpdateService = new EntityUpdateService<EditSupportTicketInput, SupportTicketOutput>(restClient, entitySettings);
-            _entityRetrievalService = new EntityRetrievalService<SupportTicketOutput>(restClient, entitySettings);
-            _entityCreationService = new EntityCreationService<SupportTicketInput, SupportTicketOutput>(restClient, entitySettings);
+            var entitySettings = new EntitySettings(typeof(SupportTicket));
+            _entityUpdateService = new EntityUpdateService<EditSupportTicketInput, SupportTicket>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<SupportTicket>(restClient, entitySettings);
+            _entityCreationService = new EntityCreationService<SupportTicketInput, SupportTicket>(restClient, entitySettings);
         }
 
-        public virtual SupportTicketOutput Get(long supportTicketId)
+        public virtual SupportTicket Get(long supportTicketId)
         {
             return _entityRetrievalService.GetById(supportTicketId);
         }
 
-        public virtual PagedResult<SupportTicketOutput> Search(SupportTicketSearchCriteria supportTicketSearchCriteria)
+        public virtual PagedResult<SupportTicket> Search(SupportTicketSearchCriteria supportTicketSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(supportTicketSearchCriteria);
         }
 
-        public virtual SupportTicketOutput Create(SupportTicketInput supportTicketInput)
+        public virtual SupportTicket Create(SupportTicketInput supportTicketInput)
         {
             return _entityCreationService.Create(supportTicketInput);
         }
 
-        public virtual SupportTicketOutput Update(long supportTicketId, EditSupportTicketInput editSupportTicketInput)
+        public virtual SupportTicket Update(long supportTicketId, EditSupportTicketInput editSupportTicketInput)
         {
             return _entityUpdateService.Update(supportTicketId, editSupportTicketInput);
         }

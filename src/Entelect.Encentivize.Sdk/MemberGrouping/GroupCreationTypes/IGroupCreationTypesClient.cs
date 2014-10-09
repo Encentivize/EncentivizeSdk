@@ -2,7 +2,7 @@
 {
     public interface IGroupCreationTypesClient
     {
-        GroupCreationTypeOutput Get(long groupCreationTypeId);
-        PagedResult<GroupCreationTypeOutput> Search(GroupCreationTypeSearchCriteria groupCreationTypeSearchCriteria);
+        GroupCreationType Get(long groupCreationTypeId);
+        PagedResult<GroupCreationType> Search(GroupCreationTypeSearchCriteria groupCreationTypeSearchCriteria);
     }
 }

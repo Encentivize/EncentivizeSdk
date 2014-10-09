@@ -6,20 +6,16 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EntityRetrievalService<TOutput> : EntityService, IEntityRetrievalService<TOutput> 
-        where TOutput : class, new()
+    public class EntityRetrievalService<TEntity> : BaseRetrievalService, IEntityRetrievalService<TEntity> 
+        where TEntity : class, IEntity, new()
     {
-        const string IdNotSetVerb = "retrieve";
 
         public EntityRetrievalService(IEncentivizeRestClient restClient, EntitySettings entitySettings)
             :base(restClient, entitySettings)
         {
-            QueryStringBuilder = new QueryStringBuilder(propertiesToExclude: new[] { "PageNumber", "PageSize" });
         }
 
-        protected QueryStringBuilder QueryStringBuilder { get; set; }
-
-        public virtual TOutput GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             if (id <= 0)
             {
@@ -28,7 +24,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
-        public virtual TOutput GetById(long id)
+        public virtual TEntity GetById(long id)
         {
             if (id <= 0)
             {
@@ -37,7 +33,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return GetById(id.ToString(CultureInfo.InvariantCulture));
         }
 
-        public virtual TOutput GetById(Guid id)
+        public virtual TEntity GetById(Guid id)
         {
             if (id == null)
             {
@@ -46,33 +42,32 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return GetById(id.ToString());
         }
 
-        public virtual TOutput Get(string customPath)
+        public virtual TEntity Get(string customPath)
         {
             return DoGet(new RestRequest(customPath));
         }
 
-        public virtual PagedResult<TOutput> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
+        public virtual PagedResult<TEntity> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
         {
             var queryString = GetQueryString(searchCriteria);
-            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", EntitySettings.EntityRoute, queryString)));
+            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", EntitySettings.BaseRoute, queryString)));
         }
 
-        public PagedResult<TOutput> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
+        public PagedResult<TEntity> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
         {
             var queryString = GetQueryString(searchCriteria);
             return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", customPath, queryString)));
         }
 
-        protected virtual TOutput GetById(string id)
+        protected virtual TEntity GetById(string id)
         {
-            return DoGet(new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
+            return DoGet(new RestRequest(string.Format("{0}/{1}", EntitySettings.BaseRoute, id)));
         }
 
-        protected virtual TOutput DoGet(RestRequest restRequest)
+        protected virtual TEntity DoGet(RestRequest restRequest)
         {
-            restRequest.Method = Method.GET;
-            restRequest.RequestFormat = DataFormat.Json;
-            var response = RestClient.Execute<TOutput>(restRequest);
+            SetupGetRequest(restRequest);
+            var response = RestClient.Execute<TEntity>(restRequest);
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 if (response.StatusCode == HttpStatusCode.NotFound)
@@ -84,11 +79,34 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
 
-        protected virtual PagedResult<TOutput> DoFindBySearchCriteria(RestRequest restRequest)
+        protected virtual PagedResult<TEntity> DoFindBySearchCriteria(RestRequest restRequest)
         {
-            restRequest.RequestFormat = DataFormat.Json;
-            restRequest.Method = Method.GET;
-            var response = RestClient.Execute<PagedResult<TOutput>>(restRequest);
+            SetupGetRequest(restRequest);
+            var response = RestClient.Execute<PagedResult<TEntity>>(restRequest);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+                throw new DataRetrievalFailedException(response);
+            }
+            return response.Data;
+        }
+    }
+
+    public class EntityRetrievalService : BaseRetrievalService, IEntityRetrievalService
+    {
+        public EntityRetrievalService(IEncentivizeRestClient restClient)
+            : base(restClient, new EntitySettings("dynamic", "dynamic", null))
+        {
+        }
+
+        public dynamic Get(string customPath)
+        {
+            var restRequest = new RestRequest(customPath);
+            SetupGetRequest(restRequest);
+            var response = RestClient.Execute<dynamic>(restRequest);
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 if (response.StatusCode == HttpStatusCode.NotFound)
@@ -100,23 +118,25 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
 
-        protected virtual string GetQueryString(BaseSearchCriteria searchCriteria)
+        public PagedResult<dynamic> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
         {
-            var queryString = QueryStringBuilder.ToQueryString(searchCriteria);
-            if (!string.IsNullOrWhiteSpace(queryString))
-            {
-                queryString = string.Format("{0}&{1}", queryString, GetPagingQueryString(searchCriteria));
-            }
-            else
-            {
-                queryString = GetPagingQueryString(searchCriteria);
-            }
-            return queryString;
+            var queryString = GetQueryString(searchCriteria);
+            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", customPath, queryString)));
         }
 
-        protected virtual string GetPagingQueryString(BaseSearchCriteria searchCriteria)
+        protected virtual PagedResult<dynamic> DoFindBySearchCriteria(RestRequest restRequest)
         {
-            return string.Format("$page={0}&$pageSize={1}", searchCriteria.PageNumber, searchCriteria.PageSize);
+            SetupGetRequest(restRequest);
+            var response = RestClient.Execute<PagedResult<dynamic>>(restRequest);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+                throw new DataRetrievalFailedException(response);
+            }
+            return response.Data;
         }
     }
 }

@@ -2,10 +2,12 @@
 {
     public interface IGroupsClient
     {
-        GroupOutput Get(long groupId);
-        PagedResult<GroupOutput> Search(GroupSearchCriteria groupSearchCriteria);
-        GroupOutput Create(GroupInput groupInput);
-        GroupOutput Update(long groupId, GroupInput groupInput);
+        Group Get(long groupId);
+        PagedResult<Group> Search(GroupSearchCriteria groupSearchCriteria);
+        Group Create(GroupInput groupInput);
+        Group Update(long groupId, GroupInput groupInput);
+        Group Update(Group group);
         void Delete(long groupId);
+        void Delete(Group group);
     }
 }

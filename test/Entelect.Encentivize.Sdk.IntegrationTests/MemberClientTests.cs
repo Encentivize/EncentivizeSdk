@@ -36,7 +36,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             var member = MembersClient.Get(1);
             var guidString = Guid.NewGuid().ToString();
             member.FirstName = guidString;
-            var me = MembersClient.UpdateMember(member.MemberId, member.ToInput());
+            var me = MembersClient.UpdateMember(member.MemberId, member.ToEditInput());
             Assert.NotNull(me);
             Assert.AreEqual(guidString, me.FirstName);
         }

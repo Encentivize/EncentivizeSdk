@@ -4,25 +4,25 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupCreationTypes
 {
     public class GroupCreationTypesClient : IGroupCreationTypesClient
     {
-        private readonly IEntityRetrievalService<GroupCreationTypeOutput> _entityRetrievalService;
+        private readonly IEntityRetrievalService<GroupCreationType> _entityRetrievalService;
 
-        public GroupCreationTypesClient(IEntityRetrievalService<GroupCreationTypeOutput> entityRetrievalService)
+        public GroupCreationTypesClient(IEntityRetrievalService<GroupCreationType> entityRetrievalService)
         {
             _entityRetrievalService = entityRetrievalService;
         }
 
         public GroupCreationTypesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Group Creation Type", "Group Creation Types", "GroupCreationTypes");
-            _entityRetrievalService = new EntityRetrievalService<GroupCreationTypeOutput>(restClient, entitySettings);
+            var entitySettings = new EntitySettings(typeof(GroupCreationType));
+            _entityRetrievalService = new EntityRetrievalService<GroupCreationType>(restClient, entitySettings);
         }
 
-        public virtual GroupCreationTypeOutput Get(long groupCreationTypeId)
+        public virtual GroupCreationType Get(long groupCreationTypeId)
         {
             return _entityRetrievalService.GetById(groupCreationTypeId);
         }
 
-        public virtual PagedResult<GroupCreationTypeOutput> Search(GroupCreationTypeSearchCriteria groupCreationTypeSearchCriteria)
+        public virtual PagedResult<GroupCreationType> Search(GroupCreationTypeSearchCriteria groupCreationTypeSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(groupCreationTypeSearchCriteria);
         }

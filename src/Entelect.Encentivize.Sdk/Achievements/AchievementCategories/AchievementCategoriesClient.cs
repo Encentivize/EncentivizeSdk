@@ -4,15 +4,15 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
     public class AchievementCategoriesClient : IAchievementCategoryClient
     {
-        private readonly IEntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput> _entityUpdateService;
-        private readonly IEntityRetrievalService<AchievementCategoryOutput> _entityRetrievalService;
-        private readonly IEntityCreationService<AchievementCategoryInput, AchievementCategoryOutput> _entityCreationService;
-        private readonly IEntityDeletionService _entityDeletionService;
+        private readonly IEntityUpdateService<AchievementCategoryInput, AchievementCategory> _entityUpdateService;
+        private readonly IEntityRetrievalService<AchievementCategory> _entityRetrievalService;
+        private readonly IEntityCreationService<AchievementCategoryInput, AchievementCategory> _entityCreationService;
+        private readonly IEntityDeletionService<AchievementCategoryInput, AchievementCategory> _entityDeletionService;
 
-        public AchievementCategoriesClient(IEntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput> entityUpdateService, 
-            IEntityRetrievalService<AchievementCategoryOutput> entityRetrievalService, 
-            IEntityCreationService<AchievementCategoryInput, AchievementCategoryOutput> entityCreationService, 
-            IEntityDeletionService entityDeletionService)
+        public AchievementCategoriesClient(IEntityUpdateService<AchievementCategoryInput, AchievementCategory> entityUpdateService, 
+            IEntityRetrievalService<AchievementCategory> entityRetrievalService, 
+            IEntityCreationService<AchievementCategoryInput, AchievementCategory> entityCreationService,
+            IEntityDeletionService<AchievementCategoryInput, AchievementCategory> entityDeletionService)
         {
             _entityUpdateService = entityUpdateService;
             _entityRetrievalService = entityRetrievalService;
@@ -22,36 +22,46 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 
         public AchievementCategoriesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Achievement Category", "Achievement Categories", "AchievementCategories");
-            _entityUpdateService = new EntityUpdateService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, entitySettings);
-            _entityRetrievalService = new EntityRetrievalService<AchievementCategoryOutput>(restClient, entitySettings);
-            _entityCreationService = new EntityCreationService<AchievementCategoryInput, AchievementCategoryOutput>(restClient, entitySettings);
-            _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
+            var entitySettings = new EntitySettings().Populate<AchievementCategory>();
+            _entityUpdateService = new EntityUpdateService<AchievementCategoryInput, AchievementCategory>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<AchievementCategory>(restClient, entitySettings);
+            _entityCreationService = new EntityCreationService<AchievementCategoryInput, AchievementCategory>(restClient, entitySettings);
+            _entityDeletionService = new EntityDeletionService<AchievementCategoryInput, AchievementCategory>(restClient, entitySettings);
         }
 
-        public virtual AchievementCategoryOutput Get(long achievementCategoryId)
+        public virtual AchievementCategory Get(long achievementCategoryId)
         {
             return _entityRetrievalService.GetById(achievementCategoryId);
         }
 
-        public virtual PagedResult<AchievementCategoryOutput> Search(AchievementCategorySearchCriteria achievementCategorySearchCriteria)
+        public virtual PagedResult<AchievementCategory> Search(AchievementCategorySearchCriteria achievementCategorySearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(achievementCategorySearchCriteria);
         }
 
-        public virtual AchievementCategoryOutput Create(AchievementCategoryInput achievementCategoryInput)
+        public virtual AchievementCategory Create(AchievementCategoryInput achievementCategoryInput)
         {
             return _entityCreationService.Create(achievementCategoryInput);
         }
 
-        public virtual AchievementCategoryOutput Update(long achievementCategoryId, AchievementCategoryInput achievementCategoryInput)
+        public virtual AchievementCategory Update(long achievementCategoryId, AchievementCategoryInput achievementCategoryInput)
         {
             return _entityUpdateService.Update(achievementCategoryId, achievementCategoryInput);
+        }
+
+        public AchievementCategory Update(AchievementCategory achievementCategory)
+        {
+            return _entityUpdateService.Update(achievementCategory);
         }
 
         public virtual void Delete(long achievementCategoryId)
         {
             _entityDeletionService.Delete(achievementCategoryId);
+        }
+
+        public void Delete(AchievementCategory achievementCategory)
+        {
+            _entityDeletionService.Delete(achievementCategory);
         }
     }
 }

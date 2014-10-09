@@ -5,7 +5,9 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EntityDeletionService: EntityService, IEntityDeletionService
+    public class EntityDeletionService<TInput, TEntity> : EntityService, IEntityDeletionService<TInput, TEntity>
+        where TInput : BaseInput
+        where TEntity : class, IEditableEntity<TInput>, new()
     {
         public EntityDeletionService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
             : base(restClient, entitySettings)
@@ -46,9 +48,14 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             DoDelete(new RestRequest(customPath));
         }
 
+        public void Delete(TEntity entity)
+        {
+            Delete(entity.GetModificationUrl());
+        }
+
         protected virtual void DeleteById(string id)
         {
-            DoDelete(new RestRequest(string.Format("{0}/{1}", EntitySettings.EntityRoute, id)));
+            DoDelete(new RestRequest(string.Format("{0}/{1}", EntitySettings.BaseRoute, id)));
         }
 
         protected virtual void DoDelete(RestRequest restRequest)

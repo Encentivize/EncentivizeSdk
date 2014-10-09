@@ -2,10 +2,12 @@
 {
     public interface IGroupTypeClient
     {
-        GroupTypeOutput Get(long groupTypeId);
-        PagedResult<GroupTypeOutput> Search(GroupTypeSearchCriteria groupTypeSearchCriteria);
-        GroupTypeOutput Create(GroupTypeInput groupTypeInput);
-        GroupTypeOutput Update(long groupTypeId, GroupTypeInput groupTypeInput);
+        GroupType Get(long groupTypeId);
+        PagedResult<GroupType> Search(GroupTypeSearchCriteria groupTypeSearchCriteria);
+        GroupType Create(GroupTypeInput groupTypeInput);
+        GroupType Update(long groupTypeId, GroupTypeInput groupTypeInput);
+        GroupType Update(GroupType groupType);
         void Delete(long groupTypeId);
+        void Delete(GroupType groupType);
     }
 }

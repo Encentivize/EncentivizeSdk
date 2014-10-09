@@ -4,15 +4,15 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupTypes
 {
     public class GroupTypesClient : IGroupTypeClient
     {
-        private readonly IEntityUpdateService<GroupTypeInput, GroupTypeOutput> _entityUpdateService;
-        private readonly IEntityRetrievalService<GroupTypeOutput> _entityRetrievalService;
-        private readonly IEntityCreationService<GroupTypeInput, GroupTypeOutput> _entityCreationService;
-        private readonly IEntityDeletionService _entityDeletionService;
+        private readonly IEntityUpdateService<GroupTypeInput, GroupType> _entityUpdateService;
+        private readonly IEntityRetrievalService<GroupType> _entityRetrievalService;
+        private readonly IEntityCreationService<GroupTypeInput, GroupType> _entityCreationService;
+        private readonly IEntityDeletionService<GroupTypeInput, GroupType> _entityDeletionService;
 
-        public GroupTypesClient(IEntityUpdateService<GroupTypeInput, GroupTypeOutput> entityUpdateService, 
-            IEntityRetrievalService<GroupTypeOutput> entityRetrievalService, 
-            IEntityCreationService<GroupTypeInput, GroupTypeOutput> entityCreationService, 
-            IEntityDeletionService entityDeletionService)
+        public GroupTypesClient(IEntityUpdateService<GroupTypeInput, GroupType> entityUpdateService, 
+            IEntityRetrievalService<GroupType> entityRetrievalService, 
+            IEntityCreationService<GroupTypeInput, GroupType> entityCreationService,
+            IEntityDeletionService<GroupTypeInput, GroupType> entityDeletionService)
         {
             _entityUpdateService = entityUpdateService;
             _entityRetrievalService = entityRetrievalService;
@@ -22,36 +22,46 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupTypes
 
         public GroupTypesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Group Type", "Group Types", "GroupTypes");
-            _entityUpdateService = new EntityUpdateService<GroupTypeInput, GroupTypeOutput>(restClient, entitySettings);
-            _entityRetrievalService = new EntityRetrievalService<GroupTypeOutput>(restClient, entitySettings);
-            _entityCreationService = new EntityCreationService<GroupTypeInput, GroupTypeOutput>(restClient, entitySettings);
-            _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
+            var entitySettings = new EntitySettings().Populate<GroupType>();
+            _entityUpdateService = new EntityUpdateService<GroupTypeInput, GroupType>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<GroupType>(restClient, entitySettings);
+            _entityCreationService = new EntityCreationService<GroupTypeInput, GroupType>(restClient, entitySettings);
+            _entityDeletionService = new EntityDeletionService<GroupTypeInput, GroupType>(restClient, entitySettings);
         }
 
-        public virtual GroupTypeOutput Get(long groupTypeId)
+        public virtual GroupType Get(long groupTypeId)
         {
             return _entityRetrievalService.GetById(groupTypeId);
         }
 
-        public virtual PagedResult<GroupTypeOutput> Search(GroupTypeSearchCriteria groupTypeSearchCriteria)
+        public virtual PagedResult<GroupType> Search(GroupTypeSearchCriteria groupTypeSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(groupTypeSearchCriteria);
         }
 
-        public virtual GroupTypeOutput Create(GroupTypeInput groupTypeInput)
+        public virtual GroupType Create(GroupTypeInput groupTypeInput)
         {
             return _entityCreationService.Create(groupTypeInput);
         }
 
-        public virtual GroupTypeOutput Update(long groupTypeId, GroupTypeInput groupTypeInput)
+        public virtual GroupType Update(long groupTypeId, GroupTypeInput groupTypeInput)
         {
             return _entityUpdateService.Update(groupTypeId, groupTypeInput);
+        }
+
+        public GroupType Update(GroupType groupType)
+        {
+            return _entityUpdateService.Update(groupType);
         }
 
         public virtual void Delete(long groupTypeId)
         {
             _entityDeletionService.Delete(groupTypeId);
+        }
+
+        public void Delete(GroupType groupType)
+        {
+            _entityDeletionService.Delete(groupType);
         }
     }
 }

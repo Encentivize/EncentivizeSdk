@@ -4,25 +4,25 @@ namespace Entelect.Encentivize.Sdk.Otp.Type
 {
     public class OneTimePinTypesClient : IOneTimePinTypesClient
     {
-        private readonly IEntityRetrievalService<OneTimePinTypeOutput> _entityRetrievalService;
+        private readonly IEntityRetrievalService<OneTimePinType> _entityRetrievalService;
 
-        public OneTimePinTypesClient(IEntityRetrievalService<OneTimePinTypeOutput> entityRetrievalService)
+        public OneTimePinTypesClient(IEntityRetrievalService<OneTimePinType> entityRetrievalService)
         {
             _entityRetrievalService = entityRetrievalService;
         }
 
         public OneTimePinTypesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("One Time Pin Type", "One Time Pin Types", "OneTimePinTypes");
-            _entityRetrievalService = new EntityRetrievalService<OneTimePinTypeOutput>(restClient, entitySettings);
+            var entitySettings = new EntitySettings(typeof(OneTimePinType));
+            _entityRetrievalService = new EntityRetrievalService<OneTimePinType>(restClient, entitySettings);
         }
 
-        public virtual OneTimePinTypeOutput Get(long oneTimePinTypeId)
+        public virtual OneTimePinType Get(long oneTimePinTypeId)
         {
             return _entityRetrievalService.GetById(oneTimePinTypeId);
         }
 
-        public virtual PagedResult<OneTimePinTypeOutput> Search(OneTimePinTypeSearchCriteria oneTimePinTypeSearchCriteria)
+        public virtual PagedResult<OneTimePinType> Search(OneTimePinTypeSearchCriteria oneTimePinTypeSearchCriteria)
         {
             return _entityRetrievalService.FindBySearchCriteria(oneTimePinTypeSearchCriteria);
         }

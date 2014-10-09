@@ -68,7 +68,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             Assert.AreEqual(firstMemberInGroup.MemberOutput.MemberId, output.MemberOutput.MemberId);
         }
 
-        public GroupOutput SomeGroup()
+        public Group SomeGroup()
         {
             return new GroupsClientTests().GetSomeEntity();
         }

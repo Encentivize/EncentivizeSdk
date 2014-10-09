@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Entelect.Encentivize.Sdk.Members.Rewards;
+using Entelect.Encentivize.Sdk.Otp.Configuration;
 using Entelect.Encentivize.Sdk.Rewards;
 using NUnit.Framework;
 
@@ -71,7 +72,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
-        public void AddRewardAdditionalInformation()
+        public void UpdateRewardAdditionalInformation()
         {
             var rewardTransaction = MemberRewardsClient.Search(new RewardTransactionSearchCriteria()).Data.First();
             var data = new
@@ -84,7 +85,22 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
 
         private void EnsureOtpDisabledForRewards()
         {
-            OneTimePinConfigurationsClient.Delete(2);
+            var config = OneTimePinConfigurationsClient.Get(2);
+            var input = new OneTimePinConfigurationInput
+            {
+                IsActive = false, 
+                MaxNumberOfRetries = 3, 
+                OneTimePinTypeId = 2
+            };
+            if (config == null)
+            {
+                OneTimePinConfigurationsClient.Create(input);
+            }
+            else if(config.IsActive)
+            {
+                OneTimePinConfigurationsClient.Update(input);
+            }
+            
         }
     }
 }

@@ -43,13 +43,33 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        public void UpdateUsingEntity()
+        {
+            var guid = Guid.NewGuid().ToString();
+            var entity = GetSomeEntity();
+            entity.Name = guid;
+            entity.Description = guid;
+            var updated = GroupRolesClient.Update(entity);
+            Assert.NotNull(updated);
+            Assert.AreEqual(updated.Name, guid);
+            Assert.AreEqual(updated.Description, guid);
+        }
+
+        [Test]
         public void Delete()
         {
             var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
             GroupRolesClient.Delete(existingItem.GroupRoleId);
         }
 
-        public GroupRoleOutput GetSomeEntity()
+        [Test]
+        public void DeleteUsingEntity()
+        {
+            var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
+            GroupRolesClient.Delete(existingItem);
+        }
+
+        public GroupRole GetSomeEntity()
         {
             var pagedItems = GroupRolesClient.Search(new GroupRoleSearchCriteria());
             var firstItem = pagedItems.Data.FirstOrDefault();
@@ -60,7 +80,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
             return firstItem;
         }
 
-        public GroupRoleOutput CreateSomeEntity(string guidString)
+        public GroupRole CreateSomeEntity(string guidString)
         {
             var itemToCreate = GetSomeInput(guidString);
             var createdItem = GroupRolesClient.Create(itemToCreate);

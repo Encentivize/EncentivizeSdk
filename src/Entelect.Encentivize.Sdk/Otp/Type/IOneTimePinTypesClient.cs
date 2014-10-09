@@ -2,7 +2,7 @@
 {
     public interface IOneTimePinTypesClient
     {
-        OneTimePinTypeOutput Get(long oneTimePinTypeId);
-        PagedResult<OneTimePinTypeOutput> Search(OneTimePinTypeSearchCriteria oneTimePinTypeSearchCriteria);
+        OneTimePinType Get(long oneTimePinTypeId);
+        PagedResult<OneTimePinType> Search(OneTimePinTypeSearchCriteria oneTimePinTypeSearchCriteria);
     }
 }

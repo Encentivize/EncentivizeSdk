@@ -1,18 +1,19 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
+using Entelect.Encentivize.Sdk.MemberGrouping.Groups;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
 {
     public class GroupMembersClient : IGroupMembersClient
     {
-        private readonly IEntityUpdateService<GroupMemberInput, GroupMemberOutput> _entityUpdateService;
-        private readonly IEntityRetrievalService<GroupMemberOutput> _entityRetrievalService;
-        private readonly IEntityCreationService<GroupMemberInput, GroupMemberOutput> _entityCreationService;
-        private readonly IEntityDeletionService _entityDeletionService;
+        private readonly IEntityUpdateService<GroupMemberInput, GroupMember> _entityUpdateService;
+        private readonly IEntityRetrievalService<GroupMember> _entityRetrievalService;
+        private readonly IEntityCreationService<GroupMemberInput, GroupMember> _entityCreationService;
+        private readonly IEntityDeletionService<GroupMemberInput, GroupMember> _entityDeletionService;
 
-        public GroupMembersClient(IEntityUpdateService<GroupMemberInput, GroupMemberOutput> entityUpdateService, 
-            IEntityRetrievalService<GroupMemberOutput> entityRetrievalService, 
-            IEntityCreationService<GroupMemberInput, GroupMemberOutput> entityCreationService, 
-            IEntityDeletionService entityDeletionService)
+        public GroupMembersClient(IEntityUpdateService<GroupMemberInput, GroupMember> entityUpdateService, 
+            IEntityRetrievalService<GroupMember> entityRetrievalService, 
+            IEntityCreationService<GroupMemberInput, GroupMember> entityCreationService,
+            IEntityDeletionService<GroupMemberInput, GroupMember> entityDeletionService)
         {
             _entityUpdateService = entityUpdateService;
             _entityRetrievalService = entityRetrievalService;
@@ -22,41 +23,41 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
 
         public GroupMembersClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Group Member", "Group Members", "Groups/{groupId:long}/Members");
-            _entityUpdateService = new EntityUpdateService<GroupMemberInput, GroupMemberOutput>(restClient, entitySettings);
-            _entityRetrievalService = new EntityRetrievalService<GroupMemberOutput>(restClient, entitySettings);
-            _entityCreationService = new EntityCreationService<GroupMemberInput, GroupMemberOutput>(restClient, entitySettings);
-            _entityDeletionService = new EntityDeletionService(restClient, entitySettings);
+            var entitySettings = new EntitySettings().Populate<GroupMember>();
+            _entityUpdateService = new EntityUpdateService<GroupMemberInput, GroupMember>(restClient, entitySettings);
+            _entityRetrievalService = new EntityRetrievalService<GroupMember>(restClient, entitySettings);
+            _entityCreationService = new EntityCreationService<GroupMemberInput, GroupMember>(restClient, entitySettings);
+            _entityDeletionService = new EntityDeletionService<GroupMemberInput, GroupMember>(restClient, entitySettings);
         }
 
-        public virtual PagedResult<GroupMemberOutput> GetMembersInGroup(long groupId)
+        public virtual PagedResult<GroupMember> GetMembersInGroup(long groupId)
         {
             return _entityRetrievalService.FindBySearchCriteria(GroupUrl(groupId), new BaseSearchCriteria(1, int.MaxValue));
         }
 
-        public virtual GroupMemberOutput AddMemberToGroup(GroupMemberInput groupMemberInput, long groupId)
+        public virtual GroupMember AddMemberToGroup(GroupMemberInput groupMemberInput, long groupId)
         {
             return _entityCreationService.Create(GroupUrl(groupId), groupMemberInput);
         }
 
-        public virtual GroupMemberOutput UpdateMemberRole(long groupId, GroupMemberInput groupMemberInput)
+        public virtual GroupMember UpdateMemberRole(GroupMember groupMember)
         {
-            return _entityUpdateService.Update(GroupMemberUrl(groupId, groupMemberInput.MemberId), groupMemberInput);
+            return _entityUpdateService.Update(groupMember);
+        }
+
+        public virtual GroupMember UpdateMemberRole(long groupId, GroupMemberInput groupMemberInput)
+        {
+            return _entityUpdateService.Update(GroupMember.GetModificationUrl(groupId, groupMemberInput.MemberId), groupMemberInput);
         }
 
         public virtual void RemovedMemberFromGroup(long groupId, long memberId)
         {
-            _entityDeletionService.Delete(GroupMemberUrl(groupId, memberId));
+            _entityDeletionService.Delete(GroupMember.GetModificationUrl(groupId, memberId));
         }
 
         protected virtual string GroupUrl(long groupId)
         {
             return string.Format("Groups/{0}/Members", groupId);
-        }
-
-        protected virtual string GroupMemberUrl(long groupId,long memberId)
-        {
-            return string.Format("Groups/{0}/Members/{1}", groupId, memberId);
         }
     }
 }

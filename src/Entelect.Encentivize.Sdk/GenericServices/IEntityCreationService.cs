@@ -1,10 +1,25 @@
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public interface IEntityCreationService<TInput, TOutput> where TInput : BaseInput where TOutput : class, new()
+    public interface IEntityCreationService<in TInput, out TEntity> 
+        where TInput : BaseInput
+        where TEntity : class, IEntity, new()
     {
-        TOutput Create(TInput input);
-        TOutput Create(string customPath, TInput input);
+        TEntity Create(TInput input);
+        TEntity Create(string customPath, TInput input);
         void CreateExpectNullResponse(TInput input);
         void CreateExpectNullResponse(string customPath, TInput input);
+    }
+
+    public interface IEntityCreationService<in TInput>
+        where TInput : BaseInput
+    {
+        void Create(TInput input);
+        void Create(string customPath, TInput input);
+    }
+
+    public interface IEntityCreationService
+    {
+        dynamic Create(dynamic input);
+        dynamic Create(string customPath, dynamic input);
     }
 }
