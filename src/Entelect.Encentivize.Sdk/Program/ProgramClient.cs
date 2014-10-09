@@ -13,7 +13,7 @@ namespace Entelect.Encentivize.Sdk.Program
 
         public ProgramsClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Program", "Programs", "Programs");
+            var entitySettings = new EntitySettings(typeof(Program));
             _entityRetrievalService = new EntityRetrievalService<Program>(restClient, entitySettings);
         }
 

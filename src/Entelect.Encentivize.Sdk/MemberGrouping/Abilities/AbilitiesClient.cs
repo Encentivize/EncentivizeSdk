@@ -13,7 +13,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Abilities
 
         public AbilitiesClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Ability", "Abilities", "Abilities");
+            var entitySettings = new EntitySettings(typeof(Ability));
             _entityRetrievalService = new EntityRetrievalService<Ability>(restClient, entitySettings);
         }
 

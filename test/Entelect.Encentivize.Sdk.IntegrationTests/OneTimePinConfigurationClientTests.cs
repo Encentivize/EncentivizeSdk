@@ -67,8 +67,13 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         public OneTimePinConfiguration CreateSomeEntity()
         {
             var itemToCreate = GetSomeInput();
-            var createdItem = OneTimePinConfigurationsClient.Create(itemToCreate);
-            return createdItem;
+            var config = OneTimePinConfigurationsClient.Get(itemToCreate.OneTimePinTypeId);
+            if (config == null)
+            {
+                var createdItem = OneTimePinConfigurationsClient.Create(itemToCreate);
+                return createdItem;
+            }
+            return config;
         }
 
         public OneTimePinConfigurationInput GetSomeInput()

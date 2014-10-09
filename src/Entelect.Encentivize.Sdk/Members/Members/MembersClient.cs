@@ -26,7 +26,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public MembersClient(IEncentivizeRestClient restClient)
         {
-            var memberSettings = new EntitySettings("Member", "Members", "members");
+            var memberSettings = new EntitySettings(typeof(Member));
             _entityRetrievalService = new EntityRetrievalService<Member>(restClient, memberSettings);
             _entityUpdateService = new EntityUpdateService<MemberInput, Member>(restClient, memberSettings);
             _entityCreationService = new EntityCreationService<MemberInput, Member>(restClient, memberSettings);

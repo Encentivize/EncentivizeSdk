@@ -19,7 +19,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
 
         public SupportTicketsClient(IEncentivizeRestClient restClient)
         {
-            var entitySettings = new EntitySettings("Support Ticket", "Support Tickets", "SupportTickets");
+            var entitySettings = new EntitySettings(typeof(SupportTicket));
             _entityUpdateService = new EntityUpdateService<EditSupportTicketInput, SupportTicket>(restClient, entitySettings);
             _entityRetrievalService = new EntityRetrievalService<SupportTicket>(restClient, entitySettings);
             _entityCreationService = new EntityCreationService<SupportTicketInput, SupportTicket>(restClient, entitySettings);
