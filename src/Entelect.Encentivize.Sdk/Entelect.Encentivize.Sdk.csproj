@@ -77,6 +77,7 @@
     <Compile Include="Achievements\Achievement.cs" />
     <Compile Include="BaseInput.cs" />
     <Compile Include="Exceptions\IdNotSetException.cs" />
+    <Compile Include="GenericServices\BaseCreationService.cs" />
     <Compile Include="GenericServices\BaseRetrievalService.cs" />
     <Compile Include="GenericServices\EncentivizeRestClient.cs" />
     <Compile Include="GenericServices\EntityCreationService.cs" />

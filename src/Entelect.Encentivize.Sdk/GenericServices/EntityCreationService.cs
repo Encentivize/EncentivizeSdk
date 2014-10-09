@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EntityCreationService<TInput, TEntity> : EntityService, IEntityCreationService<TInput, TEntity> 
+    public class EntityCreationService<TInput, TEntity> : BaseCreationService<TInput>, IEntityCreationService<TInput, TEntity> 
         where TInput : BaseInput
         where TEntity : class, IEditableEntity<TInput>, new()
     {
@@ -51,15 +51,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
                 throw new CreationFailedException(response);
             }
             return response.Data;
-
-        }
-
-        private static void PrepareCreateRequest(RestRequest restRequest, TInput input)
-        {
-            restRequest.Method = Method.POST;
-            restRequest.RequestFormat = DataFormat.Json;
-            input.Validate();
-            restRequest.AddBody(input);
         }
 
         protected virtual void DoCreateExpectNullResponse(RestRequest restRequest, TInput input)
@@ -73,7 +64,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         }
     }
 
-    public class EntityCreationService<TInput> : EntityService, IEntityCreationService<TInput>
+    public class EntityCreationService<TInput> : BaseCreationService<TInput>, IEntityCreationService<TInput>
         where TInput : BaseInput
     {
         public EntityCreationService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
@@ -83,12 +74,22 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         public void Create(TInput input)
         {
-            throw new System.NotImplementedException();
+            DoCreate(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
         }
 
         public void Create(string customPath, TInput input)
         {
-            throw new System.NotImplementedException();
+            DoCreate(new RestRequest(customPath), input);
+        }
+
+        protected virtual void DoCreate(RestRequest restRequest, TInput input)
+        {
+            PrepareCreateRequest(restRequest, input);
+            var response = RestClient.Execute(restRequest);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new CreationFailedException(response);
+            }
         }
     }
 }
