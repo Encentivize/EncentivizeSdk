@@ -5,7 +5,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 {
     public class EntityCreationService<TInput, TEntity> : BaseCreationService, IEntityCreationService<TInput, TEntity> 
         where TInput : BaseInput
-        where TEntity : class, IEditableEntity<TInput>, new()
+        where TEntity : class, IEntity, new()
     {
         public EntityCreationService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
             : base(restClient, entitySettings)
@@ -17,11 +17,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return DoCreate(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
         }
 
-        public TEntity Create(TEntity entity)
-        {
-            return Create(entity.ToInput());
-        }
-
         public TEntity Create(string customPath, TInput input)
         {
             return DoCreate(new RestRequest(customPath), input);
@@ -30,11 +25,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         public void CreateExpectNullResponse(TInput input)
         {
             DoCreateExpectNullResponse(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
-        }
-
-        public void CreateExpectNullResponse(TEntity entity)
-        {
-            CreateExpectNullResponse(entity.ToInput());
         }
 
         public void CreateExpectNullResponse(string customPath, TInput input)
