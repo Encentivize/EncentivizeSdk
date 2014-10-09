@@ -7,7 +7,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
     {
         PagedResult<RewardTransaction> Search(RewardTransactionSearchCriteria rewardSearchCriteria);
         PagedResult<RewardTransaction> MemberHistory(long memberId, RewardTransactionSearchCriteria rewardSearchCriteria);
-        PagedResult<RewardStructureOutput> GetAvailableRewardsForMember(long memberId, RewardSearchCriteria rewardSearchCriteria);
+        PagedResult<RewardStructure> GetAvailableRewardsForMember(long memberId, RewardSearchCriteria rewardSearchCriteria);
         RewardTransaction RedeemReward(long memberId, RedeemRewardInput redeemRewardInput);
         RewardTransaction Get(long memberId, long rewardTransactionId);
         void RefundReward(long memberId, long rewardTransactionId);

@@ -11,7 +11,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
         public string Subject { get; set; }
         public bool IsResolved { get; set; }
         public string LatestComment { get; set; }
-        public List<CommentOutput> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
         public List<long> SupportAgentIds { get; set; }
         public DateTime CreatedDateTime { get; set; }
 

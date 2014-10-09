@@ -2,7 +2,7 @@ using System;
 
 namespace Entelect.Encentivize.Sdk.SupportTickets
 {
-    public class CommentOutput
+    public class Comment
     {
         public long SupportTicketCommentId { get; set; }
         public string CommentBody { get; set; }

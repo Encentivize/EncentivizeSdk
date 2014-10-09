@@ -13,14 +13,14 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
         private readonly IEntityRetrievalService<RewardTransaction> _memberRewardRetrievalService;
         private readonly IEntityCreationService<RedeemRewardInput, RewardTransaction> _memberRewardCreationService;
         private readonly IEntityDeletionService<RedeemRewardInput, RewardTransaction> _memberRewardDeletionService;
-        private readonly IEntityRetrievalService<RewardStructureOutput> _rewardRetrievalService;
+        private readonly IEntityRetrievalService<RewardStructure> _rewardRetrievalService;
         private readonly IEntityRetrievalService _dynamicEntityRetrievalService;
 
         public MemberRewardsClient(IEncentivizeRestClient restClient, 
             IEntityRetrievalService<RewardTransaction> memberRewardRetrievalService, 
             IEntityCreationService<RedeemRewardInput, RewardTransaction> memberRewardCreationService,
             IEntityDeletionService<RedeemRewardInput, RewardTransaction> memberRewardDeletionService, 
-            IEntityRetrievalService<RewardStructureOutput> rewardRetrievalService, 
+            IEntityRetrievalService<RewardStructure> rewardRetrievalService, 
             IEntityRetrievalService dynamicEntityRetrievalService)
         {
             _restClient = restClient;
@@ -43,7 +43,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient, additionalInformationEntitySettings);
             /* todo rk move to own client ? */
             var rewardSettings = new EntitySettings("Reward", "Rewards", null);
-            _rewardRetrievalService = new EntityRetrievalService<RewardStructureOutput>(_restClient, rewardSettings);
+            _rewardRetrievalService = new EntityRetrievalService<RewardStructure>(_restClient, rewardSettings);
         }
 
         public virtual PagedResult<RewardTransaction> Search(RewardTransactionSearchCriteria rewardSearchCriteria)
@@ -56,7 +56,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             return _memberRewardRetrievalService.FindBySearchCriteria(string.Format("members/{0}/rewards/", memberId), rewardSearchCriteria);
         }
 
-        public virtual PagedResult<RewardStructureOutput> GetAvailableRewardsForMember(long memberId, RewardSearchCriteria rewardSearchCriteria)
+        public virtual PagedResult<RewardStructure> GetAvailableRewardsForMember(long memberId, RewardSearchCriteria rewardSearchCriteria)
         {
             return _rewardRetrievalService.FindBySearchCriteria(string.Format("members/{0}/availableRewards", memberId), rewardSearchCriteria);
         }
