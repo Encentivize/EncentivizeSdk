@@ -23,6 +23,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
                 NewComment = LatestComment
             };
         }
+
         public string GetModificationUrl()
         {
             return string.Format("SupportTickets/{0}", SupportTicketId);

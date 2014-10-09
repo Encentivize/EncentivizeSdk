@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Entelect.Encentivize.Sdk.IntegrationTests
 {
     [TestFixture]
-    public class OneTimePinConfigurationClientTests : SdkTestBase
+    public class OneTimePinConfigurationsClientTests : SdkTestBase
     {
         [Test]
         public void Search()
@@ -47,10 +47,27 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        public void UpdateUsingEntity()
+        {
+            var entity = GetSomeEntity();
+            entity.IsActive = !entity.IsActive;
+            var updated = OneTimePinConfigurationsClient.Update(entity);
+            Assert.NotNull(updated);
+            Assert.AreEqual(updated.IsActive, entity.IsActive);
+        }
+
+        [Test]
         public void Delete()
         {
             var existingItem = GetSomeEntity();
             OneTimePinConfigurationsClient.Delete(existingItem.OneTimePinTypeId);
+        }
+
+        [Test]
+        public void DeleteUsingEntity()
+        {
+            var existingItem = GetSomeEntity();
+            OneTimePinConfigurationsClient.Delete(existingItem);
         }
 
         public OneTimePinConfiguration GetSomeEntity()

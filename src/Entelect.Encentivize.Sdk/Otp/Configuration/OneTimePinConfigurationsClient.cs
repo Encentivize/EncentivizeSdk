@@ -49,9 +49,19 @@ namespace Entelect.Encentivize.Sdk.Otp.Configuration
             return _entityUpdateService.Update(oneTimePinConfigurationInput.OneTimePinTypeId, oneTimePinConfigurationInput);
         }
 
+        public OneTimePinConfiguration Update(OneTimePinConfiguration oneTimePinConfiguration)
+        {
+            return _entityUpdateService.Update(oneTimePinConfiguration);
+        }
+
         public virtual void Delete(long oneTimePinTypeId)
         {
             _entityDeletionService.Delete(oneTimePinTypeId);
+        }
+
+        public void Delete(OneTimePinConfiguration oneTimePinConfiguration)
+        {
+            _entityDeletionService.Delete(oneTimePinConfiguration);
         }
     }
 }

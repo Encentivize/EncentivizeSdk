@@ -49,9 +49,19 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
             return _entityUpdateService.Update(groupRoleId, groupRoleInput);
         }
 
+        public GroupRole Update(GroupRole groupRole)
+        {
+            return _entityUpdateService.Update(groupRole);
+        }
+
         public virtual void Delete(long groupRoleId)
         {
             _entityDeletionService.Delete(groupRoleId);
+        }
+
+        public void Delete(GroupRole groupRole)
+        {
+            _entityDeletionService.Delete(groupRole);
         }
     }
 }

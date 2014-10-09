@@ -35,7 +35,7 @@
 
         public string GetModificationUrl()
         {
-            return string.Format("Achievement/{0}", AchievementId);
+            return string.Format("Achievements/{0}", AchievementId);
         }
     }
 }

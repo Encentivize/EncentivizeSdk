@@ -55,9 +55,19 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
             return _entityUpdateService.Update(groupId, groupInput);
         }
 
+        public Group Update(Group group)
+        {
+            return _entityUpdateService.Update(group);
+        }
+
         public virtual void Delete(long groupId)
         {
             _entityDeletionService.Delete(groupId);
+        }
+
+        public void Delete(Group group)
+        {
+            _entityDeletionService.Delete(group);
         }
     }
 }

@@ -55,7 +55,7 @@
     <Compile Include="AchievementCategoriesClientTests.cs" />
     <Compile Include="AchievementsClientTests.cs" />
     <Compile Include="EntitySettingsTests.cs" />
-    <Compile Include="GroupClientTests.cs" />
+    <Compile Include="GroupsClientTests.cs" />
     <Compile Include="GroupCreationTypesClientTests.cs" />
     <Compile Include="GroupMembersClientTests.cs" />
     <Compile Include="GroupRolesClientTests.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="MemberAchievementClientTests.cs" />
     <Compile Include="MemberClientTests.cs" />
     <Compile Include="MemberRewardsClientTests.cs" />
-    <Compile Include="OneTimePinConfigurationClientTests.cs" />
+    <Compile Include="OneTimePinConfigurationsClientTests.cs" />
     <Compile Include="OneTimePinTypeClientTests.cs" />
     <Compile Include="OtpClientTests.cs" />
     <Compile Include="PointsClientTests.cs" />

@@ -49,9 +49,19 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
             return _entityUpdateService.Update(achievementCategoryId, achievementCategoryInput);
         }
 
+        public AchievementCategory Update(AchievementCategory achievementCategory)
+        {
+            return _entityUpdateService.Update(achievementCategory);
+        }
+
         public virtual void Delete(long achievementCategoryId)
         {
             _entityDeletionService.Delete(achievementCategoryId);
+        }
+
+        public void Delete(AchievementCategory achievementCategory)
+        {
+            _entityDeletionService.Delete(achievementCategory);
         }
     }
 }

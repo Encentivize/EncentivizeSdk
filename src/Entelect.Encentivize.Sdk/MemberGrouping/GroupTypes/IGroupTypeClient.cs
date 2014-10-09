@@ -6,6 +6,8 @@
         PagedResult<GroupType> Search(GroupTypeSearchCriteria groupTypeSearchCriteria);
         GroupType Create(GroupTypeInput groupTypeInput);
         GroupType Update(long groupTypeId, GroupTypeInput groupTypeInput);
+        GroupType Update(GroupType groupType);
         void Delete(long groupTypeId);
+        void Delete(GroupType groupType);
     }
 }

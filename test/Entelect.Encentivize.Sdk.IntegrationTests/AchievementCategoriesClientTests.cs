@@ -72,10 +72,29 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        public void UpdateUsingEntity()
+        {
+            var guid = Guid.NewGuid().ToString();
+            var existingItem = GetSomeEntity();
+            existingItem.Name = guid;
+            existingItem.Description = guid;
+            var updated = AchievementCategoriesClient.Update(existingItem);
+            Assert.AreEqual(guid, updated.Name);
+            Assert.AreEqual(guid, updated.Description);
+        }
+
+        [Test]
         public void Delete()
         {
             var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
             AchievementCategoriesClient.Delete(existingItem.AchievementCategoryId);
+        }
+
+        [Test]
+        public void DeleteUsingEntity()
+        {
+            var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
+            AchievementCategoriesClient.Delete(existingItem);
         }
 
         public AchievementCategory GetSomeEntity()

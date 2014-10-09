@@ -52,10 +52,30 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        public void UpdateUsingEntity()
+        {
+            var guid = Guid.NewGuid().ToString();
+            var entity = GetSomeEntity();
+            entity.Name = guid;
+            entity.Description = guid;
+            var updated = GroupsClient.Update(entity);
+            Assert.NotNull(updated);
+            Assert.AreEqual(updated.Name, guid);
+            Assert.AreEqual(updated.Description, guid);
+        }
+
+        [Test]
         public void Delete()
         {
             var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
             GroupsClient.Delete(existingItem.GroupId);
+        }
+
+        [Test]
+        public void DeleteUsingEntity()
+        {
+            var existingItem = CreateSomeEntity(Guid.NewGuid().ToString());
+            GroupsClient.Delete(existingItem);
         }
 
         public Group GetSomeEntity()

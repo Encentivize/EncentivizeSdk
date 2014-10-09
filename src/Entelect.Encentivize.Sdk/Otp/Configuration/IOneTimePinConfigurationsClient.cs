@@ -6,6 +6,8 @@
         PagedResult<OneTimePinConfiguration> Search(OneTimePinConfigurationSearchCriteria oneTimePinConfigurationSearchCriteria);
         OneTimePinConfiguration Create(OneTimePinConfigurationInput oneTimePinConfigurationInput);
         OneTimePinConfiguration Update(OneTimePinConfigurationInput oneTimePinConfigurationInput);
+        OneTimePinConfiguration Update(OneTimePinConfiguration oneTimePinConfiguration);
         void Delete(long oneTimePinTypeId);
+        void Delete(OneTimePinConfiguration oneTimePinConfiguration);
     }
 }
