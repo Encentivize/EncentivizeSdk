@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
-    public class AchievementCategoriesClient : IAchievementCategoryClient
+    public class AchievementCategoriesClient : IAchievementCategoriesClient
     {
         private readonly IEntityUpdateService<AchievementCategoryInput, AchievementCategory> _entityUpdateService;
         private readonly IEntityRetrievalService<AchievementCategory> _entityRetrievalService;

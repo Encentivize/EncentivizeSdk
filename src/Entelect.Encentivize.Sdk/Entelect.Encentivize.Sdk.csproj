@@ -70,9 +70,9 @@
     <Compile Include="Achievements\AchievementCategories\AchievementCategorySearchCriteria.cs" />
     <Compile Include="Achievements\AchievementsClient.cs" />
     <Compile Include="Achievements\AchievementSearchCriteria.cs" />
-    <Compile Include="Achievements\IAchievementClient.cs" />
+    <Compile Include="Achievements\IAchievementsClient.cs" />
     <Compile Include="BaseSearchCriteria.cs" />
-    <Compile Include="Achievements\AchievementCategories\IAchievementCategoryClient.cs" />
+    <Compile Include="Achievements\AchievementCategories\IAchievementCategoriesClient.cs" />
     <Compile Include="Achievements\AchievementInput.cs" />
     <Compile Include="Achievements\Achievement.cs" />
     <Compile Include="BaseInput.cs" />
@@ -176,7 +176,7 @@
     <Compile Include="PagedResult.cs" />
     <Compile Include="PointsTransactions\IPointsClient.cs" />
     <Compile Include="PointsTransactions\PointsTransactionSearchCriteria.cs" />
-    <Compile Include="Program\ProgramClient.cs" />
+    <Compile Include="Program\ProgramsClient.cs" />
     <Compile Include="Program\Program.cs" />
     <Compile Include="QueryStringBuilder.cs" />
     <Compile Include="Members\Members\MembersClient.cs" />
