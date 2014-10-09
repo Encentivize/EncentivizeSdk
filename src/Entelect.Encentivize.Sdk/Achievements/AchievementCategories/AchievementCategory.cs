@@ -13,7 +13,7 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
         public long? LastUpdatedById { get; set; }
         public DateTime? LastUpdatedDateUtc { get; set; }
 
-        public AchievementCategoryInput ToInput()
+        public AchievementCategoryInput ToEditInput()
         {
             return new AchievementCategoryInput
             {

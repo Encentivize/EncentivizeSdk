@@ -38,7 +38,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public string ProfilePictureUrl { get; set; }
 
-        public MemberInput ToInput()
+        public MemberInput ToEditInput()
         {
             return new MemberInput()
                    {

@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public int GroupCreationTypeId { get; set; }
         public int GroupLevel { get; set; }
-        public GroupTypeInput ToInput()
+        public GroupTypeInput ToEditInput()
         {
             return new GroupTypeInput
             {

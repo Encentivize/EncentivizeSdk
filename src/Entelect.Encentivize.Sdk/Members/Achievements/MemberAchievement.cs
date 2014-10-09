@@ -20,7 +20,7 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
         public long TimesAwarded { get; set; }
         public string AdditionalInformation { get; set; }
 
-        public MemberAchievementInput ToInput()
+        public MemberAchievementInput ToEditInput()
         {
             return new MemberAchievementInput
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers;
 using Entelect.Encentivize.Sdk.MemberGrouping.Groups;
 using NUnit.Framework;
 
@@ -21,6 +22,14 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         {
             var item = GroupsClient.Get(1);
             Assert.NotNull(item);
+        }
+
+        [Test]
+        public void GetGroupsForUser()
+        {
+            var groups = GroupsClient.GetGroupsForMember(1, new GroupMemberSearchCriteria());
+            Assert.NotNull(groups);
+            Assert.Greater(groups.Data.Count, 0);
         }
 
         [Test]

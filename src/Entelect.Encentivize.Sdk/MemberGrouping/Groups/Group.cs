@@ -14,7 +14,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
         public DateTime? LastUpdatedDateUtc { get; set; }
         public bool IsActive { get; set; }
 
-        public GroupInput ToInput()
+        public GroupInput ToEditInput()
         {
             return new GroupInput
             {

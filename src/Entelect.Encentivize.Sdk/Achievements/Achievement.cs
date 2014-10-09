@@ -15,7 +15,7 @@
         public string ImageUrl { get; set; }
         public long? DefaultRewardId { get; set; }
 
-        public AchievementInput ToInput()
+        public AchievementInput ToEditInput()
         {
             return new AchievementInput
             {

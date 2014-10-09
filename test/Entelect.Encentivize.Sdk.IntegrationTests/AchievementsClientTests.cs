@@ -17,6 +17,14 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
+        public void AvailableAchievements()
+        {
+            var searchResult = AchievementsClient.AvailableAchievements(1, new AchievementSearchCriteria());
+            Assert.NotNull(searchResult);
+            Assert.Greater(searchResult.Data.Count, 0);
+        }
+
+        [Test]
         public void GetById()
         {
             var item = AchievementsClient.Get(10);

@@ -15,7 +15,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
             MemberOutput = new Member();
         }
 
-        public GroupMemberInput ToInput()
+        public GroupMemberInput ToEditInput()
         {
             return new GroupMemberInput
             {

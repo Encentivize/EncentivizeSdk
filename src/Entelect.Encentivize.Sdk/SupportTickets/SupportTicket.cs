@@ -15,7 +15,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
         public List<long> SupportAgentIds { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
-        public EditSupportTicketInput ToInput()
+        public EditSupportTicketInput ToEditInput()
         {
             return new EditSupportTicketInput
             {
@@ -24,7 +24,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
             };
         }
 
-        SupportTicketInput IEditableEntity<SupportTicketInput>.ToInput()
+        SupportTicketInput IEditableEntity<SupportTicketInput>.ToEditInput()
         {
             return  new SupportTicketInput
             {

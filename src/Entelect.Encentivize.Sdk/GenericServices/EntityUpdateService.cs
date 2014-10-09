@@ -50,7 +50,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         public TEntity Update(TEntity entity)
         {
-            return Update(entity.GetModificationUrl(), entity.ToInput());
+            return Update(entity.GetModificationUrl(), entity.ToEditInput());
         }
 
         protected virtual TEntity UpdateById(string id, TInput input)

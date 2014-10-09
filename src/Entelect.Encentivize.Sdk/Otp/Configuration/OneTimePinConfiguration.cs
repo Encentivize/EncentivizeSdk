@@ -8,7 +8,7 @@ namespace Entelect.Encentivize.Sdk.Otp.Configuration
 
         public bool IsActive { get; set; }
 
-        public OneTimePinConfigurationInput ToInput()
+        public OneTimePinConfigurationInput ToEditInput()
         {
             return new OneTimePinConfigurationInput
             {

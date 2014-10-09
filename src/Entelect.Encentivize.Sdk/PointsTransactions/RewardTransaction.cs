@@ -13,7 +13,7 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
         public DateTime DateRequested { get; set; }
         public DateTime? DateRedeemed { get; set; }
         public DateTime? DateSignOff { get; set; }
-        public RedeemRewardInput ToInput()
+        public RedeemRewardInput ToEditInput()
         {
             return new RedeemRewardInput
             {

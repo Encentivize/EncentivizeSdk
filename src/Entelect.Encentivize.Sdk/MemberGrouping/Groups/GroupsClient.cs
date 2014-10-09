@@ -1,4 +1,5 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
+using Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
 {
@@ -32,6 +33,11 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
         public virtual Group Get(long groupId)
         {
             return _entityRetrievalService.GetById(groupId);
+        }
+
+        public virtual PagedResult<Group> GetGroupsForMember(long memberId, GroupMemberSearchCriteria groupMemberSearchCriteria)
+        {
+            return _entityRetrievalService.FindBySearchCriteria(string.Format("members/{0}/groups", memberId), groupMemberSearchCriteria);
         }
 
         public virtual PagedResult<Group> Search(GroupSearchCriteria groupSearchCriteria)

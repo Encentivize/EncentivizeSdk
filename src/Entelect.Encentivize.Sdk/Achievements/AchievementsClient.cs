@@ -39,6 +39,11 @@ namespace Entelect.Encentivize.Sdk.Achievements
             return _entityRetrievalService.FindBySearchCriteria(achievementSearchCriteria);
         }
 
+        public virtual PagedResult<Achievement> AvailableAchievements(long memberId, AchievementSearchCriteria achievementSearchCriteria)
+        {
+            return _entityRetrievalService.FindBySearchCriteria(string.Format("members/{0}/availableAchievements/", memberId), achievementSearchCriteria);
+        }
+
         public virtual Achievement Create(AchievementInput achievementInput)
         {
             return _entityCreationService.Create(achievementInput);
