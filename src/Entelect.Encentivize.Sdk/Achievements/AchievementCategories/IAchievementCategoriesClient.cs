@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 {
-    public interface IAchievementCategoryClient
+    public interface IAchievementCategoriesClient
     {
         AchievementCategory Get(long achievementCategoryId);
         AchievementCategory Create(AchievementCategoryInput achievementCategoryInput);

@@ -1,6 +1,6 @@
 namespace Entelect.Encentivize.Sdk.Achievements
 {
-    public interface IAchievementClient
+    public interface IAchievementsClient
     {
         Achievement Get(long achievementId);
         PagedResult<Achievement> Search(AchievementSearchCriteria achievementSearchCriteria);
