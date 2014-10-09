@@ -18,10 +18,10 @@
     </exec>
   </target>
   
-  <target name="UnitTests">
+  <target name="IntegrationTests">
     <nunit2>
       <formatter type="Plain" />
-      <test assemblyname="..\src\Entelect.Encentivize.Sdk.UnitTests\bin\Release\Entelect.Encentivize.Sdk.UnitTests.dll"/>
+      <test assemblyname="..\test\Entelect.Encentivize.Sdk.IntegrationTests\bin\Release\Entelect.Encentivize.Sdk.IntegrationTests.dll"/>
     </nunit2>
   </target>
   

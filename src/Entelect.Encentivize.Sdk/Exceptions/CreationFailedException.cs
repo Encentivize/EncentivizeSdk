@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Exceptions
 {
     public class CreationFailedException: EncentivizeApiException
     {
-         public CreationFailedException(string message)
-            : base(message)
+        public CreationFailedException(IRestResponse response, string additionalInformation = null)
+            : base(response, additionalInformation)
         {
         }
 
-        public CreationFailedException(string message, Exception inner)
-            : base(message, inner)
+        public CreationFailedException(IRestResponse response, Exception inner, string additionalInformation = null)
+            : base(response, inner, additionalInformation)
         {
         }
 

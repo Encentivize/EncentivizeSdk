@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Exceptions
 {
     public class DataRetrievalFailedException: EncentivizeApiException
     {
-         public DataRetrievalFailedException(string message)
-            : base(message)
+        public DataRetrievalFailedException(IRestResponse response, string additionalInformation = null)
+            : base(response, additionalInformation)
         {
         }
 
-        public DataRetrievalFailedException(string message, Exception inner)
-            : base(message, inner)
+        public DataRetrievalFailedException(IRestResponse response, Exception inner, string additionalInformation = null)
+            : base(response, inner, additionalInformation)
         {
         }
 

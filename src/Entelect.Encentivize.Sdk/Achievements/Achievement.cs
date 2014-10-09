@@ -1,10 +1,10 @@
 ﻿namespace Entelect.Encentivize.Sdk.Achievements
 {
-    public class Achievement
+    public class Achievement: IEditableEntity<AchievementInput>
     {
         public long AchievementId { get; set; }
         public long AchievementCategoryId { get; set; }
-        public long AchievementCaptureTypeId { get; set; }
+        public int AchievementCaptureTypeId { get; set; }
         public string Name { get; set; }
         public decimal DefaultPointsAwarded { get; set; }
         public string Description { get; set; }
@@ -14,5 +14,28 @@
         public bool RequiresSignOff { get; set; }
         public string ImageUrl { get; set; }
         public long? DefaultRewardId { get; set; }
+
+        public AchievementInput ToEditInput()
+        {
+            return new AchievementInput
+            {
+                AchievementCaptureTypeId = AchievementCaptureTypeId,
+                AchievementCategoryId = AchievementCategoryId,
+                AchievementReferenceNumber = AchievementReferenceNumber,
+                AllowOverriddenPoints = AllowOverriddenPoints,
+                DefaultPointsAwarded = DefaultPointsAwarded,
+                DefaultRewardId = DefaultRewardId,
+                Description = Description,
+                ImageUrl = ImageUrl,
+                Name = Name,
+                RequiresSignOff = RequiresSignOff,
+                TermsAndConditions = TermsAndConditions
+            };
+        }
+
+        public string GetModificationUrl()
+        {
+            return string.Format("Achievements/{0}", AchievementId);
+        }
     }
 }

@@ -1,10 +1,13 @@
-﻿using Entelect.Encentivize.Sdk.Members;
-
 namespace Entelect.Encentivize.Sdk.Achievements
 {
     public interface IAchievementClient
     {
-        MemberAchievement AddAchievementForMember(long memberId, AchievementInput achievement);
-        MemberAchievement AddAchievementForMember(Member member, AchievementInput achievement); 
+        Achievement Get(long achievementId);
+        PagedResult<Achievement> Search(AchievementSearchCriteria achievementSearchCriteria);
+        Achievement Create(AchievementInput achievementInput);
+        Achievement Update(long achievementId, AchievementInput achievementInput);
+        Achievement Update(Achievement achievement);
+        void Delete(long achievementId);
+        void Delete(Achievement achievement);
     }
 }

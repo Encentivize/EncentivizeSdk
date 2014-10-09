@@ -35,6 +35,10 @@
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=104.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\RestSharp.104.2.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,10 +51,30 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AchievementClientTests.cs" />
+    <Compile Include="AbilitiesClientTests.cs" />
+    <Compile Include="AchievementCategoriesClientTests.cs" />
+    <Compile Include="AchievementsClientTests.cs" />
+    <Compile Include="EntitySettingsTests.cs" />
+    <Compile Include="GroupsClientTests.cs" />
+    <Compile Include="GroupCreationTypesClientTests.cs" />
+    <Compile Include="GroupMembersClientTests.cs" />
+    <Compile Include="GroupRolesClientTests.cs" />
+    <Compile Include="GroupTypesClientTests.cs" />
+    <Compile Include="MemberAchievementClientTests.cs" />
+    <Compile Include="MemberClientTests.cs" />
+    <Compile Include="MemberRewardsClientTests.cs" />
+    <Compile Include="OneTimePinConfigurationsClientTests.cs" />
+    <Compile Include="OneTimePinTypeClientTests.cs" />
+    <Compile Include="OtpClientTests.cs" />
+    <Compile Include="PointsClientTests.cs" />
+    <Compile Include="ProgramClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryStringBuilderTests.cs" />
     <Compile Include="SdkTestBase.cs" />
-    <Compile Include="TimestoreTests.cs" />
+    <Compile Include="SupportTicketCategorysClientTests.cs" />
+    <Compile Include="SupportTicketsClientTests.cs" />
+    <Compile Include="SupportTicketTypesClientTests.cs" />
+    <Compile Include="TestSerialisationObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

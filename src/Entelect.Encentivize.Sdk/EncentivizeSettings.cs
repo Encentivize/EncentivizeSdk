@@ -6,11 +6,6 @@ namespace Entelect.Encentivize.Sdk
         public string Password { get; set; }
         public string BaseUrl { get; set; }
 
-        public EncentivizeSettings()
-        {
-            
-        }
-
         public EncentivizeSettings(string username, string password, string baseUrl)
         {
             Username = username;
