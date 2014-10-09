@@ -60,10 +60,10 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
         protected virtual PagedResult<PointsTransaction> Map(PagedResult<dynamic> result)
         {
             var mappedResult = new PagedResult<PointsTransaction>(result);
-            foreach (var itemm in result.Data)
+            foreach (var item in result.Data)
             {
-                Type type = NameToTypeMapping[itemm.pointsTransactionType.ToString()];
-                var deserialisedObject = JsonConvert.DeserializeObject(itemm.ToString(), type);
+                Type type = NameToTypeMapping[item.pointsTransactionType.ToString()];
+                var deserialisedObject = JsonConvert.DeserializeObject(item.ToString(), type);
                 var pointsTransactionOutput = (PointsTransaction)deserialisedObject;
                 mappedResult.Data.Add(pointsTransactionOutput);
             }

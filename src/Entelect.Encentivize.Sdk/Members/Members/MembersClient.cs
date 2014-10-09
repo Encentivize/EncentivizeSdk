@@ -1,28 +1,22 @@
 using System;
-using System.Net;
-using Entelect.Encentivize.Sdk.Exceptions;
 using Entelect.Encentivize.Sdk.GenericServices;
-using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members.Members
 {
     public class MembersClient : IMembersClient
     {
-        private readonly IEncentivizeRestClient _restClient;
         private readonly IEntityRetrievalService<Member> _entityRetrievalService;
         private readonly IEntityUpdateService<MemberInput, Member> _entityUpdateService;
         private readonly IEntityCreationService<MemberInput, Member> _entityCreationService;
         private readonly IEntityRetrievalService _dynamicEntityRetrievalService;
         private readonly IEntityCreationService _dynamicEntityCreationService;
 
-        public MembersClient(IEncentivizeRestClient restClient, 
-            IEntityRetrievalService<Member> entityRetrievalService, 
+        public MembersClient(IEntityRetrievalService<Member> entityRetrievalService, 
             IEntityUpdateService<MemberInput, Member> entityUpdateService, 
             IEntityCreationService<MemberInput, Member> entityCreationService,
             IEntityRetrievalService dynamicEntityRetrievalService,
             IEntityCreationService dynamicEntityCreationService)
         {
-            _restClient = restClient;
             _entityRetrievalService = entityRetrievalService;
             _entityUpdateService = entityUpdateService;
             _entityCreationService = entityCreationService;
@@ -32,13 +26,12 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public MembersClient(IEncentivizeRestClient restClient)
         {
-            _restClient = restClient;
             var memberSettings = new EntitySettings("Member", "Members", "members");
-            _entityRetrievalService = new EntityRetrievalService<Member>(_restClient, memberSettings);
-            _entityUpdateService = new EntityUpdateService<MemberInput, Member>(_restClient, memberSettings);
-            _entityCreationService = new EntityCreationService<MemberInput, Member>(_restClient, memberSettings);
-            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient);
-            _dynamicEntityCreationService = new EntityCreationService(_restClient);
+            _entityRetrievalService = new EntityRetrievalService<Member>(restClient, memberSettings);
+            _entityUpdateService = new EntityUpdateService<MemberInput, Member>(restClient, memberSettings);
+            _entityCreationService = new EntityCreationService<MemberInput, Member>(restClient, memberSettings);
+            _dynamicEntityRetrievalService = new EntityRetrievalService(restClient);
+            _dynamicEntityCreationService = new EntityCreationService(restClient);
         }
 
         public virtual Member GetMe()
@@ -85,15 +78,6 @@ namespace Entelect.Encentivize.Sdk.Members.Members
         public virtual void ResetPasswordPin(long memberId)
         {
             _dynamicEntityCreationService.Create(string.Format("members/{0}/passwordPinReset", memberId), null);
-            //var request = new RestRequest(string.Format("members/{0}/passwordPinReset", memberId), Method.POST)
-            //{
-            //    RequestFormat = DataFormat.Json
-            //};
-            //var response = _restClient.Execute(request);
-            //if (response.StatusCode != HttpStatusCode.OK)
-            //{
-            //    throw new DataRetrievalFailedException(response);
-            //}
         }
 
         protected virtual string TimeStoreUrl(long memberId)

@@ -12,4 +12,9 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         TEntity Update(string customPath, TInput input);
         TEntity Update(TEntity entity);
     }
+
+    public interface IEntityUpdateService
+    {
+        dynamic Update(string customPath, dynamic input);
+    }
 }

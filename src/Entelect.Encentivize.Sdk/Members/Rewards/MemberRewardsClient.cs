@@ -1,47 +1,44 @@
-﻿using System.Net;
-using Entelect.Encentivize.Sdk.Exceptions;
-using Entelect.Encentivize.Sdk.GenericServices;
+﻿using Entelect.Encentivize.Sdk.GenericServices;
 using Entelect.Encentivize.Sdk.PointsTransactions;
 using Entelect.Encentivize.Sdk.Rewards;
-using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.Members.Rewards
 {
     public class MemberRewardsClient : IMemberRewardsClient
     {
-        private readonly IEncentivizeRestClient _restClient;
         private readonly IEntityRetrievalService<RewardTransaction> _memberRewardRetrievalService;
         private readonly IEntityCreationService<RedeemRewardInput, RewardTransaction> _memberRewardCreationService;
         private readonly IEntityDeletionService<RedeemRewardInput, RewardTransaction> _memberRewardDeletionService;
         private readonly IEntityRetrievalService<RewardStructure> _rewardRetrievalService;
         private readonly IEntityRetrievalService _dynamicEntityRetrievalService;
+        private readonly IEntityUpdateService _dynamicUpdateService;
 
-        public MemberRewardsClient(IEncentivizeRestClient restClient, 
-            IEntityRetrievalService<RewardTransaction> memberRewardRetrievalService, 
+        public MemberRewardsClient(IEntityRetrievalService<RewardTransaction> memberRewardRetrievalService, 
             IEntityCreationService<RedeemRewardInput, RewardTransaction> memberRewardCreationService,
             IEntityDeletionService<RedeemRewardInput, RewardTransaction> memberRewardDeletionService, 
             IEntityRetrievalService<RewardStructure> rewardRetrievalService, 
-            IEntityRetrievalService dynamicEntityRetrievalService)
+            IEntityRetrievalService dynamicEntityRetrievalService,
+            IEntityUpdateService dynamicUpdateService)
         {
-            _restClient = restClient;
             _memberRewardRetrievalService = memberRewardRetrievalService;
             _memberRewardCreationService = memberRewardCreationService;
             _memberRewardDeletionService = memberRewardDeletionService;
             _rewardRetrievalService = rewardRetrievalService;
             _dynamicEntityRetrievalService = dynamicEntityRetrievalService;
+            _dynamicUpdateService = dynamicUpdateService;
         }
 
         public MemberRewardsClient(IEncentivizeRestClient restClient)
         {
-            _restClient = restClient;
             var memberRewardSettings = new EntitySettings("Member Reward", "Member Rewards", "MemberRewards");
             _memberRewardRetrievalService = new EntityRetrievalService<RewardTransaction>(restClient, memberRewardSettings);
             _memberRewardCreationService = new EntityCreationService<RedeemRewardInput, RewardTransaction>(restClient, memberRewardSettings);
             _memberRewardDeletionService = new EntityDeletionService<RedeemRewardInput, RewardTransaction>(restClient, memberRewardSettings);
-            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient);
+            _dynamicEntityRetrievalService = new EntityRetrievalService(restClient);
+            _dynamicUpdateService = new EntityUpdateService(restClient);
             /* todo rk move to own client ? */
             var rewardSettings = new EntitySettings("Reward", "Rewards", null);
-            _rewardRetrievalService = new EntityRetrievalService<RewardStructure>(_restClient, rewardSettings);
+            _rewardRetrievalService = new EntityRetrievalService<RewardStructure>(restClient, rewardSettings);
         }
 
         public virtual PagedResult<RewardTransaction> Search(RewardTransactionSearchCriteria rewardSearchCriteria)
@@ -81,18 +78,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
 
         public virtual dynamic UpdateRewardAdditionalInformation(long memberId, long rewardTransactionId, dynamic additionalInformation)
         {
-            var request = new RestRequest(AdditionalInfoUrl(memberId, rewardTransactionId))
-            {
-                Method = Method.PUT,
-                RequestFormat = DataFormat.Json
-            };
-            request.AddBody(additionalInformation);
-            var response = _restClient.Execute<dynamic>(request);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new CreationFailedException(response);
-            }
-            return response.Data;
+            return _dynamicUpdateService.Update(AdditionalInfoUrl(memberId, rewardTransactionId), additionalInformation);
         }
 
         private string AdditionalInfoUrl(long memberId, long rewardTransactionId)

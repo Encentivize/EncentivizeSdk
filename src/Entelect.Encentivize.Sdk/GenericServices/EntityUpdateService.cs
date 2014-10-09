@@ -72,4 +72,28 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             return response.Data;
         }
     }
+
+    public class EntityUpdateService : EntityService, IEntityUpdateService
+    {
+        public EntityUpdateService(IEncentivizeRestClient restClient)
+            : base(restClient, new EntitySettings("dynamic", "dynamic",null))
+        {
+        }
+
+        public dynamic Update(string customPath, dynamic input)
+        {
+            var restRequest = new RestRequest(customPath)
+            {
+                Method = Method.PUT, 
+                RequestFormat = DataFormat.Json
+            };
+            restRequest.AddBody(input);
+            var response = RestClient.Execute<dynamic>(restRequest);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new UpdateFailedException(response);
+            }
+            return response.Data;
+        }
+    }
 }

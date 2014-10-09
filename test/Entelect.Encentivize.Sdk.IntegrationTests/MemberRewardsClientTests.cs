@@ -71,7 +71,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
-        public void AddRewardAdditionalInformation()
+        public void UpdateRewardAdditionalInformation()
         {
             var rewardTransaction = MemberRewardsClient.Search(new RewardTransactionSearchCriteria()).Data.First();
             var data = new
