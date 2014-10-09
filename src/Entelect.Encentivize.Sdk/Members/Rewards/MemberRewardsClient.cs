@@ -38,9 +38,7 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             _memberRewardRetrievalService = new EntityRetrievalService<RewardTransaction>(restClient, memberRewardSettings);
             _memberRewardCreationService = new EntityCreationService<RedeemRewardInput, RewardTransaction>(restClient, memberRewardSettings);
             _memberRewardDeletionService = new EntityDeletionService<RedeemRewardInput, RewardTransaction>(restClient, memberRewardSettings);
-            var additionalInformationEntitySettings = new EntitySettings("Additional Information", "Additional Information",
-                "members/{memberId:long}/rewards/{rewardTransactionId:long}/additionalInformation");
-            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient, additionalInformationEntitySettings);
+            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient);
             /* todo rk move to own client ? */
             var rewardSettings = new EntitySettings("Reward", "Rewards", null);
             _rewardRetrievalService = new EntityRetrievalService<RewardStructure>(_restClient, rewardSettings);

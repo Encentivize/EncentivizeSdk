@@ -18,4 +18,10 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         void Create(TInput input);
         void Create(string customPath, TInput input);
     }
+
+    public interface IEntityCreationService
+    {
+        void Create(dynamic input);
+        void Create(string customPath, dynamic input);
+    }
 }

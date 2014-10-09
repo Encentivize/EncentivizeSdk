@@ -22,8 +22,7 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
 
         public PointsClient(IEncentivizeRestClient restClient) 
         {
-            var pointsTransactionSettings = new EntitySettings("Points Transaction", "Points Transactions", "PointsTransactions");
-            _entityRetrievalService = new EntityRetrievalService(restClient, pointsTransactionSettings);
+            _entityRetrievalService = new EntityRetrievalService(restClient);
             var adHocSettings = new EntitySettings("Ad Hoc Points", "Ad Hoc Points", "members/{memberId:long}/AdHocPoints");
             _adHocCreationService = new EntityCreationService<AdHocPointsInput, AdHocTransaction>(restClient, adHocSettings);
             var transferSettings = new EntitySettings("Transfer Points", "Transfer Points", "members/{fromMemberId:long}/TransferPoints");
@@ -32,7 +31,7 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
 
         public virtual PagedResult<PointsTransaction> Get(PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
         {
-            var result = _entityRetrievalService.FindBySearchCriteria(pointsTransactionSearchCriteria);
+            var result = _entityRetrievalService.FindBySearchCriteria("pointsTransactions", pointsTransactionSearchCriteria);
             return Map(result);
         }
 

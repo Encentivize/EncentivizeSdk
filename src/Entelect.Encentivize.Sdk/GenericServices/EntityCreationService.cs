@@ -3,7 +3,7 @@ using RestSharp;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
-    public class EntityCreationService<TInput, TEntity> : BaseCreationService<TInput>, IEntityCreationService<TInput, TEntity> 
+    public class EntityCreationService<TInput, TEntity> : BaseCreationService, IEntityCreationService<TInput, TEntity> 
         where TInput : BaseInput
         where TEntity : class, IEditableEntity<TInput>, new()
     {
@@ -44,6 +44,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         protected virtual TEntity DoCreate(RestRequest restRequest, TInput input)
         {
+            input.Validate();
             PrepareCreateRequest(restRequest, input);
             var response = RestClient.Execute<TEntity>(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -55,6 +56,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
         protected virtual void DoCreateExpectNullResponse(RestRequest restRequest, TInput input)
         {
+            input.Validate();
             PrepareCreateRequest(restRequest, input);
             var response = RestClient.Execute(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -64,7 +66,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         }
     }
 
-    public class EntityCreationService<TInput> : BaseCreationService<TInput>, IEntityCreationService<TInput>
+    public class EntityCreationService<TInput> : BaseCreationService, IEntityCreationService<TInput>
         where TInput : BaseInput
     {
         public EntityCreationService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
@@ -83,6 +85,37 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         }
 
         protected virtual void DoCreate(RestRequest restRequest, TInput input)
+        {
+            input.Validate();
+            PrepareCreateRequest(restRequest, input);
+            var response = RestClient.Execute(restRequest);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new CreationFailedException(response);
+            }
+        }
+    }
+
+    public class EntityCreationService : BaseCreationService, IEntityCreationService
+    {
+        public EntityCreationService(IEncentivizeRestClient restClient)
+            : base(restClient, new EntitySettings("dynamic", "dynamic",null))
+        {
+            
+        }
+
+
+        public void Create(dynamic input)
+        {
+            DoCreate(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
+        }
+
+        public void Create(string customPath, dynamic input)
+        {
+            DoCreate(new RestRequest(customPath), input);
+        }
+
+        protected virtual void DoCreate(RestRequest restRequest, dynamic input)
         {
             PrepareCreateRequest(restRequest, input);
             var response = RestClient.Execute(restRequest);

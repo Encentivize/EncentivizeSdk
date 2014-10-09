@@ -13,29 +13,32 @@ namespace Entelect.Encentivize.Sdk.Members.Members
         private readonly IEntityUpdateService<MemberInput, Member> _entityUpdateService;
         private readonly IEntityCreationService<MemberInput, Member> _entityCreationService;
         private readonly IEntityRetrievalService _dynamicEntityRetrievalService;
+        private readonly IEntityCreationService _dynamicEntityCreationService;
 
         public MembersClient(IEncentivizeRestClient restClient, 
             IEntityRetrievalService<Member> entityRetrievalService, 
             IEntityUpdateService<MemberInput, Member> entityUpdateService, 
             IEntityCreationService<MemberInput, Member> entityCreationService,
-            IEntityRetrievalService dynamicEntityRetrievalService)
+            IEntityRetrievalService dynamicEntityRetrievalService,
+            IEntityCreationService dynamicEntityCreationService)
         {
             _restClient = restClient;
             _entityRetrievalService = entityRetrievalService;
             _entityUpdateService = entityUpdateService;
             _entityCreationService = entityCreationService;
             _dynamicEntityRetrievalService = dynamicEntityRetrievalService;
+            _dynamicEntityCreationService = dynamicEntityCreationService;
         }
 
         public MembersClient(IEncentivizeRestClient restClient)
         {
             _restClient = restClient;
             var memberSettings = new EntitySettings("Member", "Members", "members");
-            var timeStoreEntitySettings = new EntitySettings("Timestore", "Timestore", "members/{memberId:long}/timestore/");
             _entityRetrievalService = new EntityRetrievalService<Member>(_restClient, memberSettings);
             _entityUpdateService = new EntityUpdateService<MemberInput, Member>(_restClient, memberSettings);
             _entityCreationService = new EntityCreationService<MemberInput, Member>(_restClient, memberSettings);
-            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient, timeStoreEntitySettings);
+            _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient);
+            _dynamicEntityCreationService = new EntityCreationService(_restClient);
         }
 
         public virtual Member GetMe()
@@ -75,29 +78,22 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public virtual void WriteTimestoreForMember(long memberId, dynamic timestoreData)
         {
-            var request = new RestRequest(TimeStoreUrl(memberId))
-            {
-                Method = Method.POST, 
-                RequestFormat = DataFormat.Json
-            };
-            request.AddBody(timestoreData);
-            var response = _restClient.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new CreationFailedException(response);
-            }
+            _dynamicEntityCreationService.Create(TimeStoreUrl(memberId), timestoreData);
         }
 
         [Obsolete("Don't use this method, rather use the OTP system")]
         public virtual void ResetPasswordPin(long memberId)
         {
-            var request = new RestRequest(string.Format("members/{0}/passwordPinReset", memberId), Method.POST);
-            request.RequestFormat = DataFormat.Json;
-            var response = _restClient.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new DataRetrievalFailedException(response);
-            }
+            _dynamicEntityCreationService.Create(string.Format("members/{0}/passwordPinReset", memberId), null);
+            //var request = new RestRequest(string.Format("members/{0}/passwordPinReset", memberId), Method.POST)
+            //{
+            //    RequestFormat = DataFormat.Json
+            //};
+            //var response = _restClient.Execute(request);
+            //if (response.StatusCode != HttpStatusCode.OK)
+            //{
+            //    throw new DataRetrievalFailedException(response);
+            //}
         }
 
         protected virtual string TimeStoreUrl(long memberId)

@@ -97,8 +97,8 @@ namespace Entelect.Encentivize.Sdk.GenericServices
 
     public class EntityRetrievalService : BaseRetrievalService, IEntityRetrievalService
     {
-        public EntityRetrievalService(IEncentivizeRestClient restClient, EntitySettings entitySettings) 
-            : base(restClient, entitySettings)
+        public EntityRetrievalService(IEncentivizeRestClient restClient)
+            : base(restClient, new EntitySettings("dynamic", "dynamic", null))
         {
         }
 
@@ -116,12 +116,6 @@ namespace Entelect.Encentivize.Sdk.GenericServices
                 throw new DataRetrievalFailedException(response);
             }
             return response.Data;
-        }
-
-        public PagedResult<dynamic> FindBySearchCriteria(BaseSearchCriteria searchCriteria)
-        {
-            var queryString = GetQueryString(searchCriteria);
-            return DoFindBySearchCriteria(new RestRequest(string.Format("{0}?{1}", EntitySettings.BaseRoute, queryString)));
         }
 
         public PagedResult<dynamic> FindBySearchCriteria(string customPath, BaseSearchCriteria searchCriteria)
