@@ -1,6 +1,6 @@
 ﻿namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
-    public class AchievementTransactionOutput : PointsTransactionOutput
+    public class AchievementTransaction : PointsTransaction
     {
         public dynamic AdditionalInformation { get; set; }
     }

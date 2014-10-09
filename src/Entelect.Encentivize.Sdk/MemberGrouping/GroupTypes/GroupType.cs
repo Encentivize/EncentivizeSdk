@@ -5,11 +5,17 @@
         public long GroupTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public long GroupCreationTypeId { get; set; }
+        public int GroupCreationTypeId { get; set; }
         public int GroupLevel { get; set; }
         public GroupTypeInput ToInput()
         {
-            throw new System.NotImplementedException();
+            return new GroupTypeInput
+            {
+                Description = Description,
+                GroupCreationTypeId = GroupCreationTypeId,
+                GroupLevel = GroupLevel,
+                Name = Name
+            };
         }
 
         public string GetModificationUrl()

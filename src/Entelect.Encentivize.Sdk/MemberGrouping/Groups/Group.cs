@@ -13,9 +13,16 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
         public long? LastUpdatedById { get; set; }
         public DateTime? LastUpdatedDateUtc { get; set; }
         public bool IsActive { get; set; }
+
         public GroupInput ToInput()
         {
-            throw new NotImplementedException();
+            return new GroupInput
+            {
+                Description = Description,
+                GroupTypeId = GroupTypeId,
+                IsActive = IsActive,
+                Name = Name
+            };
         }
 
         public string GetModificationUrl()

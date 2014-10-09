@@ -10,16 +10,16 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
     public class MemberRewardsClient : IMemberRewardsClient
     {
         private readonly IEncentivizeRestClient _restClient;
-        private readonly IEntityRetrievalService<RewardTransactionOutput> _memberRewardRetrievalService;
-        private readonly IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> _memberRewardCreationService;
-        private readonly IEntityDeletionService<RedeemRewardInput, RewardTransactionOutput> _memberRewardDeletionService;
+        private readonly IEntityRetrievalService<RewardTransaction> _memberRewardRetrievalService;
+        private readonly IEntityCreationService<RedeemRewardInput, RewardTransaction> _memberRewardCreationService;
+        private readonly IEntityDeletionService<RedeemRewardInput, RewardTransaction> _memberRewardDeletionService;
         private readonly IEntityRetrievalService<RewardStructureOutput> _rewardRetrievalService;
         private readonly IEntityRetrievalService _dynamicEntityRetrievalService;
 
         public MemberRewardsClient(IEncentivizeRestClient restClient, 
-            IEntityRetrievalService<RewardTransactionOutput> memberRewardRetrievalService, 
-            IEntityCreationService<RedeemRewardInput, RewardTransactionOutput> memberRewardCreationService,
-            IEntityDeletionService<RedeemRewardInput, RewardTransactionOutput> memberRewardDeletionService, 
+            IEntityRetrievalService<RewardTransaction> memberRewardRetrievalService, 
+            IEntityCreationService<RedeemRewardInput, RewardTransaction> memberRewardCreationService,
+            IEntityDeletionService<RedeemRewardInput, RewardTransaction> memberRewardDeletionService, 
             IEntityRetrievalService<RewardStructureOutput> rewardRetrievalService, 
             IEntityRetrievalService dynamicEntityRetrievalService)
         {
@@ -35,9 +35,9 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
         {
             _restClient = restClient;
             var memberRewardSettings = new EntitySettings("Member Reward", "Member Rewards", "MemberRewards");
-            _memberRewardRetrievalService = new EntityRetrievalService<RewardTransactionOutput>(restClient, memberRewardSettings);
-            _memberRewardCreationService = new EntityCreationService<RedeemRewardInput, RewardTransactionOutput>(restClient, memberRewardSettings);
-            _memberRewardDeletionService = new EntityDeletionService<RedeemRewardInput, RewardTransactionOutput>(restClient, memberRewardSettings);
+            _memberRewardRetrievalService = new EntityRetrievalService<RewardTransaction>(restClient, memberRewardSettings);
+            _memberRewardCreationService = new EntityCreationService<RedeemRewardInput, RewardTransaction>(restClient, memberRewardSettings);
+            _memberRewardDeletionService = new EntityDeletionService<RedeemRewardInput, RewardTransaction>(restClient, memberRewardSettings);
             var additionalInformationEntitySettings = new EntitySettings("Additional Information", "Additional Information",
                 "members/{memberId:long}/rewards/{rewardTransactionId:long}/additionalInformation");
             _dynamicEntityRetrievalService = new EntityRetrievalService(_restClient, additionalInformationEntitySettings);
@@ -46,12 +46,12 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             _rewardRetrievalService = new EntityRetrievalService<RewardStructureOutput>(_restClient, rewardSettings);
         }
 
-        public virtual PagedResult<RewardTransactionOutput> Search(RewardTransactionSearchCriteria rewardSearchCriteria)
+        public virtual PagedResult<RewardTransaction> Search(RewardTransactionSearchCriteria rewardSearchCriteria)
         {
             return _memberRewardRetrievalService.FindBySearchCriteria(rewardSearchCriteria);
         }
 
-        public virtual PagedResult<RewardTransactionOutput> MemberHistory(long memberId, RewardTransactionSearchCriteria rewardSearchCriteria)
+        public virtual PagedResult<RewardTransaction> MemberHistory(long memberId, RewardTransactionSearchCriteria rewardSearchCriteria)
         {
             return _memberRewardRetrievalService.FindBySearchCriteria(string.Format("members/{0}/rewards/", memberId), rewardSearchCriteria);
         }
@@ -61,12 +61,12 @@ namespace Entelect.Encentivize.Sdk.Members.Rewards
             return _rewardRetrievalService.FindBySearchCriteria(string.Format("members/{0}/availableRewards", memberId), rewardSearchCriteria);
         }
 
-        public virtual RewardTransactionOutput RedeemReward(long memberId, RedeemRewardInput redeemRewardInput)
+        public virtual RewardTransaction RedeemReward(long memberId, RedeemRewardInput redeemRewardInput)
         {
             return _memberRewardCreationService.Create(string.Format("members/{0}/redeemReward/", memberId), redeemRewardInput);
         }
 
-        public virtual RewardTransactionOutput Get(long memberId, long rewardTransactionId)
+        public virtual RewardTransaction Get(long memberId, long rewardTransactionId)
         {
             return _memberRewardRetrievalService.Get(string.Format("members/{0}/rewards/{1}", memberId, rewardTransactionId));
         }

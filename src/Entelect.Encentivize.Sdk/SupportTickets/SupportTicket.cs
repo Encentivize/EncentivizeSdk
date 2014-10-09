@@ -17,12 +17,23 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
 
         public EditSupportTicketInput ToInput()
         {
-            throw new NotImplementedException();
+            return new EditSupportTicketInput
+            {
+                IsResolved = IsResolved,
+                NewComment = LatestComment
+            };
         }
 
         SupportTicketInput IEditableEntity<SupportTicketInput>.ToInput()
         {
-            throw new NotImplementedException();
+            return  new SupportTicketInput
+            {
+                Comment = LatestComment,
+                Subject = Subject,
+                SupportTicketCategoryId = SupportTicketCategoryId,
+                SupportTicketPriorityId = 2, //todo rk
+                SupportTicketTypeId = SupportTicketTypeId
+            };
         }
 
         public string GetModificationUrl()

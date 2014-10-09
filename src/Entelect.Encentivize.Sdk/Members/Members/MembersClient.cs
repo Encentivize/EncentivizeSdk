@@ -60,8 +60,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public virtual Member UpdateMember(Member member)
         {
-            /*todo rk update this to use the new base once implemented*/
-            return _entityUpdateService.Update(member.MemberId, member.ToInput());
+            return _entityUpdateService.Update(member);
         }
 
         public virtual Member CreateMember(MemberInput memberInput)

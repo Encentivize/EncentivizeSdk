@@ -24,12 +24,7 @@ namespace Entelect.Encentivize.Sdk.Achievements.AchievementCategories
 
         public string GetModificationUrl()
         {
-            throw new NotImplementedException();
-        }
-
-        public string GetModificationUrl(string baseRoute)
-        {
-            return string.Format("{0}/{1}", baseRoute, AchievementCategoryId);
+            return string.Format("Achievements/{0}", AchievementCategoryId);
         }
     }
 }

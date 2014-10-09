@@ -15,12 +15,17 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
         public long ToUserId { get; set; }
         public TransferPointsInput ToInput()
         {
-            throw new NotImplementedException();
+            return new TransferPointsInput
+            {
+                Comment = Comment,
+                PointsToTransfer = PointsTransfered,
+                ToUserId = ToUserId
+            };
         }
 
         public string GetModificationUrl()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("Points transfers can not be modified");
         }
     }
 }

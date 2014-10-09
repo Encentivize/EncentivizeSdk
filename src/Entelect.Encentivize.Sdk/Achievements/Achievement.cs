@@ -35,7 +35,7 @@
 
         public string GetModificationUrl()
         {
-            throw new System.NotImplementedException();
+            return string.Format("Achievement/{0}", AchievementId);
         }
     }
 }

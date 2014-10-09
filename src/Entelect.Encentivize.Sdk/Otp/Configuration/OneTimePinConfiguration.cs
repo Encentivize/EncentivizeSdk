@@ -7,9 +7,15 @@ namespace Entelect.Encentivize.Sdk.Otp.Configuration
         public int MaxNumberOfRetries { get; set; }
 
         public bool IsActive { get; set; }
+
         public OneTimePinConfigurationInput ToInput()
         {
-            throw new System.NotImplementedException();
+            return new OneTimePinConfigurationInput
+            {
+                IsActive = IsActive,
+                MaxNumberOfRetries = MaxNumberOfRetries,
+                OneTimePinTypeId = OneTimePinTypeId
+            };
         }
 
         public string GetModificationUrl()

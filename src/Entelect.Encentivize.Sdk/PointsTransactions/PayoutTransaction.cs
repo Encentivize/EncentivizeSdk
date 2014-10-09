@@ -2,7 +2,7 @@
 
 namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
-    public class PayoutTransactionOutput : PointsTransactionOutput
+    public class PayoutTransaction : PointsTransaction
     {
         public DateTime? DatePaidOut { get; set; }
         public long UserTerminationId { get; set; }

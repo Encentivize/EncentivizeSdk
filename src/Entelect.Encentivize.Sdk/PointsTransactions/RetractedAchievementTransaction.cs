@@ -1,7 +1,7 @@
 
 namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
-    public class RetractedAchievementTransactionOutput : PointsTransactionOutput
+    public class RetractedAchievementTransaction : PointsTransaction
     {
         public long AchievementTransactionId { get; set; }
 

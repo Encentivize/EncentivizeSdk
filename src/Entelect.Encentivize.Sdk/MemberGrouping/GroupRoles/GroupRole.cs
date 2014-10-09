@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Entelect.Encentivize.Sdk.MemberGrouping.Abilities;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
@@ -12,7 +13,13 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
         public List<Ability> Abilities { get; set; }
         public GroupRoleInput ToInput()
         {
-            throw new System.NotImplementedException();
+            return new GroupRoleInput
+            {
+                Abilities = Abilities.Select(ability => ability.AbilityId),
+                Description = Description,
+                GroupTypeId = GroupTypeId,
+                Name = Name
+            };
         }
 
         public string GetModificationUrl()

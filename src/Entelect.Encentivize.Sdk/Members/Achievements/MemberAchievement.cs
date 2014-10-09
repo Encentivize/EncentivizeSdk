@@ -18,14 +18,23 @@ namespace Entelect.Encentivize.Sdk.Members.Achievements
         public MemberType MemberType { get; set; }
         public string AchievementReferenceNumber { get; set; }
         public long TimesAwarded { get; set; }
+        public string AdditionalInformation { get; set; }
+
         public MemberAchievementInput ToInput()
         {
-            throw new NotImplementedException();
+            return new MemberAchievementInput
+            {
+                AchievementId = AchievementId,
+                AdditionalInformation = AdditionalInformation,
+                Comment = Comment,
+                DateAchievementEarnedUtc = DateAchievementEarnedUtc,
+                OverriddenPoints = PointsAwarded
+            };
         }
 
         public string GetModificationUrl()
         {
-            throw new NotImplementedException();
+            return string.Format("members/{0}/achievements/{1}", MemberId, MemberAchievementId);
         }
     }
 }

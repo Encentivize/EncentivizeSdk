@@ -3,7 +3,7 @@ using Entelect.Encentivize.Sdk.Members.Rewards;
 
 namespace Entelect.Encentivize.Sdk.PointsTransactions
 {
-    public class RewardTransactionOutput : PointsTransactionOutput, IEditableEntity<RedeemRewardInput>
+    public class RewardTransaction : PointsTransaction, IEditableEntity<RedeemRewardInput>
     {
         public dynamic AdditionalInformation { get; set; }
         public long RewardId { get; set; }
@@ -15,12 +15,18 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
         public DateTime? DateSignOff { get; set; }
         public RedeemRewardInput ToInput()
         {
-            throw new NotImplementedException();
+            return new RedeemRewardInput
+            {
+                AdditionalInformation = AdditionalInformation,
+                OverriddenPoints = PointsValue,
+                Quantity = NumberOfRewards,
+                RewardId = RewardId
+            };
         }
 
         public string GetModificationUrl()
         {
-            throw new NotImplementedException();
+            return string.Format("members/{0}/rewards/{1}/", MemberId, PointsTransactionsId);
         }
     }
 }

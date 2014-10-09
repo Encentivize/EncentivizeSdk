@@ -30,19 +30,19 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
             _transferCreationService = new EntityCreationService<TransferPointsInput, TransferPoints>(restClient, transferSettings);
         }
 
-        public virtual PagedResult<PointsTransactionOutput> Get(PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
+        public virtual PagedResult<PointsTransaction> Get(PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
         {
             var result = _entityRetrievalService.FindBySearchCriteria(pointsTransactionSearchCriteria);
             return Map(result);
         }
 
-        public virtual PagedResult<PointsTransactionOutput> GetPointsForMember(long memberId, PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
+        public virtual PagedResult<PointsTransaction> GetPointsForMember(long memberId, PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
         {
             var result = _entityRetrievalService.FindBySearchCriteria(string.Format("members/{0}/pointsTransactions",memberId), pointsTransactionSearchCriteria);
             return Map(result);
         }
 
-        public virtual PagedResult<PointsTransactionOutput> GetPointsForMe(PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
+        public virtual PagedResult<PointsTransaction> GetPointsForMe(PointsTransactionSearchCriteria pointsTransactionSearchCriteria)
         {
             var result = _entityRetrievalService.FindBySearchCriteria("members/me/pointsTransactions", pointsTransactionSearchCriteria);
             return Map(result);
@@ -58,14 +58,14 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
             return _transferCreationService.Create(string.Format("members/{0}/TransferPoints", fromMemberId), transferPointsInput);
         }
 
-        protected virtual PagedResult<PointsTransactionOutput> Map(PagedResult<dynamic> result)
+        protected virtual PagedResult<PointsTransaction> Map(PagedResult<dynamic> result)
         {
-            var mappedResult = new PagedResult<PointsTransactionOutput>(result);
+            var mappedResult = new PagedResult<PointsTransaction>(result);
             foreach (var itemm in result.Data)
             {
                 Type type = NameToTypeMapping[itemm.pointsTransactionType.ToString()];
                 var deserialisedObject = JsonConvert.DeserializeObject(itemm.ToString(), type);
-                var pointsTransactionOutput = (PointsTransactionOutput)deserialisedObject;
+                var pointsTransactionOutput = (PointsTransaction)deserialisedObject;
                 mappedResult.Data.Add(pointsTransactionOutput);
             }
             return mappedResult;
@@ -78,15 +78,15 @@ namespace Entelect.Encentivize.Sdk.PointsTransactions
                 return new Dictionary<string, Type>
                 {
                     {"AdHoc", typeof (AdHocTransaction)},
-                    {"FromPointsTransfer", typeof (FromPointsTransferTransactionOutput)},
-                    {"ToPointsTransfer", typeof (ToPointsTransferTransactionOutput)},
-                    {"LostPoints", typeof (LostPointsTransactionOutput)},
-                    {"Payout", typeof (PayoutTransactionOutput)},
-                    {"Refund", typeof (RefundTransactionOutput)},
-                    {"Reward", typeof (RewardTransactionOutput)},
-                    {"Points", typeof (PointsTransactionOutput)},
-                    {"Achievement", typeof (AchievementTransactionOutput)},
-                    {"RetractedAchievement", typeof (RetractedAchievementTransactionOutput)}
+                    {"FromPointsTransfer", typeof (FromPointsTransferTransaction)},
+                    {"ToPointsTransfer", typeof (ToPointsTransferTransaction)},
+                    {"LostPoints", typeof (LostPointsTransaction)},
+                    {"Payout", typeof (PayoutTransaction)},
+                    {"Refund", typeof (RefundTransaction)},
+                    {"Reward", typeof (RewardTransaction)},
+                    {"Points", typeof (PointsTransaction)},
+                    {"Achievement", typeof (AchievementTransaction)},
+                    {"RetractedAchievement", typeof (RetractedAchievementTransaction)}
                 };
             }
         }
