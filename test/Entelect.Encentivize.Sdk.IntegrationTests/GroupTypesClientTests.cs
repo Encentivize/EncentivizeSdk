@@ -19,7 +19,8 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void GetById()
         {
-            var item = GroupTypesClient.Get(10);
+            var firstResult = GroupTypesClient.Search(new GroupTypeSearchCriteria()).Data.First();
+            var item = GroupTypesClient.Get(firstResult.GroupTypeId);
             Assert.NotNull(item);
         }
 

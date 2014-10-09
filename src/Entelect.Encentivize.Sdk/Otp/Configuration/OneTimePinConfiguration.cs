@@ -20,7 +20,7 @@ namespace Entelect.Encentivize.Sdk.Otp.Configuration
 
         public string GetModificationUrl()
         {
-            throw new System.NotImplementedException();
+            return string.Format("OneTimePinConfigurations/{0}", OneTimePinTypeId);
         }
     }
 }

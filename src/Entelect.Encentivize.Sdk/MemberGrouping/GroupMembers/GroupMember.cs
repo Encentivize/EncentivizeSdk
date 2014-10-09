@@ -8,11 +8,11 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
     {
         public long GroupId { get; set; }
         public long? GroupRoleId { get; set; }
-        public Member Member { get; set; }
+        public Member MemberOutput { get; set; }
 
         public GroupMember()
         {
-            Member = new Member();
+            MemberOutput = new Member();
         }
 
         public GroupMemberInput ToInput()
@@ -20,13 +20,13 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
             return new GroupMemberInput
             {
                 GroupRoleId = GroupRoleId,
-                MemberId = Member.MemberId
+                MemberId = MemberOutput.MemberId
             };
         }
 
         public string GetModificationUrl()
         {
-            return GetModificationUrl(GroupId, Member.MemberId);
+            return GetModificationUrl(GroupId, MemberOutput.MemberId);
         }
 
         public static string GetModificationUrl(long groupId, long memberId)

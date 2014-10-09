@@ -20,7 +20,7 @@
 
         public string GetModificationUrl()
         {
-            throw new System.NotImplementedException();
+            return string.Format("GroupTypes/{0}", GroupTypeId);
         }
     }
 }

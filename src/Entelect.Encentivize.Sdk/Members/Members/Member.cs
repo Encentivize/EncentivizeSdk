@@ -58,7 +58,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public string GetModificationUrl()
         {
-            throw new NotImplementedException();
+            return string.Format("Members/{0}", MemberId);
         }
     }
 }

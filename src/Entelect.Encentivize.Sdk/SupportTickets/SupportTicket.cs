@@ -38,7 +38,7 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
 
         public string GetModificationUrl()
         {
-            throw new NotImplementedException();
+            return string.Format("SupportTickets/{0}", SupportTicketId);
         }
     }
 }

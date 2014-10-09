@@ -25,11 +25,10 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         }
 
         [Test]
-        [ExpectedException(typeof(DataRetrievalFailedException))]
         public void GetByIdThatDoesntExist()
         {
             var achievementCategoryOutput = AchievementCategoriesClient.Get(int.MaxValue);
-            Assert.NotNull(achievementCategoryOutput);
+            Assert.Null(achievementCategoryOutput);
         }
 
         [Test]

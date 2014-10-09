@@ -27,7 +27,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
 
         public string GetModificationUrl()
         {
-            throw new NotImplementedException();
+            return string.Format("Groups/{0}", GroupId);
         }
     }
 }

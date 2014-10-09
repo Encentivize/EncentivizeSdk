@@ -24,7 +24,7 @@ namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupRoles
 
         public string GetModificationUrl()
         {
-            throw new System.NotImplementedException();
+            return string.Format("GroupRoles/{0}", GroupRoleId);
         }
     }
 }
