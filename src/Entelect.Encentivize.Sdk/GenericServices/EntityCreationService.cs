@@ -105,24 +105,25 @@ namespace Entelect.Encentivize.Sdk.GenericServices
         }
 
 
-        public void Create(dynamic input)
+        public dynamic Create(dynamic input)
         {
-            DoCreate(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
+            return DoCreate(new RestRequest(string.Format("{0}", EntitySettings.BaseRoute)), input);
         }
 
-        public void Create(string customPath, dynamic input)
+        public dynamic Create(string customPath, dynamic input)
         {
-            DoCreate(new RestRequest(customPath), input);
+            return DoCreate(new RestRequest(customPath), input);
         }
 
-        protected virtual void DoCreate(RestRequest restRequest, dynamic input)
+        protected virtual dynamic DoCreate(RestRequest restRequest, dynamic input)
         {
             PrepareCreateRequest(restRequest, input);
-            var response = RestClient.Execute(restRequest);
+            var response = RestClient.Execute<dynamic>(restRequest);
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new CreationFailedException(response);
             }
+            return response.Data;
         }
     }
 }
