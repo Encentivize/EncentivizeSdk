@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Entelect.Encentivize.Sdk.SupportTickets
 {
-    public class SupportTicket : IEditableEntity<EditSupportTicketInput>, IEditableEntity<SupportTicketInput>
+    public class SupportTicket : IEditableEntity<EditSupportTicketInput>
     {
         public long SupportTicketId { get; set; }
         public long SupportTicketTypeId { get; set; }
@@ -23,19 +23,6 @@ namespace Entelect.Encentivize.Sdk.SupportTickets
                 NewComment = LatestComment
             };
         }
-
-        SupportTicketInput IEditableEntity<SupportTicketInput>.ToEditInput()
-        {
-            return  new SupportTicketInput
-            {
-                Comment = LatestComment,
-                Subject = Subject,
-                SupportTicketCategoryId = SupportTicketCategoryId,
-                SupportTicketPriorityId = 2, //todo rk
-                SupportTicketTypeId = SupportTicketTypeId
-            };
-        }
-
         public string GetModificationUrl()
         {
             return string.Format("SupportTickets/{0}", SupportTicketId);
