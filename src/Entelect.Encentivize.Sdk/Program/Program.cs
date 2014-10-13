@@ -30,5 +30,7 @@ namespace Entelect.Encentivize.Sdk.Program
         public byte SyncAttempts { get; set; }
         public DateTime? LastSyncAttemptUtc { get; set; }
         public DateTime? LastSyncDateUtc { get; set; }
+        public bool AllowDecimalsInPoints { get; set; }
+
     }
 }
