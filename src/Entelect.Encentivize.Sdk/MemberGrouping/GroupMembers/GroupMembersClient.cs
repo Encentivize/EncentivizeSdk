@@ -1,5 +1,4 @@
 ﻿using Entelect.Encentivize.Sdk.GenericServices;
-using Entelect.Encentivize.Sdk.MemberGrouping.Groups;
 
 namespace Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers
 {

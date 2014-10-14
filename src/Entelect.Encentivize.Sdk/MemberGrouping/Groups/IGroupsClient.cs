@@ -1,4 +1,6 @@
-﻿namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
+﻿using Entelect.Encentivize.Sdk.MemberGrouping.GroupMembers;
+
+namespace Entelect.Encentivize.Sdk.MemberGrouping.Groups
 {
     public interface IGroupsClient
     {
@@ -9,5 +11,6 @@
         Group Update(Group group);
         void Delete(long groupId);
         void Delete(Group group);
+        PagedResult<Group> GetGroupsForMember(long memberId, GroupMemberSearchCriteria groupMemberSearchCriteria);
     }
 }
