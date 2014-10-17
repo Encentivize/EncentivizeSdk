@@ -38,6 +38,10 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public string ProfilePictureUrl { get; set; }
 
+        public DateTime? LastLoginDateTime { get; set; }
+
+        public long LoginCounter { get; set; }
+
         public MemberInput ToEditInput()
         {
             return new MemberInput()
