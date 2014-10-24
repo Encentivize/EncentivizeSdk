@@ -33,7 +33,7 @@ namespace Entelect.Encentivize.Sdk.IntegrationTests
         [Test]
         public void Update()
         {
-            var member = MembersClient.Get(1);
+            var member = MembersClient.Get(2);
             var guidString = Guid.NewGuid().ToString();
             member.FirstName = guidString;
             var me = MembersClient.UpdateMember(member.MemberId, member.ToEditInput());
