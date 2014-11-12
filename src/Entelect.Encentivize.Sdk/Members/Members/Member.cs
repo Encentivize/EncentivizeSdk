@@ -24,8 +24,6 @@ namespace Entelect.Encentivize.Sdk.Members.Members
 
         public int KudosBalance { get; set; }
 
-        public long LifettimeRanking { get; set; }
-
         public MemberStatus MemberStatus { get; set; }
         
         public MemberType MemberType { get; set; }

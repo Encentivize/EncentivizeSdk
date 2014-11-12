@@ -18,5 +18,7 @@ namespace Entelect.Encentivize.Sdk.Members.Members
         public DateTime? CreatedDateUtcFrom { get; set; }
         public DateTime? CreatedDateUtcTo { get; set; }
         public long? RoleId { get; set; }
+        public DateTime? LastLoginDateUtcFrom { get; set; }
+        public DateTime? LastLoginDateUtcTo { get; set; }
     }
 }
