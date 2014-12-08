@@ -71,6 +71,7 @@
     <Compile Include="Achievements\AchievementsClient.cs" />
     <Compile Include="Achievements\AchievementSearchCriteria.cs" />
     <Compile Include="Achievements\IAchievementsClient.cs" />
+    <Compile Include="AuthenticaionType.cs" />
     <Compile Include="BaseSearchCriteria.cs" />
     <Compile Include="Achievements\AchievementCategories\IAchievementCategoriesClient.cs" />
     <Compile Include="Achievements\AchievementInput.cs" />

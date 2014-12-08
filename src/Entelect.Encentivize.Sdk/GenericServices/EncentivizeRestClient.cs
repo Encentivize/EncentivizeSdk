@@ -10,7 +10,14 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             :base(settings.BaseUrl)
         {
             Settings = settings;
-            Authenticator = new HttpBasicAuthenticator(Settings.Username, Settings.Password);
+            if (Settings.AuthenticaionTypeToUse == AuthenticaionType.Basic)
+            {
+                Authenticator = new HttpBasicAuthenticator(Settings.Username, Settings.Password);
+            }
+            else if (Settings.AuthenticaionTypeToUse == AuthenticaionType.Neuron)
+            {
+                Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Settings.BearerToken);
+            }
             AddHandler("application/json", new DynamicJsonDeserializer());
         }
 
