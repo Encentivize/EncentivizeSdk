@@ -12,8 +12,7 @@ namespace Entelect.Encentivize.Sdk
             Validator.TryValidateObject(this, new ValidationContext(this, null, null), results, true);
             if (results.Any())
             {
-                var error = new ValidationFailedError(results);
-                error.Throw();
+                throw new ValidationFailedError(results);
             }
         }
     }

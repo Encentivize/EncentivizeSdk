@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using Entelect.ErrorHandling;
 
 namespace Entelect.Encentivize.Sdk
 {
-    public class ValidationFailedError : LogicError
+    public class ValidationFailedError : Exception
     {
         public ValidationFailedError(List<ValidationResult> results)
             :base(GetMessage(results))

@@ -1,5 +1,4 @@
 ﻿using System;
-using Entelect.Extensions;
 
 namespace Entelect.Encentivize.Sdk.GenericServices
 {
