@@ -16,7 +16,7 @@ namespace Entelect.Encentivize.Sdk.GenericServices
             }
             else if (Settings.AuthenticaionTypeToUse == AuthenticaionType.Neuron)
             {
-                Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Settings.BearerToken);
+                Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(Settings.BearerToken, "bearer");
             }
             AddHandler("application/json", new DynamicJsonDeserializer());
         }
